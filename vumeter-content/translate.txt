@@ -1,0 +1,7 @@
+G:txtTemperature.value=%d,T:r0=%d
+G:txtPatientName.text=%s,T:r1=%s
+M:r0=%d,T:txtTemperature.value=%d
+# default messages
+# these are used if there is not match
+M:%s,T:txtDebug.text=%s
+G:%s,T:e1

@@ -1,0 +1,193 @@
+import Qt 4.7
+import QtQuick 1.1
+import "../styles"
+
+Rectangle {
+    id: structure
+
+    property Style style: Style {}
+    property color bgColor: style.bgColor
+    property color colorWhenDefault: style.colorWhenDefault
+    property color colorWhenPressed: style.colorWhenPressed
+    property color colorWhenHovered: style.colorWhenHovered
+    property real roundness: style.roundness
+    property int borderWidth: style.borderWidth
+    property color borderColor: style.borderColor
+    property color borderColorWhenHovered: style.borderColorWhenHovered
+    property color borderColorWhenPressed: style.borderColorWhenPressed
+    property int borderWidthInner: style.borderWidthInner
+    property color borderColorInner: style.borderColorInner
+    property color borderColorInnerWhenHovered: style.borderColorInnerWhenHovered
+    property color borderColorInnerWhenPressed: style.borderColorInnerWhenPressed
+    property real minimum: 0
+    property real maximum: 100
+    property real pixelValue: (maximum - minimum) / (structure.width - (margin*2) - sled.width)
+    property real value: 0
+    property int sliderSize: structure.height - 2*margin
+    property int margin: 2
+    property Gradient gradientBg: style.gradientBg
+    property Gradient gradientWhenDefault: style.gradientWhenDefault
+    property Gradient gradientWhenHovered: style.gradientWhenHovered
+    property Gradient gradientWhenPressed: style.gradientWhenPressed
+    property bool gradientDefaultOn: style.gradientDefaultOn
+    property bool gradientHoveredOn: style.gradientHoveredOn
+    property bool gradientPressedOn: style.gradientPressedOn
+    property bool gradientBgOn: style.gradientBgOn
+    property bool hoveredStateOn: style.hoveredStateOn
+    property bool pressedStateOn: style.pressedStateOn
+    property int sledHeight: (structure.height - (margin*2))
+    property int sledWidth: sliderSize*2
+
+    /* Properties for background images
+     * --------------------------------
+     * This solution is temporary. Remember performance.
+     */
+    property Image nullImage: Image { //this property is "private" don't write it to documentation
+        id: "null"
+        source: ""
+    }
+    property Gradient nullGradient: Gradient{}
+    property Image backgroundImage: nullImage
+    property Image sledImage: nullImage
+    property Image sledImageWhenHovered: nullImage
+    property Image sledImageWhenPressed: nullImage
+    property Image currentImage: sledImage //this property is "private" don't write it to documentation
+    property bool allowScale : false
+
+    signal clicked(int value)
+
+    /**
+     * Sets sliders value
+     *
+     * @param insertValue The new value
+     * @return Nothing
+     */
+    function setValue(insertValue) {
+        if (insertValue <= minimum) {
+            sled.x = mouseArea.drag.minimumX;
+            return;
+        }
+        if (insertValue > minimum) {
+            if (insertValue > maximum) insertValue = maximum;
+            sled.x = mouseArea.drag.minimumX + ((insertValue - minimum)/pixelValue);
+        }
+    }
+
+    onWidthChanged: {
+        if (allowScale) {
+            if((value + 0.00001) < maximum) {
+                setValue(value + 0.00001);
+                setValue(value - 0.00001);
+            } else {
+                setValue(value - 0.00001);
+                setValue(value + 0.00001);
+            }
+        }
+    }
+
+    onHeightChanged: {
+        if (allowScale) {
+            if ((value + 0.00001) < maximum) {
+                setValue(value + 0.00001);
+                setValue(value - 0.00001);
+            } else {
+                setValue(value - 0.00001);
+                setValue(value + 0.00001);
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        if (!hoveredStateOn) stateHovered.destroy();
+        if (!pressedStateOn) statePressed.destroy();
+        allowScale = true;
+    }
+
+    width: 200
+    height: 16
+    smooth: true
+    radius: (structure.height/2)*roundness
+    border.color: borderColor
+    border.width: borderWidth
+    color: bgColor
+    gradient: (gradientBgOn)?gradientBg:nullGradient
+
+    Image {
+        id: image2
+
+        source:  if (backgroundImage.id != "null") backgroundImage.source;
+        width: parent.width
+        height: parent.height
+        fillMode: if (backgroundImage.id != "null") backgroundImage.fillMode;
+        anchors.centerIn: parent
+        smooth: true
+    }
+
+    Rectangle {
+        id: sled
+
+        onXChanged: {
+            structure.value = Math.round(minimum+(structure.pixelValue * (sled.x - structure.margin)));
+        }
+        width: sledWidth
+        height: sledHeight
+        x: mouseArea.drag.minimumX
+        smooth: true
+        radius: ((structure.height - (margin*2)) / 2)*roundness;
+        color: colorWhenDefault
+        gradient: (gradientDefaultOn)?gradientWhenDefault:nullGradient
+        border.color: borderColorInner
+        border.width: borderWidthInner
+        anchors.verticalCenter: structure.verticalCenter
+
+        MouseArea {
+            id: mouseArea
+
+            onClicked: structure.clicked( structure.value );
+            hoverEnabled: true
+            anchors.fill: parent
+            drag.target: sled
+            drag.axis: Drag.XAxis
+            drag.minimumX: margin
+            drag.maximumX: structure.width - margin - sled.width
+        }
+
+        Image {
+            id: image
+
+            source:  if (currentImage.id != "null") currentImage.source;
+            width: parent.width
+            height: parent.height
+            fillMode: if (currentImage.id != "null") currentImage.fillMode;
+            anchors.centerIn: parent
+            smooth: true
+        }
+    }
+
+    Rectangle{
+        id: ticks
+        color: "green"
+        height: 10
+        width: parent.width
+        anchors.bottom: parent.bottom
+    }
+
+    states: [
+    State {
+        id: statePressed
+
+        name: "pressed"; when: mouseArea.pressed
+
+        PropertyChanges { target: sled; color: colorWhenPressed; gradient: (gradientPressedOn)?gradientWhenPressed:nullGradient; border.color: borderColorInnerWhenPressed; }
+        PropertyChanges { target: structure; border.color: borderColorWhenPressed; currentImage: sledImageWhenPressed }
+    },
+    State {
+        id: stateHovered
+
+        name: "entered"; when: mouseArea.containsMouse
+
+        PropertyChanges { target: sled; color: colorWhenHovered; gradient: (gradientHoveredOn)?gradientWhenHovered:nullGradient; border.color: borderColorInnerWhenHovered; }
+        PropertyChanges { target: structure; border.color: borderColorWhenHovered; currentImage: sledImageWhenHovered }
+    }
+    ]
+}
