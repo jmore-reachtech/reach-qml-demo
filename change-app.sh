@@ -1,5 +1,3 @@
-source /etc/tslib.environment
-
 REACH_VIEWER=./qml-viewer
 
 
