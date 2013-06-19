@@ -196,9 +196,9 @@ Rectangle {
             Db.loadRecipes();
         }
 
-        var currentIndex = Db.getSetting("currentIndex");
+        var currentIndex = parseInt(Db.getSetting("currentIndex"));
 
-        if (currentIndex != null &&  currentIndex >= 0)
+        if (currentIndex && currentIndex >= 0)
         {
             imagecarousel1.setCurrentIndex(currentIndex);
             Db.currentIndex = currentIndex;
