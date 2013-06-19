@@ -50,9 +50,9 @@ Item {
             Db.loadRecipes();
         }
 
-        var currentIndex = Db.getSetting("currentIndex");
+        var currentIndex = parseInt(Db.getSetting("currentIndex"));
 
-        if (currentIndex != null &&  currentIndex >= 0)
+        if (currentIndex && currentIndex >= 0)
         {
             Db.currentIndex = currentIndex;
         }
