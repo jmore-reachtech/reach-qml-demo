@@ -176,7 +176,7 @@ Rectangle {
         Db.openDB();
 
         //Add the machine records
-        if (Db.getRecipeCount() == 0)
+        if (parseInt(Db.getRecipeCount()) === 0)
         {
             Db.insertRecipe(1, "House Special", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
             Db.insertRecipe(1, "Decaf", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
