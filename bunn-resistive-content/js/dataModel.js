@@ -177,6 +177,7 @@ function loadRecipes()
 {
     var query = "select * from recipe"
     var rs;
+    var res = "";
     _db.transaction(
         function(tx) {
             rs = tx.executeSql(query);
