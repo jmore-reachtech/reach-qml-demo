@@ -71,7 +71,9 @@ Rectangle {
             height: parent.height - (parent.height % blockSize);
 
             MouseArea {
-                anchors.fill: parent; onClicked: Logic.handleClick(mouse.x,mouse.y);
+                //anchors.fill: parent; onClicked: Logic.handleClick(mouse.x,mouse.y);
+				//Changed action to occur on press rather than release
+				anchors.fill: parent; onPressed: Logic.handleClick(mouse.x,mouse.y);
             }
         }
     }

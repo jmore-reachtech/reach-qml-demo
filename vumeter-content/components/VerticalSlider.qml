@@ -11,9 +11,7 @@ Item {
             value = minimum;
         if (value > maximum)
             value = maximum;
-
-        handle.y = slider.yMax - ((value - minimum)*slider.yMax/(maximum-minimum))
-        console.debug(value);
+        handle.y = (maximum - value) * increment;
     }
 
     property bool allowDrag: true
@@ -29,13 +27,50 @@ Item {
     property int handleX: 0
     property int yMin: 2
     property int yMax: sliderTrack.height - handle.height
+    property int yPressed
+    property real increment: (yMax - yMin)/(maximum - minimum)
     property alias imageTrack: sliderTrack.source
     property alias imageHandle: handle.source
+    property bool showHint: true
+    property alias hintFontFamily: txtValue.font.family
+    property alias hintFontPixelSize: txtValue.font.pixelSize
+    property alias hintFontPointSize: txtValue.font.pointSize
+    property alias hintFontBold: txtValue.font.bold
+    property alias hintFontItalic: txtValue.font.italic
+    property alias hintFontUnderline: txtValue.font.underline
+    property alias hintFontStrikeout: txtValue.font.strikeout
+    property int hintWidth: 40
+    property int hintHeight: 40
+    property color hintBackgroundColor: "#ffffff"
+    property int hintRadius: 9
+    property color hintBorderColor: "#000000"
+    property int hintBorderWidth: 2
+    property color hintFontColor: "#000000"
 
     Image{
         id: sliderTrack
         source: "../images/slider_track.bmp"
         anchors.fill: parent
+    }
+
+    Rectangle{
+        id: recValue
+        height: hintHeight
+        radius: hintRadius
+        border.width: hintBorderWidth
+        border.color: hintBorderColor
+        width: hintWidth
+        visible: showHint && verticalMouse.pressed
+        anchors.horizontalCenter:  parent.horizontalCenter
+        color: hintBackgroundColor
+        Text {
+            id: txtValue
+            anchors.centerIn: parent
+            text: slider.value.toFixed(1).toString();
+            font.pixelSize: 14
+            color: hintFontColor
+        }
+
     }
 
     Image {
@@ -49,37 +84,49 @@ Item {
             id: verticalMouse
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.YAxis; drag.minimumY: slider.yMin; drag.maximumY: slider.yMax
+
+            onPressed: {
+                yPressed = handle.y;
+            }
+
             onPositionChanged: {
-                value = (maximum - minimum) * (slider.yMax - handle.y-2) / slider.yMax + minimum;
-                recValue.x = handle.x+4;
-                if (handle.y < slider.yMax - 40)
-                    recValue.y = handle.y + 46;
+                value = -handle.y/increment + maximum;
+
+                if (handle.y === yMin)
+                    yPressed = yMin;
+                else if (handle.y === yMax)
+                    yPressed = yMax;
+
+                /*if (handle.y - handle.height <= yMin)
+                    recValue.y = yMax/2;
+                else if (handle.y + handle.height >= yMax)
+                    recValue.y = yMax/2;
+                else if (handle.y < yPressed)
+                    recValue.y = handle.y + handle.height;
                 else
-                    recValue.y = handle.y - 40;
+                    recValue.y = handle.y - recValue.height;*/
+
+                if (handle.y - recValue.height < yPressed && handle.y + recValue.height < yMax)
+                {
+                    //Set to bottom of handle
+                    recValue.y = handle.y + handle.height;
+                }
+                else
+                {
+                    //Set to top of handle
+                    recValue.y = handle.y - recValue.height;
+                }
+
+
             }
         }
     }
 
-    Rectangle{
-        id: recValue
-        height: 40
-        radius: 9
-        border.width: 2
-        border.color: "#000000"
-        width: 40
-        visible: verticalMouse.pressed
-
-        Text {
-            id: txtValue
-            anchors.centerIn: parent
-            text: slider.value.toFixed(1).toString();
-            font.pixelSize: 14
-        }
-
-    }
 
     Component.onCompleted: {
-        handle.y = slider.yMax - ((value - minimum)*slider.yMax/(maximum-minimum));
-        recValue.y = handle.y - 40;
+        handle.y = (maximum - value) * increment;
+        handle.x = slider.handleX
+        recValue.y = handle.y - recValue.height;
+        yPressed = yMax;
     }
 }

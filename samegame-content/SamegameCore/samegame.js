@@ -151,17 +151,16 @@ function victoryCheck()
     if (deservesBonus)
         gameCanvas.score += 500;
     // Checks for game over
-    if (deservesBonus || !(floodMoveCheck(0, maxRow - 1, -1))) {
-        gameDuration = new Date() - gameDuration;
-        if(gameCanvas.score > highScoreBar){
-            nameInputDialog.show("You won! Please enter your name:                 ");
-            nameInputDialog.initialWidth = nameInputDialog.text.width + 20;
-            if (nameInputDialog.name == "")
-                nameInputDialog.width = nameInputDialog.initialWidth;
-            nameInputDialog.text.opacity = 0; // Just a spacer
-        }else{
-            dialog.show("You won!");
-        }
+    if (!(floodMoveCheck(0, maxRow - 1, -1))) 
+	{
+		if(deservesBonus)
+		{
+		  dialog.show("You won!");
+		} 
+		else 
+		{
+		  dialog.show("Game Over.");
+		}
     }
 }
 

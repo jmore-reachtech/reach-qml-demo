@@ -3,8 +3,17 @@ import "components"
 
 Rectangle {
     id: root
+    objectName: "root"
     width: 480
     height: 272
+    property int value: -10
+
+    onValueChanged: {
+        vu_meter1.value = root.value;
+        slider___vertical1.value = root.value;
+        connection.sendMessage("v=" + root.value);
+    }
+
     gradient: Gradient {
         GradientStop {
             position: 0.16
@@ -29,12 +38,16 @@ Rectangle {
         allowDrag: true
         yMin: 2
         value: -20
-        maximum: 4
+        maximum: 3
         imageTrack: "images/slider_track.bmp"
         minimum: -20
         handleX: 0
 
-        onValueChanged: vu_meter1.value = value;
+        onValueChanged: {
+            vu_meter1.value = value;
+            root.value = value;
+            connection.sendMessage("v=" + value);
+        }
     }
 
     VUMeter {
@@ -89,4 +102,5 @@ Rectangle {
          id: launcher
     }
 
+    Component.onCompleted: root.value = -20;
 }
