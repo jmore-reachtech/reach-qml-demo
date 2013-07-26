@@ -2,23 +2,25 @@ import QtQuick 1.1
 import "components"
 
 Rectangle {
-    id: rootDial
+    id: control
+    objectName: "control"
     width: 480
     height: 272
     color: "#666666"
+    property real translateValue
+
     signal message(string msg)
 
-
-    Connections {
-        target: loader.item
-        onMessage: {
-            loader.source = msg;
-        }
-
+    onTranslateValueChanged: {
+        knob1.setValue = control.translateValue;
+        knob2.setValue = control.translateValue;
+        dial1.setValue = control.translateValue;
+        dial2.setValue = control.translateValue;
+        txtValue.text = control.translateValue.toFixed(1);
     }
 
     LineEdit {
-        id: text_input1
+        id: txtValue
         x: 208
         y: 129
         width: 82
@@ -37,8 +39,8 @@ Rectangle {
         y: -25
 
         onValueChanged: {
-            text_input1.text = knob1.value.toFixed(1).toString();
-            connection.sendMessage("txt.value=" + text_input1.text);
+            txtValue.text = knob1.value.toFixed(1).toString();
+            connection.sendMessage("txt.value=" + txtValue.text);
         }
     }
 
@@ -82,8 +84,8 @@ Rectangle {
         }
 
         onValueChanged: {
-            text_input1.text = knob2.value.toFixed(1).toString();
-            connection.sendMessage("txt.value=" + text_input1.text);
+            txtValue.text = knob2.value.toFixed(1).toString();
+            connection.sendMessage("txt.value=" + txtValue.text);
         }
     }
 
@@ -128,8 +130,8 @@ Rectangle {
 
 
         onValueChanged: {
-            text_input1.text = dial1.value.toFixed(1).toString();
-            connection.sendMessage("txt.value=" + text_input1.text);
+            txtValue.text = dial1.value.toFixed(1).toString();
+            connection.sendMessage("txt.value=" + txtValue.text);
         }
     }
 
@@ -191,8 +193,8 @@ Rectangle {
 
 
         onValueChanged: {
-            text_input1.text = dial2.value.toFixed(1).toString();
-            connection.sendMessage("txt.value=" + text_input1.text);
+            txtValue.text = dial2.value.toFixed(1).toString();
+            connection.sendMessage("txt.value=" + txtValue.text);
         }
     }
 
@@ -209,7 +211,7 @@ Rectangle {
 
 
         onButtonClick: {
-            rootDial.message("largedemo.qml");
+            control.message("largedemo.qml");
         }
     }
 

@@ -2,15 +2,22 @@ import QtQuick 1.1
 import "components"
 
 Rectangle {
-    id: rootDial
+    id: control
+    objectName: "control"
     width: 480
     height: 272
     color: "#666666"
+    property real translateValue
 
     signal message(string msg)
 
+    onTranslateValueChanged: {
+        knob1.setValue = control.translateValue;
+        txtValue.text = control.translateValue.toFixed(1);
+    }
+
     LineEdit {
-        id: text_input1
+        id: txtValue
         x: 199
         y: 13
         width: 82
@@ -59,7 +66,7 @@ Rectangle {
 
 
         onValueChanged: {
-            text_input1.text = knob1.value.toFixed(1).toString();
+            txtValue.text = knob1.value.toFixed(1).toString();
             connection.sendMessage("txt.value=" + text_input1.text);
         }
     }
@@ -107,7 +114,7 @@ Rectangle {
         height:48
         imageOff: "images/prev_down.png"
         imageOn: "images/prev_up.png"
-        onButtonClick : rootDial.message("dials.qml");
+        onButtonClick : control.message("dials.qml");
     }
 
 
@@ -123,7 +130,7 @@ Rectangle {
 
 
         onButtonClick: {
-            rootDial.message("metronome.qml");
+            control.message("metronome.qml");
         }
     }
 

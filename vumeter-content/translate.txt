@@ -1,6 +1,5 @@
-G:txtTemperature.value=%d,T:r0=%d
-G:txtPatientName.text=%s,T:r1=%s
-M:r0=%d,T:txtTemperature.value=%d
+G:vumeter=%d,T:value=%d
+M:vumeter=%d,T:control.translateValue=%d
 # default messages
 # these are used if there is not match
 M:%s,T:txtDebug.text=%s

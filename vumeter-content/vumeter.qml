@@ -2,17 +2,10 @@ import QtQuick 1.1
 import "components"
 
 Rectangle {
-    id: root
-    objectName: "root"
+    id: control
+    objectName: "control"
     width: 480
     height: 272
-    property int value: -10
-
-    onValueChanged: {
-        vu_meter1.value = root.value;
-        slider___vertical1.value = root.value;
-        connection.sendMessage("v=" + root.value);
-    }
 
     gradient: Gradient {
         GradientStop {
@@ -26,7 +19,12 @@ Rectangle {
         }
     }
 
+    property real translateValue
     signal message(string msg)
+
+    onTranslateValueChanged: {
+      slider___vertical1.value = translateValue;
+    }
 
     VerticalSlider {
         id: slider___vertical1
@@ -38,15 +36,14 @@ Rectangle {
         allowDrag: true
         yMin: 2
         value: -20
-        maximum: 3
+        maximum: 4
         imageTrack: "images/slider_track.bmp"
         minimum: -20
         handleX: 0
 
         onValueChanged: {
             vu_meter1.value = value;
-            root.value = value;
-            connection.sendMessage("v=" + value);
+            connection.sendMessage("vumeter=" + value.toFixed(1));
         }
     }
 
@@ -102,5 +99,4 @@ Rectangle {
          id: launcher
     }
 
-    Component.onCompleted: root.value = -20;
 }

@@ -11,6 +11,8 @@ Rectangle
     property real digitAngle : degreeAngle/57.2957795
     property real angleOffSet:  90.0 + degreeAngle/2 //We rotate the needle around the positive x axis in a downward position
     property real value
+    //Use to value to set the value directly without user intervention
+    property real setValue
     property real index
     property alias model : repeater.model
     property alias imageBase: imgDialBase.source
@@ -22,6 +24,25 @@ Rectangle
     property bool remove: false;
     property alias imageBaseWidth: imgDialBase.width
     property alias imageBaseHeight: imgDialBase.height
+
+    onSetValueChanged: {
+        var valueScale = 0;
+        var indexScale = 0;
+
+        for (var i = 0; i < repeater.model.count-1; i++)
+        {
+            if (setValue >= repeater.model.get(i).value && setValue <= repeater.model.get(i+1).value)
+            {
+                valueScale = (setValue - repeater.model.get(i).value)/(repeater.model.get(i+1).value - repeater.model.get(i).value);
+                indexScale = repeater.model.get(i).index + valueScale;
+                //now that we know the index we can rotate the needle
+                value = setValue;
+                dialer.rotation = angleOffSet + indexScale * degreeAngle;
+                break;
+            }
+
+        }
+    }
 
     onIndexChanged: {
         //calculate the value using extrapolation
