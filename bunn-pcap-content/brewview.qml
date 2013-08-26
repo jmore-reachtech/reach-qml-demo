@@ -7,6 +7,7 @@ Rectangle {
     width: 480
     height: 272
     id: root
+    objectName: "root"
     color: "#2D2D2D"
 
     signal message(string msg)
@@ -43,7 +44,7 @@ Rectangle {
     Timer{
         id: timer
 
-        interval: 100; running: true; repeat: true
+        interval: 100; running: false; repeat: true
         onTriggered: {
             progress.value += 2;
             if (progress.value == progress.maximum)
@@ -94,23 +95,16 @@ Rectangle {
         }
         else
         {
-            connection.sendMessage
-                (
-                    "brew="+recipe.recipeId + "," +
-                    recipe.volume + "," +
-                    recipe.preWet + "," +
-                    recipe.preInfusion + "," +
-                    recipe.fillPause + "," +
-                    recipe.extractionTime + "," +
-                    recipe.turbulenceOn + "," +
-                    recipe.turbulenceOff + "," +
-                    recipe.turbulencePower + "," +
-                    recipe.pressOutPower + "," +
-                    recipe.pressOutTime + "," +
-                    recipe.temp
-                 )
-
+            connection.sendMessage("recipeId=" + recipe.recipeId);
+            connection.sendMessage("volume=" + recipe.volume);
+            connection.sendMessage("fillPause=" + recipe.fillPause);
+            connection.sendMessage("extractionTime=" + recipe.extractionTime);
+            connection.sendMessage("turbulenceOn=" + recipe.turbulenceOn);
+            connection.sendMessage("turbulenceOff=" + recipe.turbulenceOff);
+            connection.sendMessage("temp=" + recipe.temp);
         }
+
+        timer.start();
     }
 }
 

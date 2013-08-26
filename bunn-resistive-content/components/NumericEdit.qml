@@ -18,6 +18,14 @@ Image {
     width: 100
     height: 30
 
+    onValueChanged: {
+        if (value < min)
+            value = min;
+        else if (value > max)
+            value = max;
+
+    }
+
     ImageButton {
         id: btnLeft
         anchors.left: parent.left
@@ -70,8 +78,7 @@ Image {
         height: parent.height
         text: spinner.addDisplayText ? parent.value.toFixed(parent.precision) + parent.displayText
                                      : parent.value.toFixed(parent.precision)
-        font.pointSize: 12
-        font.family: "MV Boli"
+        font.pixelSize: 16
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.left: btnLeft.right

@@ -18,6 +18,14 @@ Image {
     width: 100
     height: 30
 
+    onValueChanged: {
+        if (value < min)
+            value = min;
+        else if (value > max)
+            value = max;
+
+    }
+
     ImageButton {
         id: btnLeft
         anchors.left: parent.left

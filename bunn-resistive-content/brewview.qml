@@ -1,12 +1,13 @@
 import QtQuick 1.1
-import "../content/components"
-import "../content/js/dataModel.js" as Db
+import "components"
+import "js/dataModel.js" as Db
 
 
 Rectangle {
     width: 480
     height: 272
     id: root
+    objectName: "root"
     color: "#2D2D2D"
 
     signal message(string msg)
@@ -24,11 +25,10 @@ Rectangle {
         color: "#ffffff"
         text: ""
         font.underline: false
-        font.pointSize: 16
+        font.pixelSize: 18
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         style: Text.Normal
         font.bold: true
-        font.family: "MV Boli"
         horizontalAlignment: Text.AlignHCenter
     }
 
@@ -44,13 +44,13 @@ Rectangle {
     Timer{
         id: timer
 
-        interval: 100; running: true; repeat: true
+        interval: 100; running: false; repeat: true
         onTriggered: {
             progress.value += 2;
             if (progress.value == progress.maximum)
             {
                 timer.stop();
-                root.message("visible")
+                root.message("coffeeview.qml")
             }
         }
     }
@@ -59,13 +59,16 @@ Rectangle {
         id: btnCancel
         x: 208
         y: 202
-        width: 66
-        height: 56
+        width: 76
+        height: 64
         imageOn: "images/btnCancel.png"
         imageOff: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("visible")
-            connection.sendMessage("brew=0")
+            if (typeof connection === "undefined")
+                console.debug("brew=0");
+            else
+                connection.sendMessage("brew=0");
+            root.message("coffeeview.qml");
         }
     }
 
@@ -80,30 +83,28 @@ Rectangle {
         //Send data to console
         var recipe = Db.dataList.get(Db.currentIndex);
 
-        connection.sendMessage
-                (
-                    "brew="+recipe.recipeId + "," +
-                    recipe.volume + "," +
-                    recipe.preWet + "," +
-                    recipe.preInfusion + "," +
-                    recipe.fillPause + "," +
-                    recipe.extractionTime + "," +
-                    recipe.turbulenceOn + "," +
-                    recipe.turbulenceOff + "," +
-                    recipe.turbulencePower + "," +
-                    recipe.pressOutPower + "," +
-                    recipe.pressOutTime + "," +
-                    recipe.temp
-                 )
+        if (typeof connection === "undefined")
+        {
+            console.debug("&recipeid=" + recipe.recipeId + "&recipeName=" + encodeURIComponent(recipe.recipeName) +
+                "&volume=" + encodeURIComponent(recipe.volume) + "&preWet=" + encodeURIComponent(recipe.preWet) +
+                "&preInfusion=" + encodeURIComponent(recipe.preInfusion) + "&fillPause=" + encodeURIComponent(recipe.fillPause) +
+                "&extractionTime=" + encodeURIComponent(recipe.extractionTime) + "&turbulenceOn=" + encodeURIComponent(recipe.turbulenceOn) +
+                "&turbulenceOff=" + encodeURIComponent(recipe.turbulenceOff) + "&turbulencePower=" + encodeURIComponent(recipe.turbulencePower) +
+                "&pressOutPower" + encodeURIComponent(recipe.pressOutPower) + "&pressOutTime=" + encodeURIComponent(recipe.pressOutTime) +
+                "&temp=" +  encodeURIComponent(recipe.temp));
+        }
+        else
+        {
+            connection.sendMessage("recipeId=" + recipe.recipeId);
+            connection.sendMessage("volume=" + recipe.volume);
+            connection.sendMessage("fillPause=" + recipe.fillPause);
+            connection.sendMessage("extractionTime=" + recipe.extractionTime);
+            connection.sendMessage("turbulenceOn=" + recipe.turbulenceOn);
+            connection.sendMessage("turbulenceOff=" + recipe.turbulenceOff);
+            connection.sendMessage("temp=" + recipe.temp);
+        }
 
-        console.debug("&recipeid=" + recipe.recipeId + "&recipeName=" + encodeURIComponent(recipe.recipeName) +
-            "&volume=" + encodeURIComponent(recipe.volume) + "&preWet=" + encodeURIComponent(recipe.preWet) +
-            "&preInfusion=" + encodeURIComponent(recipe.preInfusion) + "&fillPause=" + encodeURIComponent(recipe.fillPause) +
-            "&extractionTime=" + encodeURIComponent(recipe.extractionTime) + "&turbulenceOn=" + encodeURIComponent(recipe.turbulenceOn) +
-            "&turbulenceOff=" + encodeURIComponent(recipe.turbulenceOff) + "&turbulencePower=" + encodeURIComponent(recipe.turbulencePower) +
-            "&pressOutPower" + encodeURIComponent(recipe.pressOutPower) + "&pressOutTime=" + encodeURIComponent(recipe.pressOutTime) +
-            "&temp=" +  encodeURIComponent(recipe.temp));
-
+        timer.start();
     }
 }
 

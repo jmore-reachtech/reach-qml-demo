@@ -1,6 +1,6 @@
 import QtQuick 1.1
-import "../content/components"
-import "../content/js/dataModel.js" as Db
+import "components"
+import "js/dataModel.js" as Db
 
 
 Rectangle {
@@ -37,12 +37,12 @@ Rectangle {
         id: btnCancel
         x: 208
         y: 202
-        width: 66
-        height: 56
+        width: 76
+        height: 64
         imageOn: "images/btnCancel.png"
         imageOff: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("visible")
+            root.message("coffeeview.qml")
         }
     }
 }

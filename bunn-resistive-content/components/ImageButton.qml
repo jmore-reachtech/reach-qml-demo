@@ -6,7 +6,7 @@ import QtQuick 1.1
 /*  state changes and fires an onButtonClick event that the programmer can   */
 /*  add the click event details.                                             */
 
-Rectangle {
+Item {
     id: rectangle1
     property alias imageOn: border_image1.source
     property alias imageOff: border_image2.source
@@ -31,7 +31,6 @@ Rectangle {
         }
     }
 
-    color: "transparent"
     width: 137
     height: 126
 
@@ -65,7 +64,7 @@ Rectangle {
 
     Timer {
         id: timer
-             interval: 200; running: false; repeat: false
+             interval: 100; running: false; repeat: false
              onTriggered: {
                  border_image1.visible = true;
                  border_image2.visible = false;
@@ -83,12 +82,12 @@ Rectangle {
             timer.start();
         }
         onPressed: {
-            rectangle1.scale = 1.3
+            rectangle1.scale = 1.04
             border_image1.visible = false;
             border_image2.visible = true;
         }
         onReleased: {
-            rectangle1.scale = 1.3
+            rectangle1.scale = 1.04
         }
     }
 

@@ -3,7 +3,7 @@ import QtQuick 1.1
 Rectangle {
     width: 480
     height: 180
-    color: "black"
+    color: "Transparent"
     property ListModel items: ListModel {}
     property int currentIndex: view.currentIndex
     // sets the number of pixels between press and release

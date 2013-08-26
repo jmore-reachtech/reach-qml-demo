@@ -1,6 +1,6 @@
 import QtQuick 1.1
-import "../content/components"
-import "../content/js/dataModel.js" as Db
+import "components"
+import "js/dataModel.js" as Db
 
 
 Rectangle {
@@ -24,11 +24,10 @@ Rectangle {
         color: "#ffffff"
         text: qsTr("Rinsing the coffee maker please wait...")
         font.underline: false
-        font.pointSize: 16
+        font.pixelSize: 18
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         style: Text.Normal
         font.bold: true
-        font.family: "MV Boli"
         horizontalAlignment: Text.AlignHCenter
     }
 
@@ -50,7 +49,7 @@ Rectangle {
             if (progress.value == progress.maximum)
             {
                 timer.stop();
-                root.message("visible")
+                root.message("coffeeview.qml")
             }
         }
     }
@@ -59,18 +58,24 @@ Rectangle {
         id: btnCancel
         x: 208
         y: 202
-        width: 66
-        height: 56
+        width: 76
+        height: 64
         imageOn: "images/btnCancel.png"
         imageOff: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("visible")
-            connection.sendMessage("rinse=0")
+            if (typeof connection === "undefined")
+                console.debug("rinse=0");
+            else
+                connection.sendMessage("rinse=0");
+            root.message("coffeeview.qml");
         }
     }
 
     Component.onCompleted: {
-        connection.sendMessage("rinse=1")
+        if (typeof connection === "undefined")
+            console.debug("rinse=1");
+        else
+            connection.sendMessage("rinse=1");
     }
 
 

@@ -12,7 +12,7 @@ Rectangle {
     }
 
     id: lineEdit
-    height: input.height + 8
+    height: font.pixelSize + 8
     color: "White"
     radius: 2
     border.color: "gray"
@@ -23,9 +23,9 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: 4
         anchors.top: parent.top
-        anchors.topMargin: 4
+        anchors.topMargin: 2
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 4
+        anchors.bottomMargin: 2
         color: "black"
 
         text: lineEdit.text

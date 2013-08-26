@@ -1,14 +1,15 @@
 import QtQuick 1.1
 
-import "../content/components"
-import "../content/js/dataModel.js" as Db
-import "../content/js/ops.js" as Ops
+import "components"
+import "js/dataModel.js" as Db
+import "js/ops.js" as Ops
 
 
 Rectangle {
     width: 480
     height: 272
     id: root
+    objectName: "root"
     color: "#2D2D2D"
     property string rotateLeft: "\u2939"
     property string rotateRight: "\u2935"
@@ -22,6 +23,14 @@ Rectangle {
     property string errorMessage: ""
     property bool keyBoardLoaded: false
 
+    property alias m_Name: tbName.text
+    property alias m_Volume: volume.value
+    property alias m_FillPause: fillPause.value
+    property alias m_ExtractionTime: extractionTime.value
+    property alias m_TurbulenceOn: turbulenceOn.value
+    property alias m_TurbulenceOff: turbulenceOff.value
+    property alias m_Temp: temp.value
+
     signal message(string msg)
 
     gradient: Gradient {
@@ -31,21 +40,20 @@ Rectangle {
 
     Text {
         id: txtName
-        x: 22
-        y: 9
+        x: 13
+        y: 24
         color: "#f7f6f6"
         text: qsTr("Name")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
         z: 30
     }
 
     LineEdit {
         id: tbName
-        x: 74
-        y: 5
-        width: 244
-        font.pixelSize: 13
+        x: 80
+        y: 22
+        width: 300
+        font.pixelSize: 20
         maximumLength: 30
         z:31
 
@@ -67,53 +75,50 @@ Rectangle {
 
     Text {
         id: txtMsg
-        x: 326
-        y: 9
+        x: 390
+        y: 28
         color: "Red"
         text: qsTr("*")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 14
         z: 30
     }
 
     Text {
         id: txtVolume
-        x: 21
-        y: 35
+        x: 12
+        y: 66
         color: "#f7f6f6"
         text: qsTr("Volume")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: volume
-        x: 22
-        y: 58
-        height: 30
-        width: 100
+        x: 13
+        y: 89
+        height: 40
+        width: 130
         max: 16
         min: 2
         addDisplayText: true
-        displayText: " oz"
+        displayText: " OZ"
     }
 
     Text {
         id: txtTemp
-        x: 19
-        y: 94
+        x: 10
+        y: 137
         color: "#f7f6f6"
         text: qsTr("Temperature")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: temp
-        x: 22
-        y: 118
-        height: 30
-        width: 106
+        x: 13
+        y: 161
+        height: 40
+        width: 130
         max: 208
         min: 165
         increment: 1
@@ -121,69 +126,22 @@ Rectangle {
         displayText: qsTr("<sup>o</sup>F")
     }
 
-    Text {
-        id: txtPreInfusion
-        x: 22
-        y: 151
-        color: "#f7f6f6"
-        text: qsTr("Pre-Infusion")
-        font.family: "MV Boli"
-        font.pointSize: 13
-    }
-
-    NumericEdit {
-        id: preInfusion
-        x: 22
-        y: 174
-        height: 30
-        width: 100
-        max: 100
-        min: 0
-        increment: 10
-        addDisplayText: true
-        displayText: "%"
-    }
-
-    Text {
-        id: txtPreWet
-        x: 22
-        y: 208
-        color: "#f7f6f6"
-        text: qsTr("Pre-Wet")
-        font.family: "MV Boli"
-        font.pointSize: 13
-    }
-
-    NumericEdit {
-        id: preWet
-        x: 21
-        y: 231
-        height: 30
-        width: 132
-        max: 1.0
-        min: 0.0
-        precision: 1
-        increment: 0.1
-        addDisplayText: true
-        displayText: " Secs"
-    }
 
     Text {
         id: txtFillPause
-        x: 163
-        y: 36
+        x: 158
+        y: 67
         color: "#f7f6f6"
         text: qsTr("Fill Pause")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: fillPause
-        x: 161
-        y: 59
-        height: 30
-        width: 139
+        x: 158
+        y: 89
+        height: 40
+        width: 150
         max: 25.0
         min: 1.0
         precision: 1
@@ -194,20 +152,19 @@ Rectangle {
 
     Text {
         id: txtExtractionTime
-        x: 161
-        y: 95
+        x: 158
+        y: 137
         color: "#f7f6f6"
         text: qsTr("Extraction Time")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: extractionTime
-        x: 161
-        y: 118
-        height: 30
-        width: 133
+        x: 158
+        y: 161
+        height: 40
+        width: 150
         max: 180
         min: 20
         precision: 0
@@ -218,20 +175,19 @@ Rectangle {
 
     Text {
         id: txtTurbulenceOn
-        x: 326
-        y: 33
+        x: 322
+        y: 66
         color: "#f7f6f6"
         text: qsTr("Turbulence On")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: turbulenceOn
-        x: 326
-        y: 58
-        height: 30
-        width: 133
+        x: 322
+        y: 89
+        height: 40
+        width: 140
         max: 45
         min: 1
         precision: 0
@@ -242,20 +198,19 @@ Rectangle {
 
     Text {
         id: txtTurbulenceOff
-        x: 323
-        y: 95
+        x: 322
+        y: 137
         color: "#f7f6f6"
         text: qsTr("Turbulence Off")
-        font.family: "MV Boli"
-        font.pointSize: 13
+        font.pixelSize: 18
     }
 
     NumericEdit {
         id: turbulenceOff
-        x: 323
-        y: 118
-        height: 30
-        width: 133
+        x: 322
+        y: 161
+        height: 40
+        width: 140
         max: 40
         min: 1
         precision: 0
@@ -264,60 +219,12 @@ Rectangle {
         displayText: " Secs"
     }
 
-    Text {
-        id: txtTurbulencePower
-        x: 322
-        y: 151
-        color: "#f7f6f6"
-        text: qsTr("Turbulence Power")
-        font.family: "MV Boli"
-        font.pointSize: 13
-    }
-
-    NumericEdit {
-        id: turbulencePower
-        x: 324
-        y: 174
-        height: 30
-        width: 90
-        max: 7
-        min: 1
-        precision: 0
-        increment: 1
-        addDisplayText: false
-        displayText: ""
-    }
-
-    Text {
-        id: txtpressOutPower
-        x: 161
-        y: 151
-        color: "#f7f6f6"
-        text: qsTr("Press Out Power")
-        font.family: "MV Boli"
-        font.pointSize: 13
-    }
-
-    NumericEdit {
-        id: pressOutPower
-        x: 163
-        y: 174
-        height: 30
-        width: 90
-        max: 7
-        min: 1
-        precision: 0
-        increment: 1
-        addDisplayText: false
-        displayText: ""
-    }
-
     ImageButton {
         id: btnSave
-        x: 317
-        y: 212
-        width: 66
-        height: 56
+        x: 166
+        y: 206
+        width: 76
+        height: 64
         imageOn: "images/btnSave.png"
         imageOff: "images/btnSaveOff.png"
         onButtonClick: {
@@ -325,23 +232,26 @@ Rectangle {
             if (tbName.text.trim().length > 0)
             {
                 //Insert recipe to the database and get the ID
-                var res = Db.insertRecipe(0, tbName.text, volume.value, preWet.value, preInfusion.value, fillPause.value, extractionTime.value,
-                                turbulenceOn.value, turbulenceOff.value, turbulencePower.value,
-                                pressOutPower.value, 60, temp.value);
+                var res = Db.insertRecipe(0, tbName.text, volume.value, 0, 0, fillPause.value, extractionTime.value,
+                                turbulenceOn.value, turbulenceOff.value, 0,
+                                0, 60, temp.value);
                 if (res > 0)
                 {
-                    Db.dataList.append({recipeId: res, machineRecipe: 0, recipeName: tbName.text, volume: volume.value, preWet: preWet.value,
-                        preInfusion: preInfusion.value, fillPause: fillPause.value, extractionTime: extractionTime.value,
-                        turbulenceOn: turbulenceOn.value, turbulenceOff: turbulenceOff.value, turbulencePower: turbulencePower.value,
-                        pressOutPower: pressOutPower.value, pressOutTime: 60, temp: temp.value});
+                    Db.dataList.append({recipeId: res, machineRecipe: 0, recipeName: tbName.text, volume: volume.value, preWet: 0,
+                        preInfusion: 0, fillPause: fillPause.value, extractionTime: extractionTime.value,
+                        turbulenceOn: turbulenceOn.value, turbulenceOff: turbulenceOff.value, turbulencePower: 0,
+                        pressOutPower: 0, pressOutTime: 60, temp: temp.value});
 
                     Db.currentIndex = Db.dataList.count - 1;
-                    root.message("update");
+                    root.message("coffeeview.qml");
                 }
                 else
                 {
                     //Show error here
                     console.debug(res);
+                    tbName.visible = false;
+                    txtName.visible = false;
+                    txtMsg.visible = false;
                     errorMessage = res;
                     errorWindow.visible = true;
                     opaqueWindow.visible = true;
@@ -357,16 +267,17 @@ Rectangle {
 
     ImageButton {
         id: btnCancel
-        x: 385
-        y: 212
-        width: 66
-        height: 56
+        x: 236
+        y: 206
+        width: 76
+        height: 64
         imageOn: "images/btnCancel.png"
         imageOff: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("visible")
+            root.message("coffeeview.qml")
         }
     }
+
 
     Rectangle{
         id: opaqueWindow
@@ -382,14 +293,13 @@ Rectangle {
             GradientStop {position: 0.0; color: "#2D2D2D"}
             GradientStop {position: 1.0; color: "#666666"}
         }
-        z: 10
     }
 
 
     Rectangle{
         id: errorWindow
         width: 300
-        height: 200
+        height: 240
         border.color: "#000000"
         border.width: 4
         radius: 8
@@ -397,7 +307,6 @@ Rectangle {
         visible: false;
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        z: 33
 
         color: "#2D2D2D"
 
@@ -411,8 +320,7 @@ Rectangle {
             height: 95
             text: "An error occurred: \n" + errorMessage
             wrapMode: Text.WordWrap
-            font.pointSize: 13
-            font.family: "MV Boli"
+            font.pixelSize: 18
             horizontalAlignment: Text.AlignHCenter
             color: "White"
             x: 0
@@ -425,19 +333,20 @@ Rectangle {
             id: btnErrorCancel
             x: 117
             y: 132
-            width: 66
-            height: 56
+            width: 76
+            height: 64
             imageOn: "images/btnCancel.png"
             imageOff: "images/btnCancelOff.png"
             onButtonClick: {
-                errorWindow.z = 10;
+                tbName.visible = true;
+                txtName.visible = true;
+                txtMsg.visible = true;
                 errorWindow.visible = false;
                 opaqueWindow.visible = false;
             }
         }
 
     }
-
 
 
     // Virtual keyboard pops up when a user enters the textEdit control
@@ -454,14 +363,10 @@ Rectangle {
     Component.onCompleted: {
         volume.value = 8;
         temp.value = 200;
-        preInfusion.value = 10;
-        preWet.value = 0.0;
         fillPause.value = 5;
         extractionTime.value = 45;
         turbulenceOn.value = 5;
         turbulenceOff.value = 10;
-        turbulencePower.value = 4;
-        pressOutPower.value = 7;
     }
 
 }

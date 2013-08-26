@@ -9,6 +9,7 @@ Rectangle {
     width: 480
     height: 272
     id: root
+    objectName: "root"
     color: "#2D2D2D"
     z: 200
     property string rotateLeft: "\u2939"
@@ -22,6 +23,14 @@ Rectangle {
     property string editObject: "textEdit"
     property string errorMessage: "";
     property bool keyBoardLoaded: false
+
+    property alias m_Name: tbName.text
+    property alias m_Volume: volume.value
+    property alias m_FillPause: fillPause.value
+    property alias m_ExtractionTime: extractionTime.value
+    property alias m_TurbulenceOn: turbulenceOn.value
+    property alias m_TurbulenceOff: turbulenceOff.value
+    property alias m_Temp: temp.value
 
     signal message(string msg)
 
