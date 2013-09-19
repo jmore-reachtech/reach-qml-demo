@@ -1,6 +1,0 @@
-G:txt.value=%d,T:dial=%d
-M:dial=%d,T:control.translateValue=%d
-# default messages
-# these are used if there is not match
-M:%s,T:txtDebug.text=%s
-G:%s,T:e1
