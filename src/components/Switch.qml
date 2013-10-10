@@ -19,7 +19,7 @@ Rectangle {
     color: "Transparent"
 
     width: 64
-    height:64
+    height: 64
 
     signal buttonClick()
     onButtonClick: {

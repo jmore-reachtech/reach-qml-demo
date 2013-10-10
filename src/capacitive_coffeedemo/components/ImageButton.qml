@@ -44,12 +44,14 @@ Item {
         visible: !mouseArea.pressed
         anchors.fill: parent
         opacity: !root.disabled ? 1.0 : 0.5
+        asynchronous: true
     }
 
     BorderImage {
         id: border_image2
         visible: mouseArea.pressed
         anchors.fill: parent
+        asynchronous: true
     }
 
     MouseArea {

@@ -28,7 +28,7 @@ Item {
     property int yMin: 2
     property int yMax: sliderTrack.height - handle.height
     property int yPressed
-    property real increment: (yMax - yMin)/(maximum - minimum)
+    property int increment: (yMax - yMin)/(maximum - minimum)
     property alias imageTrack: sliderTrack.source
     property alias imageHandle: handle.source
     property bool showHint: true
@@ -85,17 +85,8 @@ Item {
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.YAxis; drag.minimumY: slider.yMin; drag.maximumY: slider.yMax
 
-            onPressed: {
-                yPressed = handle.y;
-            }
-
             onPositionChanged: {
                 value = -handle.y/increment + maximum;
-
-                if (handle.y === yMin)
-                    yPressed = yMin;
-                else if (handle.y === yMax)
-                    yPressed = yMax;
 
                 if (handle.y < handle.height/2)
                 {

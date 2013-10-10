@@ -33,6 +33,7 @@ Item {
                 scale: 4. * y / view.height * 6. / items.count
                 z: y
                 opacity: scale / 1.3
+                asynchronous: true
 
                 Text {
                     id: delegateText

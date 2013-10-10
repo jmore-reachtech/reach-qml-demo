@@ -35,6 +35,12 @@ Rectangle {
         ListElement {
             image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "spedometerdemo/mainview.qml"; icontext: "Spedometer Demo"
         }
+        ListElement {
+            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "capacitive_componentdemo/mainview.qml"; icontext: "     Capacitive\nComponent Demo"
+        }
+        ListElement {
+            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "resistive_componentdemo/mainview.qml"; icontext: "      Resistive\nComponent Demo"
+        }
     }
 
     GridView{
@@ -73,10 +79,13 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
+                var index = 0;
                 menu.page += 1;
                 if (menu.page > menu.rows)
                     menu.page = menu.rows;
-                menu.positionViewAtIndex(menu.page, GridView.Beginning);
+
+                index = (menu.page - 1) * 4;
+                menu.positionViewAtIndex(index, GridView.Beginning);
             }
         }
 
@@ -95,10 +104,12 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
+                var index = 0;
                 menu.page -= 1;
                 if (menu.page < 1)
                     menu.page = 1;
-                menu.positionViewAtIndex(menu.page, GridView.Beginning);
+                index = (menu.page - 1) * 4;
+                menu.positionViewAtIndex(index, GridView.Beginning);
             }
         }
     }
@@ -142,7 +153,7 @@ Rectangle {
 
                 MouseArea{
                     anchors.fill: parent
-                    onPressed: {
+                    onClicked: {
                         root.message(form);
                     }
                 }
@@ -151,7 +162,7 @@ Rectangle {
     }
 
     BorderImage {
-        id: border_image1
+        id: imgUpArrow
         x: 0
         y: 56
         width: 50
@@ -160,7 +171,7 @@ Rectangle {
     }
 
     BorderImage {
-        id: border_image2
+        id: imgDownArrow
         x: 1
         y: 174
         width: 50
@@ -170,14 +181,12 @@ Rectangle {
 
     Text {
         id: text1
-        x: -3
-        y: 127
+        x: 2
+        y: 130
         color: "#ffffff"
         text: qsTr("Swipe")
         rotation: -90
-        font.pointSize: 12
+        font.pixelSize: 16
     }
-
-
 
 }
