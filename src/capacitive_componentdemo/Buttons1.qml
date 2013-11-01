@@ -141,7 +141,7 @@ Rectangle {
 
     ImageButton {
         id: quitButton
-        x: 16
+        x: 46
         y: 209
         width: 48
         height: 48

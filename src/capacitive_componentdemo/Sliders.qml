@@ -91,7 +91,7 @@ Rectangle {
             minimum: 0
             xMin: 0
             xMax: 247
-            value: 0
+            value: -3
             handleY: -2
             hintRadius: 9
             hintWidth: 40
@@ -115,7 +115,7 @@ Rectangle {
 
     VerticalSlider {
         id: slider___vertical2
-        x: 423
+        x: 413
         y: 6
         width: 23
         height: 260
@@ -132,7 +132,7 @@ Rectangle {
         imageOverlay: "images/vert_slider_bg.png"
         minimum: 0
         value: 0
-        handleX: -10
+        handleX: -9
         hintRadius: 9
         yMin: 0
         hintWidth: 40

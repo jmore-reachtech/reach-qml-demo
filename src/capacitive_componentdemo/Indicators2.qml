@@ -27,7 +27,7 @@ Rectangle {
     }
 
     Image{
-        x: 17
+        x: 21
         y: 15
         source: "images/therm_base.png"
 
@@ -103,7 +103,7 @@ Rectangle {
 
     Image {
         id: image1
-        x: 125
+        x: 126
         y: 40
         width: 340
         height: 124

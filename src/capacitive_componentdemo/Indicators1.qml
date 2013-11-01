@@ -56,7 +56,7 @@ Rectangle {
 
     Image{
         x: 182
-        y: 66
+        y: 59
         source: "images/level_base.png"
         VerticalLevelIndicator {
             id: vertical1
@@ -89,7 +89,7 @@ Rectangle {
 
     Image{
         x: 23
-        y: 48
+        y: 36
         source: "images/battery_base.png"
 
         VerticalLevelIndicator {
