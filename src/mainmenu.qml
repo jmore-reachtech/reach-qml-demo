@@ -153,9 +153,27 @@ Rectangle {
 
                 MouseArea{
                     anchors.fill: parent
-                    onClicked: {
-                        root.message(form);
+
+                    onPressed: {
+                        textIcon.color = "yellow";
+                        imgIcon.opacity = 0.7;
+                        textIcon.opacity = 0.7;
+                        timer1.start();
                     }
+
+                    onReleased: {
+                        textIcon.color = "white";
+                        imgIcon.opacity = 1.0;
+                        textIcon.opacity = 1.0;
+                    }
+                }
+
+                Timer{
+                    id: timer1
+                    interval: 300;
+                    running: false;
+                    repeat: false
+                    onTriggered: root.message(form);
                 }
             }
         }
