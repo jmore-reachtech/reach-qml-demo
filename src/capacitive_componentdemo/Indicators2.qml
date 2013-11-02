@@ -72,15 +72,15 @@ Rectangle {
     LEDLight {
         id: led_light1
         x: 170
-        y: 170
+        y: 167
         width: 58
         height: 58
         on: false
-        font.pixelSize: 13
+        font.pixelSize: 12
         textColor: "#000000"
         textPosition: "bottom"
         label: "  Temp\nWarning"
-        fieldSpacing: 4
+        fieldSpacing: 2
         font.bold: true
         font.family: "Arial"
         imageOff: "images/ledoff.png"
@@ -90,7 +90,7 @@ Rectangle {
     PanelReadOut {
         id: panel_read_out1
         x: 258
-        y: 179
+        y: 176
         width: 116
         height: 76
         text: ""

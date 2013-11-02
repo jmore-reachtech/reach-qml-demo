@@ -78,15 +78,13 @@ Rectangle {
                   imgSwipe.visible = true;
                   root.swipe = "left";
                   timer1.start();
-                  //onLeftSwipe();
               } else {
                   imgSwipe.x = root.width - imgSwipe.width;
                   imgSwipe.y = root.height - imgSwipe.height - 4;
                   imgSwipe.source = "images/left_swipe.png";
                   imgSwipe.visible = true;
-                  timer1.start();
                   root.swipe = "right";
-                  //onRightSwipe();
+                  timer1.start();
               }
           } else {
               if( oldY > mouseY) {/*up*/ }
@@ -116,6 +114,22 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: rectPager
+        width: root.width
+        height: 14
+        color: "transparent"
+        anchors.bottom: root.bottom
+
+        Row{
+            id: rowPager
+            spacing: 5
+            anchors.centerIn: parent
+
+        }
+    }
+
+
     BorderImage {
         id: imgSwipe
         x: 41
@@ -136,10 +150,37 @@ Rectangle {
                 onLeftSwipe();
             else
                 onRightSwipe();
+            updatePageIndicator();
+        }
+    }
+
+    function createPageIndicator()
+    {
+        for (var i=0; i < repeater.count; i++)
+        {
+            var src = "";
+            if ( i == root.page)
+                src = "import QtQuick 1.1; Rectangle{color: \"white\"; border.width: 1; border.color: \"black\";  width: 8; height: 8; radius: width/2; smooth: true}"
+            else
+                src = "import QtQuick 1.1; Rectangle{color: \"#666666\"; width: 8; height: 8; border.width: 1; border.color: \"black\"; radius: width/2; smooth: true}"
+
+            var rect = Qt.createQmlObject(src, rowPager, "rectPageIndicator" + i.toString());
+        }
+
+    }
+
+    function updatePageIndicator()
+    {
+        for(var i = 0; i < rowPager.children.length ; i++) {
+            if (i == root.page)
+                rowPager.children[i].color = "white";
+            else
+                rowPager.children[i].color = "#666666";
         }
     }
 
     Component.onCompleted: {
         currentPage = "Buttons1";
+        createPageIndicator();
     }
 }
