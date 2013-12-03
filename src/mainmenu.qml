@@ -35,12 +35,6 @@ Rectangle {
         ListElement {
             image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "spedometerdemo/mainview.qml"; icontext: "Spedometer Demo"
         }
-        ListElement {
-            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "capacitive_componentdemo/mainview.qml"; icontext: "     Capacitive\nComponent Demo"
-        }
-        ListElement {
-            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "resistive_componentdemo/mainview.qml"; icontext: "      Resistive\nComponent Demo"
-        }
     }
 
     GridView{
@@ -79,13 +73,10 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
-                var index = 0;
                 menu.page += 1;
                 if (menu.page > menu.rows)
                     menu.page = menu.rows;
-
-                index = (menu.page - 1) * 4;
-                menu.positionViewAtIndex(index, GridView.Beginning);
+                menu.positionViewAtIndex(menu.page, GridView.Beginning);
             }
         }
 
@@ -104,12 +95,10 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
-                var index = 0;
                 menu.page -= 1;
                 if (menu.page < 1)
                     menu.page = 1;
-                index = (menu.page - 1) * 4;
-                menu.positionViewAtIndex(index, GridView.Beginning);
+                menu.positionViewAtIndex(menu.page, GridView.Beginning);
             }
         }
     }
@@ -166,21 +155,29 @@ Rectangle {
                         imgIcon.opacity = 1.0;
                         textIcon.opacity = 1.0;
                     }
+
+                    onCanceled: {
+                        timer1.stop();
+                        textIcon.color = "white";
+                        imgIcon.opacity = 1.0;
+                        textIcon.opacity = 1.0;
+                    }
                 }
 
                 Timer{
                     id: timer1
-                    interval: 300;
+                    interval: 200;
                     running: false;
                     repeat: false
                     onTriggered: root.message(form);
                 }
+
             }
         }
     }
 
     BorderImage {
-        id: imgUpArrow
+        id: border_image1
         x: 0
         y: 56
         width: 50
@@ -189,7 +186,7 @@ Rectangle {
     }
 
     BorderImage {
-        id: imgDownArrow
+        id: border_image2
         x: 1
         y: 174
         width: 50
@@ -206,5 +203,7 @@ Rectangle {
         rotation: -90
         font.pixelSize: 16
     }
+
+
 
 }
