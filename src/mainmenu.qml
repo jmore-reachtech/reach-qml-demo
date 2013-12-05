@@ -35,6 +35,12 @@ Rectangle {
         ListElement {
             image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "spedometerdemo/mainview.qml"; icontext: "Spedometer Demo"
         }
+        ListElement {
+            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "capacitive_componentdemo/mainview.qml"; icontext: "     Capacitive\nComponent Demo"
+        }
+        ListElement {
+            image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "resistive_componentdemo/mainview.qml"; icontext: "      Resistive\nComponent Demo"
+        }
     }
 
     GridView{
@@ -73,10 +79,13 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
+                var index = 0;
                 menu.page += 1;
                 if (menu.page > menu.rows)
                     menu.page = menu.rows;
-                menu.positionViewAtIndex(menu.page, GridView.Beginning);
+
+                index = (menu.page - 1) * 4;
+                menu.positionViewAtIndex(index, GridView.Beginning);
             }
         }
 
@@ -95,10 +104,12 @@ Rectangle {
             font.family: "Arial"
 
             onButtonClick: {
+                var index = 0;
                 menu.page -= 1;
                 if (menu.page < 1)
                     menu.page = 1;
-                menu.positionViewAtIndex(menu.page, GridView.Beginning);
+                index = (menu.page - 1) * 4;
+                menu.positionViewAtIndex(index, GridView.Beginning);
             }
         }
     }
@@ -203,7 +214,5 @@ Rectangle {
         rotation: -90
         font.pixelSize: 16
     }
-
-
 
 }
