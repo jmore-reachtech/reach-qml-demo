@@ -137,7 +137,7 @@ Rectangle {
             visible: !inAnotherDemo
             text: "Quit"
             anchors { left: newGameButton.right; leftMargin: 3; verticalCenter: parent.verticalCenter }
-            onClicked: screen.message("../src/mainmenu.qml");
+            onClicked: screen.message("../src-43-24/mainmenu.qml");
         }
 
         Text {

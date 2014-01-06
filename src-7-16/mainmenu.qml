@@ -112,9 +112,9 @@ Rectangle {
                     }
 
                     onReleased: {
-                        textIcon.color = "white";
-                        imgIcon.opacity = 1.0;
-                        textIcon.opacity = 1.0;
+                        textIcon.color = "yellow";
+                        imgIcon.opacity = 0.7;
+                        textIcon.opacity = 0.7;
                     }
 
                     onCanceled: {
