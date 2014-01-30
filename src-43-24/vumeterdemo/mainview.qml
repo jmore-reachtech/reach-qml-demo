@@ -173,7 +173,7 @@ Rectangle {
         text: ""
         imageDown: "../images/quit_down.png"
         imageUp: "../images/quit_up.png"
-        onButtonClick: root.message("../src-43-24/mainmenu.qml");
+        onButtonClick: root.message("../src/mainmenu.qml");
     }
 
 

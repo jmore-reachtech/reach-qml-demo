@@ -118,7 +118,7 @@ Rectangle {
         imageUp: "images/btnCancel.png"
         imageDown: "images/btnCancelOff.png"
         onButtonPress: {
-            mainView.message("../src-43-24/mainmenu.qml");
+            mainView.message("../src/mainmenu.qml");
         }
     }
 

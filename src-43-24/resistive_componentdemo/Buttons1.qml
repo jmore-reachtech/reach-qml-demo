@@ -147,7 +147,7 @@ Rectangle {
         text: ""
         imageDown: "images/quit_down.png"
         imageUp: "images/quit_up.png"
-        onButtonClick: parent.parent.parent.message("../src-43-24/mainmenu.qml");
+        onButtonClick: parent.parent.parent.message("../src/mainmenu.qml");
     }
 
     Component.onCompleted: {
