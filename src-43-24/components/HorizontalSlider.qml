@@ -4,30 +4,20 @@ Item {
     id: slider;
     width: 184
     height: 48
-    // value is read/write.
-    property int value: 0
-    onValueChanged: {
-        if (value < minimum)
-            value = minimum;
-        if (value > maximum)
-            value = maximum;
-        handle.x = (value - minimum) * ((slider.xMax - slider.xMin) / (maximum - minimum));
-    }
 
     property bool allowDrag: true
-    onAllowDragChanged: {
-        if (!allowDrag)
-            horizontalMouse.enabled = false;
-    }
-
-    property real maximum: 10
-    property real minimum: 0
+    property bool completed: false;
+    property int value: 0
+    property int maximum: 10
+    property int minimum: 0
     property int xMax: sliderTrack.width - handle.width
     property int xMin: 0
-    property int handleY: 2
+    property alias handleY: handle.y
     property alias imageTrack: sliderTrack.source
     property alias imageHandle: handle.source
+    property alias imageOverlay: overlay.source
     property bool showHint: true
+    property bool mousePressed: false
     property alias hintFontFamily: txtValue.font.family
     property alias hintFontPixelSize: txtValue.font.pixelSize
     property alias hintFontPointSize: txtValue.font.pointSize
@@ -43,24 +33,61 @@ Item {
     property int hintBorderWidth: 2
     property color hintFontColor: "#000000"
 
+    onValueChanged: {
+        if (completed && value < minimum)
+            value = minimum;
+        if (completed && value > maximum)
+            value = maximum;
+
+        if (!mousePressed)
+        {
+            handle.x = (value - minimum) * ((slider.xMax - slider.xMin) / (maximum - minimum));
+            if (overlay.source)
+                overlay.width = handle.x + handle.width/2;
+        }
+
+    }
+
+    onAllowDragChanged: {
+        if (!allowDrag)
+            horizontalMouse.enabled = false;
+    }
+
     Image{
         id: sliderTrack
         source: "../images/slider_htrack.png"
         anchors.fill: parent
     }
 
+    BorderImage{
+        id: overlay
+        smooth: true;
+        source: ""
+        border { left: 10; top: 4; right: 2; bottom: 4 }
+             horizontalTileMode: BorderImage.Stretch
+             verticalTileMode: BorderImage.Stretch
+    }
+
     Image {
         id: handle;
         smooth: true
-        y: handleY;
+        y: 2;
         source: "../images/slider_handle.png"
 
         MouseArea {
             id: horizontalMouse
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.XAxis; drag.minimumX: slider.xMin; drag.maximumX: slider.xMax
+
+            onPressed: mousePressed = true;
+            onReleased: mousePressed = false;
+
             onPositionChanged: {
                 value = handle.x / ((slider.xMax - slider.xMin) / (maximum - minimum)) + minimum
+
+                if (overlay.source)
+                    overlay.width = handle.x + handle.width/2;
+
                 if (handle.x < slider.xMax - recValue.width)
                     recValue.x = handle.x + handle.width;
                 else
@@ -93,9 +120,14 @@ Item {
     }
 
     Component.onCompleted: {
-        handle.x = (value - minimum) * ((slider.xMax - slider.xMin) / (maximum - minimum));
+        handle.x = (slider.value - minimum) * ((slider.xMax - slider.xMin) / (maximum - minimum));
+
+        if (overlay.source)
+            overlay.width = handle.x + handle.width/2;
+
         handle.y = slider.handleY
         recValue.x = handle.x + recValue.width;
+        completed = true;
     }
 }
 

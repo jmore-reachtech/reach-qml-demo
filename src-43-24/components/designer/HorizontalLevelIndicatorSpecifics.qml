@@ -108,6 +108,42 @@ QWidget {
                     }
                 }
 
+                QWidget {
+                    layout: HorizontalLayout {
+
+                        Label {
+                            text: qsTr("Value Scale")
+                            toolTip: qsTr("Value Scale")
+                        }
+
+                        DoubleSpinBox {
+                            backendValue: backendValues.valueScale
+                            singleStep: 1
+                            minimum: -1000
+                            maximum: 1000
+                            decimals: 2
+                            baseStateFlag: isBaseState
+                        }
+                    }
+                }
+
+                QWidget {
+                    layout: HorizontalLayout {
+
+                        Label {
+                            text: qsTr("Value Symbol")
+                            toolTip: qsTr("Value Symbol")
+                        }
+
+                        LineEdit{
+                            visible: !useLineEdit
+                            backendValue: backendValues.symbol
+                            baseStateFlag: isBaseState;
+                            translation: true
+                        }
+                    }
+                }
+
             }
         }
 

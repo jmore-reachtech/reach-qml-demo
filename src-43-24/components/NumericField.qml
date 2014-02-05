@@ -8,9 +8,9 @@ Rectangle {
     property alias label: labelItem
     property alias input: textItem
     property int fieldSpacing: 6
-    property real max: 1000
-    property real min: 0
-    property real value: parseFloat(input.text)
+    property real max
+    property real min
+    property variant value: maskedInput.length > 0 ? input.text : parseFloat(input.text)
     property url normalKeyIcon: "../images/key_off.png"
     property url pressedKeyIcon: "../images/key_on.png"
     property int keyWidth: 38
@@ -18,6 +18,8 @@ Rectangle {
     property url keyboardBackGroundImage: "../images/keyboardbg.png"
     property int keyboardAnimationSpeed: 100
     property string keyTextColor: "#ffffff"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
 
     property alias labelText: labelItem.text
     property alias labelColor: labelItem.color
@@ -28,7 +30,6 @@ Rectangle {
     property alias labelFontItalic: labelItem.font.italic
     property alias labelFontUnderline: labelItem.font.underline
     property alias labelFontStrikeout: labelItem.font.strikeout
-
     property alias inputText: textItem.text
     property alias inputColor: textItem.color
     property alias inputFontFamily: textItem.font.family
@@ -38,6 +39,8 @@ Rectangle {
     property alias inputFontItalic: textItem.font.italic
     property alias inputFontUnderline: textItem.font.underline
     property alias inputFontStrikeout: textItem.font.strikeout
+    property alias maskedInput : textItem.maskedInput
+    property string validator : ""
 
     color: "Transparent"
 
@@ -62,6 +65,7 @@ Rectangle {
             id: textItem
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 12
+            width: control.width - labelItem.width - fieldSpacing
         }
 
     }
@@ -98,6 +102,10 @@ Rectangle {
             min: control.min
             max: control.max
             keyTextColor: control.keyTextColor
+            keyTextBold: control.keyTextBold
+            keyTextFontSize: control.keyTextFontSize
+            validator: control.validator
+            maskedInput: control.maskedInput
 
             onKeyPress: {                
                 if (key === KeyCodes.keyEnter)

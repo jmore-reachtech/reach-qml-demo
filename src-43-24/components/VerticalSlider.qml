@@ -1,17 +1,23 @@
-import QtQuick 1.0
+import QtQuick 1.1
 
 Item {
     id: slider;
     width: 48;
     height: 184
-    // value is read/write.
+    property bool completed: false
     property int value: 0
     onValueChanged: {
-        if (value < minimum)
+        if (completed && value < minimum)
             value = minimum;
-        if (value > maximum)
+        if (completed && value > maximum)
             value = maximum;
-        handle.y = (maximum - value) * increment;
+
+        if (!mousePressed)
+        {
+            handle.y = -increment * (value - maximum)
+            if (overlay.source)
+                overlay.height = handle.y + handle.height/2;
+        }
     }
 
     property bool allowDrag: true
@@ -24,13 +30,14 @@ Item {
 
     property real maximum: 10
     property real minimum: 0
-    property int handleX: 0
+    property alias handleX: handle.x
     property int yMin: 2
     property int yMax: sliderTrack.height - handle.height
-    property int yPressed
-    property int increment: (yMax - yMin)/(maximum - minimum)
+    property bool mousePressed: false
+    property real increment: (yMax - yMin)/(maximum - minimum)
     property alias imageTrack: sliderTrack.source
     property alias imageHandle: handle.source
+    property alias imageOverlay: overlay.source
     property bool showHint: true
     property alias hintFontFamily: txtValue.font.family
     property alias hintFontPixelSize: txtValue.font.pixelSize
@@ -51,6 +58,16 @@ Item {
         id: sliderTrack
         source: "../images/slider_track.bmp"
         anchors.fill: parent
+    }
+
+    BorderImage{
+        id: overlay
+        smooth: true;
+
+        source: ""
+        border { left: 4; top: 10; right: 4; bottom: 10 }
+             horizontalTileMode: BorderImage.Stretch
+             verticalTileMode: BorderImage.Stretch
     }
 
     Rectangle{
@@ -76,7 +93,7 @@ Item {
     Image {
         id: handle
         smooth: true
-        x: handleX
+        x: 0
         source: "../images/slider_handle.png"
 
 
@@ -85,8 +102,14 @@ Item {
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.YAxis; drag.minimumY: slider.yMin; drag.maximumY: slider.yMax
 
+            onPressed: mousePressed = true;
+            onReleased: mousePressed = false;
+
             onPositionChanged: {
-                value = -handle.y/increment + maximum;
+                value = ((-handle.y + yMin)/increment) + maximum;
+
+                if (overlay.source)
+                    overlay.height = handle.y + handle.height/2;
 
                 if (handle.y < handle.height/2)
                 {
@@ -109,6 +132,8 @@ Item {
         handle.y = (maximum - value) * increment;
         handle.x = slider.handleX
         recValue.y = handle.y - recValue.height;
-        yPressed = yMax;
+        if (overlay.source)
+            overlay.height = handle.y + handle.height/2;
+        completed = true;
     }
 }

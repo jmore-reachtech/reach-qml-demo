@@ -10,13 +10,14 @@ Rectangle {
     property int fieldSpacing: 6
     property url normalKeyIcon: "../images/key_off.png"
     property url pressedKeyIcon: "../images/key_on.png"
-    property url normalSpaceKeyIcon: "../images/key_off.png"
-    property url pressedSpaceKeyIcon: "../images/key_off.png"
     property int keyWidth: 38
     property int keyHeight: 40
     property url keyboardBackGroundImage: "../images/keyboardbg.png"
     property int keyboardAnimationSpeed: 100
     property string keyTextColor: "#ffffff"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
+
     property alias labelText: labelItem.text
     property alias labelColor: labelItem.color
     property alias labelFontFamily: labelItem.font.family
@@ -90,13 +91,13 @@ Rectangle {
             text.width: input.width
             normalKeyIcon: control.normalKeyIcon
             pressedKeyIcon: control.pressedKeyIcon
-            normalSpaceKeyIcon: control.normalSpaceKeyIcon
-            pressedSpaceKeyIcon: control.pressedSpaceKeyIcon
             keyWidth: control.keyWidth
             keyHeight: control.keyHeight
             bgImage: control.keyboardBackGroundImage
             animationSpeed: control.keyboardAnimationSpeed
             keyTextColor: control.keyTextColor
+            keyTextBold: control.keyTextBold
+            keyTextFontSize: control.keyTextFontSize
 
             onKeyPress: {
                 if (key === KeyCodes.keyBackspace) {

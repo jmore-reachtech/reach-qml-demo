@@ -9,7 +9,8 @@ var keySrc = "../components/Key.qml";
 var component = Qt.createComponent(keySrc);
 
 function createKey(editor, parent, keyCap, keyCode, normalKeyIcon,
-                   pressedlKeyIcon, keyHeight, keyWidth, keySpacing, keyTextColor)
+                   pressedlKeyIcon, keyHeight, keyWidth, keySpacing,
+                   keyTextColor, keyTextBold, keyTextFontSize)
 {
     if (keyCap === 'Space')
     {
@@ -25,7 +26,8 @@ function createKey(editor, parent, keyCap, keyCode, normalKeyIcon,
                                                     "pressedKeyIcon": pressedlKeyIcon,
                                                     "editor": editor,
                                                     "textColor": keyTextColor,
-                                                    "font.bold": true,
+                                                    "font.bold": keyTextBold,
+                                                    "font.pixelSize": keyTextFontSize,
                                                     "width": keyWidth,                                                       
                                                     "height": keyHeight});
         if(dynamicObject == null){

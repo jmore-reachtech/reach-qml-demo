@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -20,7 +20,7 @@ Rectangle {
 
     signal message(string msg)
 
-    Spedometer {
+    Speedometer {
         id: spedo
         x: 135
         y: 31

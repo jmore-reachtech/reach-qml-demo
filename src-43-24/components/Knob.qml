@@ -12,7 +12,7 @@ Rectangle
     property real digitAngle : degreeAngle/57.2957795
     property real angleOffSet:  90.0 + degreeAngle/2 //We rotate the needle around the positive x axis in a downward position
     property real knobValue
-    //Use to value to set the knobValue directly without user intervention
+    //Use value to set the knobValue directly without user intervention
     property real value
     property real index
     property int initialIndex: 0
@@ -72,8 +72,6 @@ Rectangle
             index: 5
             value: 5
         }
-
-
     }
 
     onValueChanged: {

@@ -1,15 +1,17 @@
-import QtQuick 1.0
+import QtQuick 1.1
 
 Rectangle
 {
     property alias model: view.model
     property alias currentIndex: view.currentIndex
     property int initialIndex: 0
+    property int value: view.model.get(currentIndex).value
     property int itemHeight: 29
     property alias backGroundImage: bgImage.source
     property color textColor: "black"
     property alias highlightImage: hlImage.source
     property alias font: fontText.font
+    property int viewCount: 7
 
     color: "White"
     height: 216
@@ -64,7 +66,25 @@ Rectangle
             PathLine { x: view.width/2; y: view.pathItemCount*itemHeight + itemHeight }
         }
 
-        delegate: Text {verticalAlignment: Text.AlignVCenter; color: textColor; font.bold: fontText.font.bold; font.family: fontText.font.family; font.pixelSize: fontText.font.pixelSize; text: index; height: itemHeight; smooth:true }
+        delegate: spinnerDelegate
+    }
+
+    Component{
+        id: spinnerDelegate
+        Rectangle{
+            color: "transparent"
+            height: itemHeight
+
+            Text {
+                anchors.centerIn: parent;
+                color: textColor;
+                font.bold: fontText.font.bold;
+                font.family: fontText.font.family;
+                font.pixelSize: fontText.font.pixelSize;
+                text: index;
+                smooth:true
+            }
+        }
     }
 
     Keys.onDownPressed: view.incrementCurrentIndex()

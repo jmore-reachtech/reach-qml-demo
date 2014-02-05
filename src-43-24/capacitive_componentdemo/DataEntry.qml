@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -28,22 +28,20 @@ Rectangle {
 
     AlphaField {
         id: tbName
-        x: 78
-        y: 51
+        x: 63
+        y: 39
         width: 302
         height: 34
         labelFontBold: false
         keyboardBackGroundImage: "images/keyboardbg.png"
         normalKeyIcon: "images/key1_off.png"
         pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
         fieldSpacing: 7
         inputText: ""
         keyTextColor: "#000000"
-        keyTextBold: true
+        keyTextBold: false
+        keyHeight: 44
+        keyWidth: 42
         keyTextFontSize: 14
         inputColor: "#ffffff"
         labelColor: "#000000"
@@ -57,9 +55,9 @@ Rectangle {
     }
 
     NumericField {
-        id: numeric_field1
-        x: 78
-        y: 91
+        id: tbAge
+        x: 63
+        y: 75
         width: 180
         normalKeyIcon: "images/key1_off.png"
         pressedKeyIcon: "images/key1_on.png"
@@ -68,10 +66,10 @@ Rectangle {
         min: 0
         inputText: ""
         keyTextColor: "#000000"
-        keyTextBold: true
+        keyTextBold: false
         keyTextFontSize: 14
-        keyWidth: 40
-        keyHeight: 40
+        keyWidth: 44
+        keyHeight: 42
         inputColor: "#ffffff"
         labelColor: "#000000"
         inputFontPixelSize: 14
@@ -82,12 +80,14 @@ Rectangle {
         labelText: "Age"
     }
 
-    RadioButtonList {
-        id: radiobutton_list2
-        x: 78
-        y: 167
+    VerticalRadioButtonList {
+        id: rbProduct
+        x: 63
+        y: 132
         spacing: 4
-        itemSpacing: 4
+        imageHeight: 24
+        imageWidth: 24
+        itemSpacing: 3
         font.pixelSize: 14
         textColor: "#000000"
         font.family: "Arial"
@@ -96,16 +96,12 @@ Rectangle {
             ListElement {
                 item_value: "1"
                 item_checked: true
-                item_height: 26
-                item_width: 26
                 item_text: "PDWZ100"
             }
 
             ListElement {
                 item_value: "2"
                 item_checked: false
-                item_height: 26
-                item_width: 26
                 item_text: "PDWZ200"
             }
         }
@@ -115,27 +111,31 @@ Rectangle {
 
     Text {
         id: text1
-        x: 76
-        y: 140
+        x: 61
+        y: 110
         text: qsTr("Product Code")
         font.pixelSize: 14
     }
 
     Text {
         id: text2
-        x: 244
-        y: 140
+        x: 229
+        y: 110
         text: qsTr("Where did you buy this product?")
         font.pixelSize: 14
     }
 
-    CheckBoxList {
-        id: checkbox_list1
-        x: 244
-        y: 167
-        spacing: 8
-        itemSpacing: 5
-        font.pixelSize: 16
+    VerticalCheckBoxList {
+        id: clStore
+        x: 229
+        y: 132
+        width: 74
+        height: 91
+        spacing: 6
+        itemSpacing: 4
+        imageWidth: 24
+        imageHeight: 24
+        font.pixelSize: 14
         textColor: "#000000"
         font.family: "Arial"
         font.bold: false
@@ -143,23 +143,17 @@ Rectangle {
             ListElement {
                 item_value: "1"
                 item_checked: true
-                item_height: 24
-                item_width: 24
                 item_text: "Store 1"
             }
 
             ListElement {
                 item_value: "2"
                 item_checked: false
-                item_height: 24
-                item_width: 24
                 item_text: "Store 2"
             }
             ListElement {
                 item_value: "3"
                 item_checked: false
-                item_height: 24
-                item_width: 24
                 item_text: "Store 3"
             }
         }
@@ -167,5 +161,26 @@ Rectangle {
         imageChecked: "images/checkbox_click.png"
     }
 
+    ImageButton{
+        x: 61
+        y: 216
+        width: 64
+        height: 33
+        text: "Save"
+        imageUp: "images/internal_button_up.bmp"
+        imageDown: "images/internal_button_dn.bmp"
+
+        onButtonClick: {
+            console.debug("Name: " + tbName.inputText);
+            console.debug("Age: " + tbAge.value);
+            console.debug("Product: " + rbProduct.value);
+            console.debug("Stores:");
+            for (var i=0; i < clStore.values.count; i++)
+            {
+                console.debug(clStore.values.get(i).value);
+            }
+        }
+
+    }
 
 }

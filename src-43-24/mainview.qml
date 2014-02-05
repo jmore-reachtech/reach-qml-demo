@@ -1,4 +1,5 @@
 import QtQuick 1.1
+import "components"
 
 Item {
     id: mainView
@@ -9,10 +10,15 @@ Item {
         id: loader
     }
 
+    Beeper{
+        id: beeper
+    }
+
     Connections {
         target: loader.item
         onMessage: {
-            loader.source = msg;
+            beeper.beep();
+            loader.source = msg;            
         }
     }
 

@@ -4,7 +4,7 @@ Dial{
     id: vumeter
     value: model.get(0).value //-20.0
     min: model.get(0).value //-20.0
-    max:  model.get(14).value //3.0
+    max:  model.get(model.count-1).value //3.0
     // Width and height dictated by the background image
     width: 377; height: 242
 

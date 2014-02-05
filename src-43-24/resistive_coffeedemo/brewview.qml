@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 

@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     width: 480
@@ -91,7 +91,7 @@ Rectangle {
             minimum: 0
             xMin: 0
             xMax: 247
-            value: -3
+            value: 0
             handleY: -2
             hintRadius: 9
             hintWidth: 40

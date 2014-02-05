@@ -8,8 +8,9 @@ Type {
             name: "Switch"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
-            requiredImport: "components"
             forceImport: "true"
+
+            requiredImport: "components"
             Property { name: "width"; type: "int"; value: 60; }
             Property { name: "height"; type: "int"; value: 40; }
             Property { name: "imageOff"; type: "QUrl"; value: "images/internal_button_dn.bmp"; }
@@ -38,8 +39,9 @@ Type {
             name: "Image Button"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
-            requiredImport: "components"
             forceImport: "true"
+
+            requiredImport: "components"
             Property { name: "width"; type: "int"; value: 60; }
             Property { name: "height"; type: "int"; value: 40; }
             Property { name: "imageDown"; type: "QUrl"; value: "images/internal_button_dn.bmp"; }
@@ -54,6 +56,54 @@ Type {
     }
 
 Type {
+        name: "LEDLight"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "LED Light"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            forceImport: "true"
+
+            requiredImport: "components"
+            Property { name: "width"; type: "int"; value: 58; }
+            Property { name: "height"; type: "int"; value: 58; }
+            Property { name: "imageOn"; type: "QUrl"; value: "images/ledon.png"; }
+            Property { name: "imageOff"; type: "QUrl"; value: "images/ledoff.png"; }
+            Property { name: "on"; type: "bool"; value: false; }
+            Property { name: "fieldSpacing"; type: "int"; value: 4; }
+            Property { name: "label"; type: "QString"; value: "Label"; }
+            Property { name: "textPosition"; type: "QString"; value: "bottom"; }
+            Property { name: "textColor"; type: "QString"; value: "#000000"; }
+            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.bold"; type: "bool"; value: false; }
+            Property { name: "font.pixelSize"; type: "int"; value: 12; }
+        }
+    }
+
+Type {
+        name: "PanelReadOut"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "Panel Read Out"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            forceImport: "true"
+
+            requiredImport: "components"
+            Property { name: "width"; type: "int"; value: 211; }
+            Property { name: "height"; type: "int"; value: 99; }
+            Property { name: "imagePanel"; type: "QUrl"; value: "images/bezel.bmp"; }
+            Property { name: "text"; type: "QString"; value: "10000"; }
+            Property { name: "textColor"; type: "QString"; value: "#50dd0e"; }
+            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.bold"; type: "bool"; value: false; }
+            Property { name: "font.pixelSize"; type: "int"; value: 22; }
+        }
+    }
+
+Type {
         name: "HorizontalLevelIndicator"
         icon: "item-icon16.png"
 
@@ -62,6 +112,7 @@ Type {
             category: "Reach Components"
             libraryIcon: "item-icon.png"
             forceImport: "true"
+
             requiredImport: "components"
             Property { name: "width"; type: "int"; value: 200; }
             Property { name: "height"; type: "int"; value: 20; }
@@ -88,6 +139,7 @@ Type {
             category: "Reach Components"
             libraryIcon: "item-icon.png"            
             forceImport: "true"
+
             requiredImport: "components"
             Property { name: "width"; type: "int"; value: 28; }
             Property { name: "height"; type: "int"; value: 161; }
@@ -106,14 +158,26 @@ Type {
     }
 
 Type {
-        name: "CheckBoxList"
+        name: "HorizontalCheckBoxList"
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "CheckBox List"
+            name: "CheckBox List - Horizontal"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
-            QmlSource {source: "CheckBoxListSource.qml" }
+            QmlSource {source: "HorizontalCheckBoxListSource.qml" }
+        }
+    }
+
+Type {
+        name: "VerticalCheckBoxList"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "CheckBox List - Vertical"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            QmlSource {source: "VerticalCheckBoxListSource.qml" }
         }
     }
 
@@ -122,7 +186,7 @@ Type {
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "Numeric Field"
+            name: "Numeric Field - Horizontal"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
             requiredImport: "components"
@@ -144,13 +208,42 @@ Type {
         }
     }
 
-
 Type {
-        name: "AlphaField"
+        name: "NumericSelector"
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "Alphabetic Field"
+            name: "Numeric Selector"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            requiredImport: "components"
+            forceImport: "true"
+            Property { name: "width"; type: "int"; value: 110; }
+            Property { name: "textFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "textFontPixelSize"; type: "int"; value: 14; }
+            Property { name: "textColor"; type: "QString"; value: "#000000"; }
+            Property { name: "max"; type: "int"; value: 100; }
+            Property { name: "min"; type: "int"; value: 0; }
+            Property { name: "precision"; type: "int"; value: 0; }
+            Property { name: "increment"; type: "int"; value: 1; }
+            Property { name: "autoRepeat"; type: "bool"; value: true; }
+            Property { name: "autoRepeatInterval"; type: "int"; value: 100; }
+            Property { name: "displayText"; type: "string"; value: "<sup>o</sup>"; }
+            Property { name: "source"; type: "QUrl"; value: "images/bg_numericedit.png"; }
+            Property { name: "leftImageUp"; type: "QUrl"; value: "images/left_arrow_spin.png"; }
+            Property { name: "leftImageDown"; type: "QUrl"; value: "images/left_arrow_spin_off.png"; }
+            Property { name: "rightImageUp"; type: "QUrl"; value: "images/right_arrow_spin.png"; }
+            Property { name: "rightImageDown"; type: "QUrl"; value: "images/right_arrow_spin_off.png"; }
+        }
+    }
+
+
+Type {
+        name: "VerticalNumericField"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "Numeric Field - Vertical"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
             requiredImport: "components"
@@ -167,18 +260,83 @@ Type {
             Property { name: "inputColor"; type: "QString"; value: "#ffffff"; }
             Property { name: "keyTextColor"; type: "QString"; value: "#ffffff"; }
             Property { name: "keyboardAnimationSpeed"; type: "int"; value: 100; }
+            Property { name: "max"; type: "int"; value: 100; }
+            Property { name: "min"; type: "int"; value: 0; }
         }
     }
 
 Type {
-        name: "RadioButtonList"
+        name: "AlphaField"
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "RadioButton List"
+            name: "Alphabetic Field - Horizontal"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
-            QmlSource {source: "RadioButtonListSource.qml" }
+            requiredImport: "components"
+            forceImport: "true"
+            Property { name: "fieldSpacing"; type: "int"; value: 4; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelText"; type: "QString"; value: "Label"; }
+            Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
+            Property { name: "labelColor"; type: "QString"; value: "#000000"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "width"; type: "int"; value: "180"; }
+            Property { name: "inputText"; type: "QString"; value: ""; }
+            Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
+            Property { name: "inputColor"; type: "QString"; value: "#ffffff"; }
+            Property { name: "keyTextColor"; type: "QString"; value: "#ffffff"; }
+            Property { name: "keyboardAnimationSpeed"; type: "int"; value: 100; }
+        }
+    }
+
+Type {
+        name: "VerticalAlphaField"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "Alphabetic Field - Vertical"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            requiredImport: "components"
+            forceImport: "true"
+            Property { name: "fieldSpacing"; type: "int"; value: 4; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelText"; type: "QString"; value: "Label"; }
+            Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
+            Property { name: "labelColor"; type: "QString"; value: "#000000"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "width"; type: "int"; value: "180"; }
+            Property { name: "inputText"; type: "QString"; value: ""; }
+            Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
+            Property { name: "inputColor"; type: "QString"; value: "#ffffff"; }
+            Property { name: "keyTextColor"; type: "QString"; value: "#ffffff"; }
+            Property { name: "keyboardAnimationSpeed"; type: "int"; value: 100; }
+        }
+    }
+
+
+Type {
+        name: "HorizontalRadioButtonList"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "RadioButton List - Horizontal"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            QmlSource {source: "HorizontalRadioButtonListSource.qml" }
+        }
+    }
+
+Type {
+        name: "VerticalRadioButtonList"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "RadioButton List - Vertical"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            QmlSource {source: "VerticalRadioButtonListSource.qml" }
         }
     }
 
@@ -204,6 +362,7 @@ Type {
             libraryIcon: "item-icon.png"
             forceImport: "true"
             requiredImport: "components"
+
             Property { name: "width"; type: "int"; value: 130; }
             Property { name: "height"; type: "int"; value: 56; }
             Property { name: "textOn"; type: "QString"; value: "On"; }
@@ -228,14 +387,38 @@ Type {
     }
 
 Type {
-        name: "SwitchGroup"
+        name: "Knob"
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "Switch Group"
+            name: "Knob"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
-            QmlSource {source: "SwitchGroupSource.qml" }
+            QmlSource {source: "KnobSource.qml" }
+        }
+    }
+
+Type {
+        name: "VerticalSwitchGroup"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "Switch Group - Vertical"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            QmlSource {source: "VerticalSwitchGroupSource.qml" }
+        }
+    }
+
+Type {
+        name: "HorizontalSwitchGroup"
+        icon: "item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "Switch Group - Horizontal"
+            category: "Reach Components"
+            libraryIcon: "item-icon.png"
+            QmlSource {source: "HorizontalSwitchGroupSource.qml" }
         }
     }
 
@@ -249,13 +432,13 @@ Type {
             libraryIcon: "item-icon.png"
             forceImport: "true"
             requiredImport: "components"
-            requiredImport: "../components"
             Property { name: "width"; type: "int"; value: 48; }
             Property { name: "height"; type: "int"; value: 184; }
             Property { name: "allowDrag"; type: "bool"; value: "true"; }
             Property { name: "showHint"; type: "bool"; value: "true"; }
             Property { name: "imageTrack"; type: "QUrl"; value: "images/slider_track.bmp"; }
             Property { name: "imageHandle"; type: "QUrl"; value: "images/slider_handle.png"; }
+            Property { name: "imageOverlay"; type: "QUrl"; value: ""; }
             Property { name: "minimum"; type: "int"; value: 0; }
             Property { name: "maximum"; type: "int"; value: 10; }
             Property { name: "value"; type: "int"; value: 0; }
@@ -283,13 +466,13 @@ Type {
             libraryIcon: "item-icon.png"
             forceImport: "true"
             requiredImport: "components"
-            requiredImport: "../components"
             Property { name: "width"; type: "int"; value: 184; }
             Property { name: "height"; type: "int"; value: 48; }
             Property { name: "allowDrag"; type: "bool"; value: "true"; }
             Property { name: "showHint"; type: "bool"; value: "true"; }
             Property { name: "imageTrack"; type: "QUrl"; value: "images/slider_htrack.png"; }
             Property { name: "imageHandle"; type: "QUrl"; value: "images/slider_handle.png"; }
+            Property { name: "imageOverlay"; type: "QUrl"; value: ""; }
             Property { name: "minimum"; type: "int"; value: 0; }
             Property { name: "maximum"; type: "int"; value: 10; }
             Property { name: "value"; type: "int"; value: 0; }
@@ -307,47 +490,6 @@ Type {
         }
     }
 
-Type {
-        name: "Knob"
-        icon: "item-icon16.png"
-
-        ItemLibraryEntry {
-            name: "Knob"
-            category: "Reach Components"
-            libraryIcon: "item-icon.png"
-            forceImport: "true"
-            requiredImport: "components"
-            requiredImport: "../components"
-            Property { name: "width"; type: "int"; value: 180; }
-            Property { name: "height"; type: "int"; value: 180; }
-            Property { name: "initialIndex"; type: "int"; value: 0; }
-            Property { name: "add"; type: "bool"; value: false; }
-            Property { name: "remove"; type: "bool"; value: false; }
-            Property { name: "showHint"; type: "bool"; value: true; }
-            Property { name: "textColor"; type: "color"; value: "#ffffff"; }
-            Property { name: "imageBase"; type: "QString"; value: "images/dialbase.png"; }
-            Property { name: "imageBaseWidth"; type: "int"; value: 108; }
-            Property { name: "imageBaseHeight"; type: "int"; value: 108; }
-            Property { name: "imageNeedle"; type: "QString"; value: "images/dialneedle.png"; }
-            Property { name: "imageNeedleWidth"; type: "int"; value: 108; }
-            Property { name: "imageNeedleHeight"; type: "int"; value: 108; }
-            Property { name: "font.family"; type: "QString"; value: "Arial"; }
-            Property { name: "font.bold"; type: "bool"; value: false; }
-            Property { name: "font.pixelSize"; type: "int"; value: 16; }
-            Property { name: "mouseAreaHeight"; type: "int"; value: 77; }
-            Property { name: "mouseAreaWidth"; type: "int"; value: 77; }
-            Property { name: "hintHeight"; type: "int"; value: 40; }
-            Property { name: "hintWidth"; type: "int"; value: 40; }
-            Property { name: "hintBackgroundColor"; type: "QString"; value: "#ffffff"; }
-            Property { name: "hintRadius"; type: "int"; value: 9; }
-            Property { name: "hintBorderWidth"; type: "int"; value: 2; }
-            Property { name: "hintBorderColor"; type: "QString"; value: "#000000"; }
-            Property { name: "hintFontPixelSize"; type: "int"; value: 16; }
-            Property { name: "hintFontFamily"; type: "QString"; value: "Arial"; }
-            Property { name: "hintFontColor"; type: "QString"; value: "#000000"; }
-
-        }
-    }
 
 Type {
         name: "VUMeter"
@@ -359,7 +501,6 @@ Type {
             libraryIcon: "item-icon.png"
             forceImport: "true"
             requiredImport: "components"
-            requiredImport: "../components"
             Property { name: "width"; type: "int"; value: 377; }
             Property { name: "height"; type: "int"; value: 242; }
             Property { name: "backgroundImage"; type: "QString"; value: "images/vu_background.png"; }
@@ -380,16 +521,15 @@ Type {
     }
 
 Type {
-        name: "Spedometer"
+        name: "Speedometer"
         icon: "item-icon16.png"
 
         ItemLibraryEntry {
-            name: "Spedometer"
+            name: "Speedometer"
             category: "Reach Components"
             libraryIcon: "item-icon.png"
             forceImport: "true"
             requiredImport: "components"
-            requiredImport: "../components"
             Property { name: "width"; type: "int"; value: 210; }
             Property { name: "height"; type: "int"; value: 210; }
             Property { name: "backgroundImage"; type: "QString"; value: "images/meterbackground.png"; }

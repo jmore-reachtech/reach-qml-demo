@@ -3,11 +3,11 @@ import "components"
 
 Spinner {
     id: spinner1
-    width: 100
+    width: 90
     height: 216
     color: "#ffffff"
     radius: 2
-    font.pixelSize: 25
+    font.pixelSize: 24
     textColor: "#000000"
     initialIndex: 0
     border.color: "#000000"
@@ -16,7 +16,7 @@ Spinner {
     font.family: "Arial"
     font.bold: false
     highlightImage: "images/spinner-select.png"
-    itemHeight: 29
+    itemHeight: 34
 
     model:  ListModel{
         ListElement{ index: 1; value: 1}

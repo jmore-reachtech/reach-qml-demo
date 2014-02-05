@@ -1,6 +1,6 @@
 import QtQuick 1.1
 
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 
@@ -28,14 +28,12 @@ Rectangle {
         keyboardBackGroundImage: "images/keyboardbg.png"
         normalKeyIcon: "images/key1_off.png"
         pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
         fieldSpacing: 16
         inputText: ""
         keyTextColor: "#000000"
-        keyTextBold: true
+        keyTextBold: false
+        keyHeight: 44
+        keyWidth: 42
         keyTextFontSize: 14
         inputColor: "#ffffff"
         labelColor: "#f7f6f6"
@@ -67,7 +65,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: volume
         x: 13
         y: 89
@@ -75,7 +73,6 @@ Rectangle {
         width: 130
         max: 16
         min: 2
-        addDisplayText: true
         displayText: " OZ"
     }
 
@@ -88,7 +85,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: temp
         x: 13
         y: 161
@@ -97,7 +94,6 @@ Rectangle {
         max: 208
         min: 165
         increment: 1
-        addDisplayText: true
         displayText: qsTr("<sup>o</sup>F")
     }
 
@@ -111,7 +107,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: fillPause
         x: 158
         y: 89
@@ -121,7 +117,6 @@ Rectangle {
         min: 1.0
         precision: 1
         increment: 0.1
-        addDisplayText: true
         displayText: " Secs"
     }
 
@@ -134,7 +129,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: extractionTime
         x: 158
         y: 161
@@ -144,7 +139,6 @@ Rectangle {
         min: 20
         precision: 0
         increment: 1
-        addDisplayText: true
         displayText: " Secs"
     }
 
@@ -157,7 +151,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: turbulenceOn
         x: 322
         y: 89
@@ -167,7 +161,6 @@ Rectangle {
         min: 1
         precision: 0
         increment: 1
-        addDisplayText: true
         displayText: " Secs"
     }
 
@@ -180,7 +173,7 @@ Rectangle {
         font.pixelSize: 18
     }
 
-    NumericEdit {
+    NumericSelector {
         id: turbulenceOff
         x: 322
         y: 161
@@ -190,7 +183,6 @@ Rectangle {
         min: 1
         precision: 0
         increment: 1
-        addDisplayText: true
         displayText: " Secs"
     }
 
