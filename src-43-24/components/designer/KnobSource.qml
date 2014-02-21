@@ -10,7 +10,7 @@ Knob {
     imageBase: "images/dialbase.png"
     showHint: true
     hintBorderWidth: 2
-    hintFontFamily: "Arial"
+    hintFontFamily: "DejaVu Sans"
     imageNeedle: "images/dialneedle.png"
     hintBackgroundColor: "#ffffff"
     hintFontColor: "#000000"
@@ -21,7 +21,7 @@ Knob {
     mouseAreaHeight: 77
     textColor: "#ffffff"
     imageNeedleWidth: 108
-    font.family: "Arial"
+    font.family: "DejaVu Sans"
     imageBaseHeight: 108
     font.bold: false
     hintRadius: 9

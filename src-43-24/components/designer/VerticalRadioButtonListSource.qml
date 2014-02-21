@@ -6,7 +6,7 @@ VerticalRadioButtonList {
     textColor: "#000000"
     font.pixelSize: 16
     font.bold: false
-    font.family: "Arial"
+    font.family: "DejaVu Sans"
     spacing: 4
     itemSpacing: 10
     imageHeight: 28

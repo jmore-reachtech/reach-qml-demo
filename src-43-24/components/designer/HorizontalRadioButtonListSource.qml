@@ -6,7 +6,7 @@ HorizontalRadioButtonList {
     textColor: "#000000"
     font.pixelSize: 16
     font.bold: false
-    font.family: "Arial"
+    font.family: "DejaVu Sans"
     imageHeight: 28
     imageWidth: 28
     spacing: 4

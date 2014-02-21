@@ -14,7 +14,7 @@ Item {
 
     Text {
         id: fontText
-        font.family: "Arial"
+        font.family: "DejaVu Sans"
         font.pixelSize: 16
         font.bold: false
         color: "Black"

@@ -16,12 +16,12 @@ Type {
             Property { name: "imageOff"; type: "QUrl"; value: "images/internal_button_dn.bmp"; }
             Property { name: "imageOn"; type: "QUrl"; value: "images/internal_button_up.bmp"; }
             Property { name: "textOff"; type: "QString"; value: "Off"; }
-            Property { name: "textOffFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "textOffFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "textOffBold"; type: "bool"; value: false; }
             Property { name: "textOffColor"; type: "QString"; value: "#000000"; }
             Property { name: "textOffFontSize"; type: "int"; value: 14; }
             Property { name: "textOn"; type: "QString"; value: "On"; }
-            Property { name: "textOnFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "textOnFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "textOnBold"; type: "bool"; value: false; }
             Property { name: "textOnColor"; type: "QString"; value: "#000000"; }
             Property { name: "textOnFontSize"; type: "int"; value: 14; }
@@ -48,7 +48,7 @@ Type {
             Property { name: "imageUp"; type: "QUrl"; value: "images/internal_button_up.bmp"; }
             Property { name: "text"; type: "QString"; value: "Test"; }
             Property { name: "textColor"; type: "QString"; value: "#000000"; }
-            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.family"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "font.bold"; type: "bool"; value: false; }
             Property { name: "font.pixelSize"; type: "int"; value: 18; }
 
@@ -75,7 +75,7 @@ Type {
             Property { name: "label"; type: "QString"; value: "Label"; }
             Property { name: "textPosition"; type: "QString"; value: "bottom"; }
             Property { name: "textColor"; type: "QString"; value: "#000000"; }
-            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.family"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "font.bold"; type: "bool"; value: false; }
             Property { name: "font.pixelSize"; type: "int"; value: 12; }
         }
@@ -97,7 +97,7 @@ Type {
             Property { name: "imagePanel"; type: "QUrl"; value: "images/bezel.bmp"; }
             Property { name: "text"; type: "QString"; value: "10000"; }
             Property { name: "textColor"; type: "QString"; value: "#50dd0e"; }
-            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.family"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "font.bold"; type: "bool"; value: false; }
             Property { name: "font.pixelSize"; type: "int"; value: 22; }
         }
@@ -125,7 +125,7 @@ Type {
             Property { name: "value"; type: "int"; value: 0; }
             Property { name: "showHint"; type: "bool"; value: true; }
             Property { name: "hintFontPixelSize"; type: "int"; value: 14; }
-            Property { name: "hintFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "hintFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "hintFontColor"; type: "QString"; value: "#000000"; }
         }
     }
@@ -152,7 +152,7 @@ Type {
             Property { name: "value"; type: "int"; value: 0; }
             Property { name: "showHint"; type: "bool"; value: true; }
             Property { name: "hintFontPixelSize"; type: "int"; value: 14; }
-            Property { name: "hintFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "hintFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "hintFontColor"; type: "QString"; value: "#000000"; }
         }
     }
@@ -193,11 +193,11 @@ Type {
             forceImport: "true"
             Property { name: "width"; type: "int"; value: 180; }
             Property { name: "fieldSpacing"; type: "int"; value: 4; }
-            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "labelText"; type: "QString"; value: "Label"; }
             Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
             Property { name: "labelColor"; type: "QString"; value: "#000000"; }
-            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "inputText"; type: "QString"; value: ""; }
             Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
             Property { name: "inputColor"; type: "QString"; value: "#ffffff"; }
@@ -219,7 +219,7 @@ Type {
             requiredImport: "components"
             forceImport: "true"
             Property { name: "width"; type: "int"; value: 110; }
-            Property { name: "textFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "textFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "textFontPixelSize"; type: "int"; value: 14; }
             Property { name: "textColor"; type: "QString"; value: "#000000"; }
             Property { name: "max"; type: "int"; value: 100; }
@@ -250,11 +250,11 @@ Type {
             forceImport: "true"
             Property { name: "width"; type: "int"; value: 180; }
             Property { name: "fieldSpacing"; type: "int"; value: 4; }
-            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "labelText"; type: "QString"; value: "Label"; }
             Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
             Property { name: "labelColor"; type: "QString"; value: "#000000"; }
-            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "inputText"; type: "QString"; value: ""; }
             Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
             Property { name: "inputColor"; type: "QString"; value: "#ffffff"; }
@@ -276,11 +276,11 @@ Type {
             requiredImport: "components"
             forceImport: "true"
             Property { name: "fieldSpacing"; type: "int"; value: 4; }
-            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "labelText"; type: "QString"; value: "Label"; }
             Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
             Property { name: "labelColor"; type: "QString"; value: "#000000"; }
-            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "width"; type: "int"; value: "180"; }
             Property { name: "inputText"; type: "QString"; value: ""; }
             Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
@@ -301,11 +301,11 @@ Type {
             requiredImport: "components"
             forceImport: "true"
             Property { name: "fieldSpacing"; type: "int"; value: 4; }
-            Property { name: "labelFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "labelFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "labelText"; type: "QString"; value: "Label"; }
             Property { name: "labelFontPixelSize"; type: "int"; value: 14; }
             Property { name: "labelColor"; type: "QString"; value: "#000000"; }
-            Property { name: "inputFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "inputFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "width"; type: "int"; value: "180"; }
             Property { name: "inputText"; type: "QString"; value: ""; }
             Property { name: "inputFontPixelSize"; type: "int"; value: 14; }
@@ -381,7 +381,7 @@ Type {
             Property { name: "textColor"; type: "QString"; value: "#ffffff"; }
             Property { name: "font.bold"; type: "bool"; value: false; }
             Property { name: "font.pixelSize"; type: "int"; value: 22; }
-            Property { name: "font.family"; type: "QString"; value: "Arial"; }
+            Property { name: "font.family"; type: "QString"; value: "DejaVu Sans"; }
 
         }
     }
@@ -451,7 +451,7 @@ Type {
             Property { name: "hintBorderWidth"; type: "int"; value: 2; }
             Property { name: "hintBorderColor"; type: "QString"; value: "#000000"; }
             Property { name: "hintFontPixelSize"; type: "int"; value: 16; }
-            Property { name: "hintFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "hintFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "hintFontColor"; type: "QString"; value: "#000000"; }
         }
     }
@@ -485,7 +485,7 @@ Type {
             Property { name: "hintBorderWidth"; type: "int"; value: 2; }
             Property { name: "hintBorderColor"; type: "QString"; value: "#000000"; }
             Property { name: "hintFontPixelSize"; type: "int"; value: 16; }
-            Property { name: "hintFontFamily"; type: "QString"; value: "Arial"; }
+            Property { name: "hintFontFamily"; type: "QString"; value: "DejaVu Sans"; }
             Property { name: "hintFontColor"; type: "QString"; value: "#000000"; }
         }
     }

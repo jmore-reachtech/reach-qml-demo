@@ -6,7 +6,7 @@ VerticalSwitchGroup {
     spacing: 4
     font.pixelSize: 16
     font.bold: false
-    font.family: "Arial"
+    font.family: "DejaVu Sans"
     textOffColor: "#000000"
     textOnColor: "#000000"
 

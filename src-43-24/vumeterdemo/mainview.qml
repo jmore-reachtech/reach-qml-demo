@@ -59,99 +59,99 @@ Rectangle {
             font.family: "Arial"
             model: ListModel {
                 ListElement {
-                    index: -20
+                    text: "-20"
                     value: -20
                 }
                 ListElement {
-                    index: -19
+                    text: "-19"
                     value: -19
                 }
                 ListElement {
-                    index: -18
+                    text: "-18"
                     value: -18
                 }
                 ListElement {
-                    index: -17
+                    text: "-17"
                     value: -17
                 }
                 ListElement {
-                    index: -16
+                    text: "-16"
                     value: -16
                 }
                 ListElement {
-                    index: -15
+                    text: "-15"
                     value: -15
                 }
                 ListElement {
-                    index: -14
+                    text: "-14"
                     value: -14
                 }
                 ListElement {
-                    index: -13
+                    text: "-13"
                     value: -13
                 }
                 ListElement {
-                    index: -12
+                    text: "-12"
                     value: -12
                 }
                 ListElement {
-                    index: -11
+                    text: "-11"
                     value: -11
                 }
                 ListElement {
-                    index: -10
+                    text: "-10"
                     value: -10
                 }
                 ListElement {
-                    index: -9
+                    text: "-9"
                     value: -9
                 }
                 ListElement {
-                    index: -8
+                    text: "-8"
                     value: -8
                 }
                 ListElement {
-                    index: -7
+                    text: "-7"
                     value: -7
                 }
                 ListElement {
-                    index: -6
+                    text: "-6"
                     value: -6
                 }
                 ListElement {
-                    index: -5
+                    text: "-5"
                     value: -5
                 }
                 ListElement {
-                    index: -4
+                    text: "-4"
                     value: -4
                 }
                 ListElement {
-                    index: -3
+                    text: "-3"
                     value: -3
                 }
                 ListElement {
-                    index: -2
+                    text: "-2"
                     value: -2
                 }
                 ListElement {
-                    index: -1
+                    text: "-1"
                     value: -1
                 }
                 ListElement {
-                    index: 0
+                    text: "0"
                     value: 0
                 }
                 ListElement {
-                    index: 1
+                    text: "1"
                     value: 1
                 }
                 ListElement {
-                    index: 2
+                    text: "2"
                     value: 2
                 }
                 ListElement {
-                    index: 3
+                    text: "3"
                     value: 3
                 }
             }

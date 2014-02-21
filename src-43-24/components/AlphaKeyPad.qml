@@ -53,8 +53,8 @@ Column {
             textOff: KeyCodes.keyUpArrow
             textOn: KeyCodes.keyDownArrow
             textOnBold: control.keyTextBold
-            textOnFontFamily: "Arial"
-            textOffFontFamily: "Arial"
+            textOnFontFamily: "DejaVu Sans"
+            textOffFontFamily: "DejaVu Sans"
             textOnFontSize: control.keyTextFontSize
             textOffFontSize: control.keyTextFontSize
             imageOn: normalKeyIcon
@@ -89,8 +89,8 @@ Column {
             textOff: "ABC"
             textOn: "12#"
             textOnBold: control.keyTextBold
-            textOnFontFamily: "Arial"
-            textOffFontFamily: "Arial"
+            textOnFontFamily: "DejaVu Sans"
+            textOffFontFamily: "DejaVu Sans"
             textOnFontSize: control.keyTextFontSize
             textOffFontSize: control.keyTextFontSize
             imageOn: normalKeyIcon
