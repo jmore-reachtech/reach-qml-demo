@@ -41,6 +41,9 @@ Rectangle {
         ListElement {
             image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "resistive_componentdemo/mainview.qml"; icontext: "      Resistive\nComponent Demo"
         }
+        ListElement {
+            image: "images/graph-icon.png"; iconheight:64; iconwidth: 76; form: "graphdemo/mainview.qml"; icontext: "Graph Demo"
+        }
     }
 
     GridView{
