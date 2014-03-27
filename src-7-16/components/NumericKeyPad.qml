@@ -8,6 +8,9 @@ Grid {
     property int keyWidth: 28
     property int keyHeight: 40
     property color keyTextColor: "#ffffff"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
+
     property variant keyDefs: 
 
             [
@@ -39,6 +42,8 @@ Grid {
             width: control.keyWidth
             height: control.keyHeight
             textColor: control.keyTextColor
+            font.bold: control.keyTextBold
+            font.pixelSize: control.keyTextFontSize
             normalKeyIcon: repeater.model[index].normalKeyIcon ? repeater.model[index].normalKeyIcon: normalKeyIcon//control.normalKeyIcon
             pressedKeyIcon: repeater.model[index].pressedKeyIcon ? repeater.model[index].pressedKeyIcon : pressedlKeyIcon//control.pressedlKeyIcon
             onReleased: handleKeyPress(keyCode)

@@ -184,6 +184,20 @@ QWidget {
                         }
                     }
                 }
+                QWidget {
+                    layout: HorizontalLayout {
+                        Label {
+                            text: qsTr("Overlay Image")
+                            toolTip: qsTr("Image Source for Overlay")
+                        }
+                        UrlEdit {
+                            backendValue: backendValues.imageOverlay
+                            baseStateFlag: isBaseState
+                            filter: "*.png *.gif *.jpg *.bmp *.jpeg *.svg"
+                            showComboBox: true
+                        }
+                    }
+                }
             }
         }
 

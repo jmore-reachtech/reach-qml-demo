@@ -1,15 +1,18 @@
-import QtQuick 1.0
+import QtQuick 1.1
 
 Rectangle
 {
     property alias model: view.model
     property alias currentIndex: view.currentIndex
     property int initialIndex: 0
+    property variant initialValue
+    property variant value: view.model.get(currentIndex).value
     property int itemHeight: 29
     property alias backGroundImage: bgImage.source
     property color textColor: "black"
     property alias highlightImage: hlImage.source
     property alias font: fontText.font
+    property int viewCount: 7
 
     color: "White"
     height: 216
@@ -21,17 +24,17 @@ Rectangle
 
     ListModel{
         id: data
-        ListElement{ index: 1; value: 1}
-        ListElement{ index: 2; value: 2}
-        ListElement{ index: 3; value: 3}
-        ListElement{ index: 4; value: 4}
-        ListElement{ index: 5; value: 5}
-        ListElement{ index: 6; value: 6}
+        ListElement{ text: "1"; value: 1}
+        ListElement{ text: "2"; value: 2}
+        ListElement{ text: "3"; value: 3}
+        ListElement{ text: "4"; value: 4}
+        ListElement{ text: "5"; value: 5}
+        ListElement{ text: "6"; value: 6}
     }
 
     Text {
         id: fontText
-        font.family: "Arial"
+        font.family: "DejaVu Sans"
         font.pixelSize: 18
         font.bold: false
     }
@@ -64,7 +67,25 @@ Rectangle
             PathLine { x: view.width/2; y: view.pathItemCount*itemHeight + itemHeight }
         }
 
-        delegate: Text {verticalAlignment: Text.AlignVCenter; color: textColor; font.bold: fontText.font.bold; font.family: fontText.font.family; font.pixelSize: fontText.font.pixelSize; text: index; height: itemHeight; smooth:true }
+        delegate: spinnerDelegate
+    }
+
+    Component{
+        id: spinnerDelegate
+        Rectangle{
+            color: "transparent"
+            height: itemHeight
+
+            Text {
+                anchors.centerIn: parent;
+                color: textColor;
+                font.bold: fontText.font.bold;
+                font.family: fontText.font.family;
+                font.pixelSize: fontText.font.pixelSize;
+                text: model.text;
+                smooth:true
+            }
+        }
     }
 
     Keys.onDownPressed: view.incrementCurrentIndex()
@@ -74,5 +95,24 @@ Rectangle
         view.currentIndex = initialIndex;
     }
 
-    Component.onCompleted:  view.currentIndex = initialIndex;
+    onInitialValueChanged: setInitialValue();
+
+    function setInitialValue()
+    {
+        for (var i=0; i<view.count; i++)
+        {
+            if (view.model.get(i).value === initialValue)
+            {
+                view.currentIndex = i;
+                return;
+            }
+        }
+    }
+
+    Component.onCompleted:  {
+        if (typeof initialValue !== "undefined")
+            setInitialValue();
+        else
+            view.currentIndex = initialIndex;
+    }
 }

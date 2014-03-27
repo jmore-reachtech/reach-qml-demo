@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -35,12 +35,10 @@ Rectangle {
         keyboardBackGroundImage: "images/keyboardbg.png"
         normalKeyIcon: "images/key1_off.png"
         pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
         fieldSpacing: 7
         inputText: ""
+        keyWidth: 45
+        keyHeight: 55
         keyTextColor: "#000000"
         keyTextBold: true
         keyTextFontSize: 14
@@ -69,8 +67,8 @@ Rectangle {
         keyTextColor: "#000000"
         keyTextBold: true
         keyTextFontSize: 14
-        keyWidth: 40
-        keyHeight: 40
+        keyWidth: 45
+        keyHeight: 55
         inputColor: "#ffffff"
         labelColor: "#000000"
         inputFontPixelSize: 14
@@ -81,7 +79,7 @@ Rectangle {
         labelText: "Age"
     }
 
-    RadioButtonList {
+    VerticalRadioButtonList {
         id: radiobutton_list2
         x: 240
         y: 251
@@ -128,7 +126,7 @@ Rectangle {
         font.pixelSize: 14
     }
 
-    CheckBoxList {
+    VerticalCheckBoxList {
         id: checkbox_list1
         x: 406
         y: 251

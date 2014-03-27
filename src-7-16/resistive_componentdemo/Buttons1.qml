@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: button1
@@ -29,12 +29,12 @@ Rectangle {
         width: 102
         height: 102
         text: ""
-        imageUp: "images/btn_off2.png"
+        imageUp: "../capacitive_componentdemo/images/btn_off2.png"
         font.pixelSize: 18
         textColor: "#000000"
-        imageDown: "images/btn_on2.png"
+        imageDown: "../capacitive_componentdemo/images/btn_on2.png"
         font.bold: false
-        font.family: "Arial"
+        font.family: "DejaVu Sans"
 
         onButtonPress: {
             console.debug("Button Pressed.");
@@ -52,12 +52,12 @@ Rectangle {
         textOff: ""
         textOn: ""
         textOnBold: false
-        textOnFontFamily: "Arial"
-        textOffFontFamily: "Arial"
+        textOnFontFamily: "DejaVu Sans"
+        textOffFontFamily: "DejaVu Sans"
         textOnFontSize: 14
         textOffFontSize: 14
-        imageOn: "images/switch_on.png"
-        imageOff: "images/switch_off.png"
+        imageOn: "../capacitive_componentdemo/images/switch_on.png"
+        imageOff: "../capacitive_componentdemo/images/switch_off.png"
         textOnColor: "#000000"
         textOffColor: "#000000"
         textOffBold: false
@@ -81,8 +81,8 @@ Rectangle {
         textOffFontFamily: "Arial"
         textOnFontSize: 14
         textOffFontSize: 14
-        imageOn: "images/btn_on.png"
-        imageOff: "images/btn_off.png"
+        imageOn: "../capacitive_componentdemo/images/btn_on.png"
+        imageOff: "../capacitive_componentdemo/images/btn_off.png"
         textOnColor: "#000000"
         textOffColor: "#000000"
         textOffBold: false
@@ -105,28 +105,28 @@ Rectangle {
         model: ListModel {
             ListElement {
                 text_on: "1"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "1"
                 text_off: "1"
-                image_on: "../images/switchgroupdown.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "2"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "2"
                 text_off: "2"
-                image_on: "../images/switchgroupdown.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "3"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "3"
                 text_off: "3"
-                image_on: "../images/switchgroupdown.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown.png"
                 item_width: 60
                 item_height: 60
             }
@@ -150,46 +150,46 @@ Rectangle {
         model: ListModel {
             ListElement {
                 text_on: "A"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "A"
                 text_off: "A"
-                image_on: "../images/switchgroupdown2.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown2.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "B"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "B"
                 text_off: "B"
-                image_on: "../images/switchgroupdown2.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown2.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "C"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "C"
                 text_off: "C"
-                image_on: "../images/switchgroupdown2.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown2.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "D"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "D"
                 text_off: "D"
-                image_on: "../images/switchgroupdown2.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown2.png"
                 item_width: 60
                 item_height: 60
             }
             ListElement {
                 text_on: "E"
-                image_off: "../images/switchgroupup.png"
+                image_off: "../capacitive_componentdemo/images/switchgroupup.png"
                 val: "E"
                 text_off: "E"
-                image_on: "../images/switchgroupdown2.png"
+                image_on: "../capacitive_componentdemo/images/switchgroupdown2.png"
                 item_width: 60
                 item_height: 60
             }
@@ -208,8 +208,8 @@ Rectangle {
         width: 48
         height: 48
         text: ""
-        imageDown: "images/quit_down.png"
-        imageUp: "images/quit_up.png"
+        imageDown: "../capacitive_componentdemo/images/quit_down.png"
+        imageUp: "../capacitive_componentdemo/images/quit_up.png"
         onButtonClick: parent.parent.parent.message("../src/mainmenu.qml");
     }
 

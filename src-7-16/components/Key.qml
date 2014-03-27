@@ -1,5 +1,5 @@
 import QtQuick 1.1
-
+import "../js/keycodes.js" as KeyCodes
 
 Item {
     id: control
@@ -19,15 +19,13 @@ Item {
     height: 40
 
     onPressed: {
-        if (editor) {
+        if (editor)
             editor.handleKeyPress(keyCode);
-        }
     }
 
     onReleased: {
-        if (editor) {
+        if (editor)
             editor.showKeyHint(keyCode);
-        }
     }
 
     BorderImage {
@@ -59,7 +57,6 @@ Item {
             control.released();
         }
     }
-
 
 }
 

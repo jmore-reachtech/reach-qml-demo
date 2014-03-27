@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -57,10 +57,10 @@ Rectangle {
         width: 48
         height: 40
         text: ""
-        imageUp: "images/left_arrow_up.png"
+        imageUp: "../capacitive_componentdemo/images/left_arrow_up.png"
         font.pixelSize: 18
         textColor: "#000000"
-        imageDown: "images/left_arrow_down.png"
+        imageDown: "../capacitive_componentdemo/images/left_arrow_down.png"
         font.bold: false
         font.family: "Arial"
         smooth: true
@@ -81,10 +81,10 @@ Rectangle {
         height: 40
         text: ""
         smooth: true
-        imageUp: "images/right_arrow_up.png"
+        imageUp: "../capacitive_componentdemo/images/right_arrow_up.png"
         font.pixelSize: 18
         textColor: "#000000"
-        imageDown: "images/right-arrow_down.png"
+        imageDown: "../capacitive_componentdemo/images/right-arrow_down.png"
         font.bold: false
         font.family: "Arial"
 

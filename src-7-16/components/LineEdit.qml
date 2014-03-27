@@ -14,6 +14,9 @@ Rectangle {
     property alias validator: editInput.validator
     property alias cursorVisible: editInput.cursorVisible
     property alias font: editInput.font
+    property alias maskedInput: editInput.inputMask
+    property alias displayText: editInput.displayText
+    property bool acceptableInput: editInput.acceptableInput
 
     height: fontPixelSize + padding*4
 
@@ -27,10 +30,8 @@ Rectangle {
         width: parent.width - 8
         height: parent.height - 4
         anchors.centerIn: parent
-
         font.pixelSize: 12
         text: ""
-
 
         MouseArea {
             anchors.fill: parent

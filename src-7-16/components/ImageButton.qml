@@ -44,12 +44,14 @@ Item {
         visible: !mouseArea.pressed
         anchors.fill: parent
         opacity: !root.disabled ? 1.0 : 0.5
+        asynchronous: true
     }
 
     BorderImage {
         id: border_image2
         visible: mouseArea.pressed
         anchors.fill: parent
+        asynchronous: true
     }
 
     MouseArea {
@@ -63,8 +65,8 @@ Item {
 
     Text {
         id: text
-        text: qsTr("text")
-        color: qsTr("Black")
+        text: ""
+        color: "#000000"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.fill: parent

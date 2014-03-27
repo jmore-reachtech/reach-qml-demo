@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 Rectangle {
@@ -16,24 +16,30 @@ Rectangle {
         anchors.fill: parent
     }
 
+    Text{
+        x: 188
+        y: 42
+        color: "#ffffff"
+        text: "Add Coffee Recipe"
+        font.pixelSize: 23
+    }
+
     AlphaField {
         id: tbName
         x: 188
         y: 96
         width: 362
         height: 34
-        keyboardBackGroundImage: "images/keyboardbg.png"
-        normalKeyIcon: "images/key1_off.png"
-        pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
+        keyboardBackGroundImage: "../capacitive_coffeedemo/images/keyboardbg.png"
+        normalKeyIcon: "../capacitive_coffeedemo/images/key1_off.png"
+        pressedKeyIcon: "../capacitive_coffeedemo/images/key1_on.png"
         fieldSpacing: 16
         inputText: ""
         keyTextColor: "#000000"
         keyTextBold: true
         keyTextFontSize: 14
+        keyWidth: 45
+        keyHeight: 55
         inputColor: "#ffffff"
         labelColor: "#f7f6f6"
         inputFontPixelSize: 18
@@ -197,8 +203,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnSave.png"
-        imageDown: "images/btnSaveOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnSave.png"
+        imageDown: "../capacitive_coffeedemo/images/btnSaveOff.png"
         onButtonClick: {
             txtMsg.text = "*";
             if (tbName.inputText.trim().length > 0)
@@ -210,7 +216,7 @@ Rectangle {
                 if (res > 0)
                 {           
                     Db.currentIndex = res;
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                    root.message("resistive_coffeedemo/mainview.qml");
                 }
                 else
                 {
@@ -237,10 +243,10 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnCancel.png"
-        imageDown: "images/btnCancelOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+        imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
         onButtonClick: {
-            root.message("capacitive_coffeedemo/mainview.qml")
+            root.message("resistive_coffeedemo/mainview.qml")
         }
     }
 
@@ -297,8 +303,8 @@ Rectangle {
             width: 76
             height: 64
             text: ""
-            imageUp: "images/btnCancel.png"
-            imageDown: "images/btnCancelOff.png"
+            imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+            imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
             onButtonClick: {
                 tbName.visible = true;
                 txtMsg.visible = true;

@@ -13,7 +13,7 @@ Image {
     property real increment: 1
     property int precision: 0
     fillMode: Image.TileHorizontally
-    source: "images/bg_spinner.png"
+    source: "../capacitive_coffeedemo/images/bg_spinner.png"
     asynchronous: true
     width: 100
     height: 30
@@ -24,8 +24,8 @@ Image {
         width: parent.height
         height: parent.height
         text: ""
-        imageUp: "images/left_arrow_spin.png"
-        imageDown: "images/left_arrow_spin_off.png"
+        imageUp: "../capacitive_coffeedemo/images/left_arrow_spin.png"
+        imageDown: "../capacitive_coffeedemo/images/left_arrow_spin_off.png"
         onButtonClick: {
             value -= increment;
             if (value < min)
@@ -49,8 +49,8 @@ Image {
         height: parent.height
         anchors.rightMargin: 0
         text: ""
-        imageUp: "images/right_arrow_spin.png"
-        imageDown: "images/right_arrow_spin_off.png"
+        imageUp: "../capacitive_coffeedemo/images/right_arrow_spin.png"
+        imageDown: "../capacitive_coffeedemo/images/right_arrow_spin_off.png"
         onButtonClick: {
             value += increment;
             if (value > max)

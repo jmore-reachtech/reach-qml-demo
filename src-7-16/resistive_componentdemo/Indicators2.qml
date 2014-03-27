@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: indicator2
@@ -28,7 +28,7 @@ Rectangle {
     Image{
         x: 89
         y: 109
-        source: "images/therm_base.png"
+        source: "../capacitive_componentdemo/images/therm_base.png"
 
         VerticalLevelIndicator {
             id: vertical3
@@ -40,11 +40,11 @@ Rectangle {
             hintFontPointSize: 22
             minValue: -30
             hintFontPixelSize: 14
-            imageBase: "images/therm.png"
+            imageBase: "../capacitive_componentdemo/images/therm.png"
             hintFontColor: "#000000"
             value: 0
             showHint: false
-            imageOverlay: "images/therm_overlay.png"
+            imageOverlay: "../capacitive_componentdemo/images/therm_overlay.png"
             scale: 1.0
             symbol: "<sup>o</sup>C"
             maxValue: 50
@@ -82,8 +82,8 @@ Rectangle {
         fieldSpacing: 2
         font.bold: true
         font.family: "Arial"
-        imageOff: "images/ledoff.png"
-        imageOn: "images/ledon.png"
+        imageOff: "../capacitive_componentdemo/images/ledoff.png"
+        imageOn: "../capacitive_componentdemo/images/ledon.png"
     }
 
     PanelReadOut {
@@ -95,7 +95,7 @@ Rectangle {
         text: ""
         font.pixelSize: 22
         textColor: "#50dd0e"
-        imagePanel: "images/bezel.bmp"
+        imagePanel: "../capacitive_componentdemo/images/bezel.bmp"
         font.bold: false
         font.family: "Arial"
     }
@@ -106,7 +106,7 @@ Rectangle {
         y: 166
         width: 340
         height: 124
-        source: "images/therm_horizbase.png"
+        source: "../capacitive_componentdemo/images/therm_horizbase.png"
 
         HorizontalLevelIndicator {
             id: horizontal1
@@ -116,11 +116,11 @@ Rectangle {
             height: 24
             minValue: -30
             hintFontPixelSize: 14
-            imageBase: "images/therm_horiz.png"
+            imageBase: "../capacitive_componentdemo/images/therm_horiz.png"
             hintFontColor: "#000000"
             value: -3
             showHint: false
-            imageOverlay: "images/therm_horiz_overlay.png"
+            imageOverlay: "../capacitive_componentdemo/images/therm_horiz_overlay.png"
             maxValue: 50
             increment: 3
             startPosition: "left"

@@ -2,43 +2,54 @@ import QtQuick 1.1
 
 Rectangle {
     id: button
-    width: 120
-    height: 23
     property alias text: innerText.text
-    property alias imageChecked: imageChecked.source
-    property alias imageUnchecked: imageUnchecked.source
+    property alias imageChecked: imgChecked.source
+    property alias imageUnchecked: imgUnchecked.source
+    property int imageHeight: 32
+    property int imageWidth: 32
     property bool checked: false
     property string value: ""
     property alias font: innerText.font
     property alias textColor: innerText.color
-    signal clicked
+    property int spacing: 6
     color: "transparent"
+    width: button.imageWidth + spacing + innerText.width
+    height: button.imageHeight > innerText.height ? button.imageHeight : innerText.height
 
+    signal clicked
 
     BorderImage{
-        id: imageChecked
+        id: imgChecked
         anchors.left: button.left
-        source: "../images/radio_checked.svg"
+        source: "../images/radiobutton_click.png"
         visible: button.checked
+        height: imageHeight
+        width: imageWidth
+        smooth: true
+        anchors.verticalCenter: button.verticalCenter
     }
 
     BorderImage{
-        id: imageUnchecked
+        id: imgUnchecked
         anchors.left: button.left
-        source: "../images/radio_unchecked.svg"
+        source: "../images/radiobutton.png"
         visible: !button.checked
+        height: imageHeight
+        width: imageWidth
+        smooth: true
+        anchors.verticalCenter: button.verticalCenter
     }
 
     Text{
         id: innerText
-        anchors.left: imageChecked.right
-        anchors.leftMargin: 4
+        anchors.left: imgChecked.right
+        anchors.leftMargin: button.spacing
         enabled: button.enabled
         color: "White"
         text: "Radio Button"
         font.pixelSize: 14
+        height: imageHeight
         verticalAlignment: Text.AlignVCenter
-        height: button.height
     }
 
 
@@ -49,7 +60,6 @@ Rectangle {
             button.clicked();
         }
     }
-
 
 
 }

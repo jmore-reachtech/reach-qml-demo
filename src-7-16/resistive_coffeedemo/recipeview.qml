@@ -1,6 +1,6 @@
 import QtQuick 1.1
 
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 Rectangle {
@@ -19,21 +19,25 @@ Rectangle {
         anchors.fill: parent
     }
 
+    Text{
+        x: 188
+        y: 42
+        color: "#ffffff"
+        text: "Edit Coffee Recipe"
+        font.pixelSize: 23
+    }
+
     AlphaField {
         id: tbName
         x: 188
         y: 96
         width: 362
         height: 34
-        keyboardBackGroundImage: "images/keyboardbg.png"
-        normalKeyIcon: "images/key1_off.png"
-        pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
-        keyHeight: 47
-        keyWidth: 39
+        keyboardBackGroundImage: "../capacitive_coffeedemo/images/keyboardbg.png"
+        normalKeyIcon: "../capacitive_coffeedemo/images/key1_off.png"
+        pressedKeyIcon: "../capacitive_coffeedemo/images/key1_on.png"
+        keyWidth: 45
+        keyHeight: 55
         fieldSpacing: 16
         inputText: ""
         keyTextColor: "#000000"
@@ -202,8 +206,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnSave.png"
-        imageDown: "images/btnSaveOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnSave.png"
+        imageDown: "../capacitive_coffeedemo/images/btnSaveOff.png"
         onButtonClick: {
             txtMsg.text = "*";
 
@@ -221,7 +225,7 @@ Rectangle {
                 var res = Db.updateRecipe(Db.recipe);
                 if (res > 0)
                 {
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                    root.message("resistive_coffeedemo/mainview.qml");
                 }
                 else
                 {
@@ -246,8 +250,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnDelete.png"
-        imageDown: "images/btnDeleteOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnDelete.png"
+        imageDown: "../capacitive_coffeedemo/images/btnDeleteOff.png"
         onButtonClick: {
             opaqueWindow.visible = true;
             opaqueWindow.z = 32;
@@ -262,10 +266,10 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnCancel.png"
-        imageDown: "images/btnCancelOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+        imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
         onButtonClick: {
-            root.message("capacitive_coffeedemo/mainview.qml")
+            root.message("resistive_coffeedemo/mainview.qml")
         }
     }
 
@@ -319,15 +323,15 @@ Rectangle {
             width: 76
             height: 64
             text: ""
-            imageUp: "images/btnYes.png"
-            imageDown: "images/btnYesOff.png"
+            imageUp: "../capacitive_coffeedemo/images/btnYes.png"
+            imageDown: "../capacitive_coffeedemo/images/btnYesOff.png"
             onButtonClick: {
                 //First delete from the database
                 var res = Db.deleteRecipe(root.recipeId);
                 if (res > 0)
                 {      
                     Db.currentIndex = 0;
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                    root.message("resistive_coffeedemo/mainview.qml");
                 }
             }
         }
@@ -339,8 +343,8 @@ Rectangle {
             width: 76
             height: 64
             text: ""
-            imageUp: "images/btnCancel.png"
-            imageDown: "images/btnCancelOff.png"
+            imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+            imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
             onButtonClick: {
                 opaqueWindow.z = 10;
                 opaqueWindow.visible = false;
@@ -391,8 +395,8 @@ Rectangle {
             width: 76
             height: 64
             text: ""
-            imageUp: "images/btnCancel.png"
-            imageDown: "images/btnCancelOff.png"
+            imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+            imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
             onButtonClick: {
                 errorWindow.z = 10;
                 errorWindow.visible = false;
@@ -415,7 +419,7 @@ Rectangle {
         turbulenceOff.value = Db.recipe.turbulenceOff;
 
         //Position the delete and cancel buttons
-        if (Db.recipe.machineRecipe === 1)
+        if (Db.recipe.machineRecipe === "1")
         {
             //hide delete button
             btnDelete.visible = false;

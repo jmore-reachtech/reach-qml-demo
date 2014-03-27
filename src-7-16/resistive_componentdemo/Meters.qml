@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -9,7 +9,7 @@ Rectangle {
     signal message(string msg)
 
     Image{
-        source: "images/meterdemobgd.png"
+        source: "../capacitive_componentdemo/images/meterdemobgd.png"
         anchors.fill: parent
 
         Text {
@@ -25,18 +25,18 @@ Rectangle {
 
         }
 
-        Spedometer {
-            id: spedometer2
+        Speedometer {
+            id: speedometer2
             x: 436
             y: 131
             width: 215
             height: 217
             minAngle: -112
-            needleImage: "images/needle.png"
+            needleImage: "../capacitive_componentdemo/images/needle.png"
             overlayImageHeight: 40
             min: 0
             needleImageHeight: 79
-            overlayImage: "images/speedometer_overlay.png"
+            overlayImage: "../capacitive_componentdemo/images/speedometer_overlay.png"
             value: 0
             needleImageWidth: 8
             max: 80
@@ -48,23 +48,23 @@ Rectangle {
             overlayX: 95
             needleY: 24
             needleX: 110
-            backgroundImage: "images/rpm_base.png"
+            backgroundImage: "../capacitive_componentdemo/images/rpm_base.png"
         }
 
 
-        Spedometer {
-            id: spedometer1
+        Speedometer {
+            id: speedometer1
             x: 145
             y: 108
             width: 244
             height: 245
             minAngle: -126
             smooth: false
-            needleImage: "images/needle.png"
+            needleImage: "../capacitive_componentdemo/images/needle.png"
             overlayImageHeight: 46
             min: 0
             needleImageHeight: 88
-            overlayImage: "images/speedometer_overlay.png"
+            overlayImage: "../capacitive_componentdemo/images/speedometer_overlay.png"
             value: 0
             needleImageWidth: 8
             max: 180
@@ -76,7 +76,7 @@ Rectangle {
             overlayX: 104
             needleY: 28
             needleX: 122
-            backgroundImage: "images/speedometer_base.png"
+            backgroundImage: "../capacitive_componentdemo/images/speedometer_base.png"
 
             onValueChanged: text1.text = value.toFixed(0).toString();
             Text {
@@ -110,21 +110,21 @@ Rectangle {
         hintBackgroundColor: "#ffffff"
         hintFontColor: "#000000"
         hintFontPixelSize: 16
-        imageOverlay: "images/slider_fg.png"
-        imageTrack: "images/slider_bg.png"
+        imageOverlay: "../capacitive_componentdemo/images/slider_fg.png"
+        imageTrack: "../capacitive_componentdemo/images/slider_bg.png"
         minimum: 0
         xMin: 0
         value: 0
         handleY: 0
         hintRadius: 9
         hintWidth: 40
-        imageHandle: "images/handle.png"
+        imageHandle: "../capacitive_componentdemo/images/handle.png"
         allowDrag: true
         hintHeight: 40
 
         onValueChanged: {
-            spedometer1.value = value;
-            spedometer2.value = 38.23 * spedometer1.value / 100.0;
+            speedometer1.value = value;
+            speedometer2.value = 38.23 * speedometer1.value / 100.0;
         }
     }
 

@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -32,11 +32,11 @@ Rectangle {
         height: 180
         hintBorderColor: "#000000"
         imageNeedleHeight: 108
-        imageBase: "images/dialbase.png"
+        imageBase: "../capacitive_componentdemo/images/dialbase.png"
         showHint: true
         hintBorderWidth: 2
         hintFontFamily: "Arial"
-        imageNeedle: "images/dialneedle.png"
+        imageNeedle: "../capacitive_componentdemo/images/dialneedle.png"
         hintBackgroundColor: "#ffffff"
         hintFontColor: "#000000"
         hintFontPixelSize: 16
@@ -72,11 +72,11 @@ Rectangle {
         height: 190
         hintBorderColor: "#000000"
         imageNeedleHeight: 150
-        imageBase: "images/black_dial.png"
+        imageBase: "../capacitive_componentdemo/images/black_dial.png"
         showHint: false
         hintBorderWidth: 2
         hintFontFamily: "Arial"
-        imageNeedle: "images/black_dial_needle.png"
+        imageNeedle: "../capacitive_componentdemo/images/black_dial_needle.png"
         hintBackgroundColor: "#ffffff"
         hintFontColor: "#000000"
         hintFontPixelSize: 16

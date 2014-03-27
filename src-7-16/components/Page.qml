@@ -1,13 +1,9 @@
 import QtQuick 1.1
 
-Rectangle {
+Item {
     id: control
-    width: 480
-    height: 272
-    color: "#666666"
-    gradient: Gradient {
-        GradientStop {position: 0.0; color: "#666666"}
-        GradientStop {position: 1.0; color: "#EEEEEE"}
-    }
+    width: 1024
+    height: 768
+
     signal message(string msg)
 }

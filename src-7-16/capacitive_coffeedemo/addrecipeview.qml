@@ -1,6 +1,6 @@
 import QtQuick 1.1
 
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 
@@ -18,6 +18,14 @@ Rectangle {
         anchors.fill: parent
     }
 
+    Text{
+        x: 188
+        y: 42
+        color: "#ffffff"
+        text: "Add Coffee Recipe"
+        font.pixelSize: 23
+    }
+
     AlphaField {
         id: tbName
         x: 188
@@ -27,13 +35,11 @@ Rectangle {
         keyboardBackGroundImage: "images/keyboardbg.png"
         normalKeyIcon: "images/key1_off.png"
         pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
         fieldSpacing: 16
         inputText: ""
         keyTextColor: "#000000"
+        keyWidth: 45
+        keyHeight: 55
         keyTextBold: true
         keyTextFontSize: 14
         inputColor: "#ffffff"

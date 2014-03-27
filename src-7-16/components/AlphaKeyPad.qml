@@ -4,15 +4,15 @@ import "../js/keycodes.js" as KeyCodes
 Column {
     id: control
     property url normalKeyIcon: "../images/key_off.png"
-    property url pressedKeyIcon: "../images/key_on.png"
-    property url normalSpaceKeyIcon: "../images/key_off.png"
-    property url pressedSpaceKeyIcon: "../images/key_on.png"
+    property url pressedlKeyIcon: "../images/key_on.png"
     property int keySpacing: 10
     property int keyWidth: 28
     property int keyHeight: 40
     property bool loaded: false;
     property variant popupEditor
     property color keyTextColor: "#ffffff"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
 
     signal mouseEvent
     spacing: control.keySpacing
@@ -52,16 +52,16 @@ Column {
             on: true
             textOff: KeyCodes.keyUpArrow
             textOn: KeyCodes.keyDownArrow
-            textOnBold: false
-            textOnFontFamily: "Arial"
-            textOffFontFamily: "Arial"
-            textOnFontSize: 14
-            textOffFontSize: 14
+            textOnBold: control.keyTextBold
+            textOnFontFamily: "DejaVu Sans"
+            textOffFontFamily: "DejaVu Sans"
+            textOnFontSize: control.keyTextFontSize
+            textOffFontSize: control.keyTextFontSize
             imageOn: normalKeyIcon
             imageOff: normalKeyIcon
-            textOnColor: "#000000"
-            textOffColor: "#000000"
-            textOffBold: false
+            textOnColor: "Yellow"
+            textOffColor: "Yellow"
+            textOffBold: control.keyTextBold
 
             onButtonPress: showAltCodes();
         }
@@ -88,16 +88,16 @@ Column {
             on: true
             textOff: "ABC"
             textOn: "12#"
-            textOnBold: false
-            textOnFontFamily: "Arial"
-            textOffFontFamily: "Arial"
-            textOnFontSize: 14
-            textOffFontSize: 14
+            textOnBold: control.keyTextBold
+            textOnFontFamily: "DejaVu Sans"
+            textOffFontFamily: "DejaVu Sans"
+            textOnFontSize: control.keyTextFontSize
+            textOffFontSize: control.keyTextFontSize
             imageOn: normalKeyIcon
             imageOff: normalKeyIcon
             textOnColor: keyTextColor
             textOffColor: keyTextColor
-            textOffBold: false
+            textOffBold: control.keyTextBold
             onButtonPress: showSpecialChars();
         }
     }
@@ -169,24 +169,17 @@ Column {
     {
         for (var i = 0; i < texts.length; ++i)
         {
-            KeyCodes.createKey(popupEditor, parent, texts[i],  codes[i], control.normalKeyIcon, control.pressedKeyIcon, control.keyHeight, control.keyWidth, control.keySpacing, control.keyTextColor);
+            KeyCodes.createKey(popupEditor, parent, texts[i],  codes[i], control.normalKeyIcon, control.pressedlKeyIcon, control.keyHeight, control.keyWidth,
+                control.keySpacing, control.keyTextColor, control.keyTextBold, control.keyTextFontSize);
         }
     }
 
-    function createSpaceKey()
-    {
-        KeyCodes.createKey(popupEditor, row4, 'Space',  ' ', control.normalSpaceKeyIcon, control.pressedSpaceKeyIcon, control.keyHeight, control.keyWidth, control.keySpacing, control.keyTextColor);
-    }
 
     Component.onCompleted: {
         createKeys(['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'], ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'], row1);
         createKeys(['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'], ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'], row2);
         createKeys(['', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Back'], ['', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', KeyCodes.keyBackspace], row3);
-        createKeys(['', ','], ['', ','], row4);
-        createSpaceKey();
-        createKeys(['.', 'Done'], ['.', KeyCodes.keyEnter], row4);
-
-        //createKeys(['', ',', 'Space', '.', 'Done'], ['', ',', ' ', '.', KeyCodes.keyEnter] , row4);
+        createKeys(['', ',', 'Space', '.', 'Done'], ['', ',', ' ', '.', KeyCodes.keyEnter] , row4);
     }
 }
 

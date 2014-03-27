@@ -15,14 +15,14 @@ Item {
     property variant rootObject
     property url normalKeyIcon: "../images/key_off.png"
     property url pressedKeyIcon: "../images/key_on.png"
-    property url normalSpaceKeyIcon: "../images/key_off.png"
-    property url pressedSpaceKeyIcon: "../images/key_on.png"
     property int keyWidth: 38
     property int keyHeight: 40
     property bool showHint: true
     property int hintDuration: 500
     property bool loaded: false
     property string keyTextColor: "#000000"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
 
     signal keyPress(string key)
 
@@ -31,11 +31,6 @@ Item {
         rootObject = popupEditor.parent;
         while (rootObject.parent)
             rootObject = rootObject.parent;
-
-        //hide all child components
-        //for(var i=0; i < rootObject.children.length; i++)
-        //    rootObject.children[i].visible = false;
-
 
         popupEditor.parent = rootObject;
         popupEditor.width = rootObject.width;
@@ -50,9 +45,6 @@ Item {
     function hide()
     {
         hideAnim.start();
-        //show all child components
-        //for(var i=0; i < rootObject.children.length; i++)
-        //    rootObject.children[i].visible = true;
     }
 
     function handleKeyPress(key)
@@ -85,8 +77,6 @@ Item {
         onTriggered: recHint.visible = false;
     }
 
-    width: content.width
-    height: content.height
 
    MouseArea{
        anchors.fill: parent
@@ -95,13 +85,15 @@ Item {
    Image {
        id: bgImage
        source: "../images/keyboardbg.png"
-
+       width: parent.width
+       height: parent.height
    }
 
    Column {
+       width: parent.width
        Item {
            id: content
-           width: 466
+           width: parent.width - 10
            height: Math.max(labelItem.font.pixelSize, textItem.font.pixelSize) + 20
 
            Text {
@@ -132,17 +124,17 @@ Item {
                id: alphaKeyPad
                anchors.left: labelItem.left
                anchors.leftMargin: 0
-               anchors.top: labelItem.bottom
-               anchors.topMargin: 10
+               anchors.top: textItem.bottom
+               anchors.topMargin: 2
                normalKeyIcon: popupEditor.normalKeyIcon
-               pressedKeyIcon: popupEditor.pressedKeyIcon
-               normalSpaceKeyIcon: popupEditor.normalSpaceKeyIcon
-               pressedSpaceKeyIcon: popupEditor.pressedSpaceKeyIcon
+               pressedlKeyIcon: popupEditor.pressedKeyIcon
                keySpacing: 4
                keyWidth: popupEditor.keyWidth
                keyHeight: popupEditor.keyHeight
                popupEditor: parent.parent.parent
                keyTextColor: popupEditor.keyTextColor
+               keyTextBold: popupEditor.keyTextBold
+               keyTextFontSize: popupEditor.keyTextFontSize
            }
 
            Rectangle{

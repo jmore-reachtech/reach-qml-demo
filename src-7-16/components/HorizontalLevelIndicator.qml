@@ -7,6 +7,8 @@ Item {
     property int minValue: 0
     property int maxValue: 10
     property int value: 0
+    property real valueScale: 1.0
+    property string symbol: ""
     property alias imageOverlay: overlay.source
     property alias imageBase: base.source
     width: base.width
@@ -48,7 +50,7 @@ Item {
     Text{
         id: txtValue
         anchors.centerIn: base
-        text: root.value.toFixed(0).toString();
+        text: (root.value * root.valueScale).toFixed(0).toString() + root.symbol;
         font.pixelSize: 14
         color: hintFontColor
         visible: showHint

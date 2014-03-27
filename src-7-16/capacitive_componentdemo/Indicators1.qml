@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: indicator1
@@ -101,7 +101,7 @@ Rectangle {
             hintFontBold: true
             minValue: 0
             hintFontPixelSize: 24
-            scale: 2.0
+            valueScale: 2.0
             symbol: "%"
             imageBase: "images/battery_full.png"
             hintFontColor: "#000000"

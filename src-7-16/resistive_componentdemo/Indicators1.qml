@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: indicator1
@@ -35,11 +35,11 @@ Rectangle {
         hintFontPointSize: 10
         minValue: 0
         hintFontPixelSize: 14
-        imageBase: "images/tank.png"
+        imageBase: "../capacitive_componentdemo/images/tank.png"
         hintFontColor: "#ffffff"
         value: 0
         showHint: true
-        imageOverlay: "images/tank_overlay.png"
+        imageOverlay: "../capacitive_componentdemo/images/tank_overlay.png"
         maxValue: 50
         increment: 4
         startPosition: "left"
@@ -56,7 +56,7 @@ Rectangle {
     Image{
         x: 247
         y: 131
-        source: "images/level_base.png"
+        source: "../capacitive_componentdemo/images/level_base.png"
         VerticalLevelIndicator {
             id: vertical1
             x: 6
@@ -66,11 +66,11 @@ Rectangle {
             hintFontBold: true
             minValue: 0
             hintFontPixelSize: 15
-            imageBase: "images/level.png"
+            imageBase: "../capacitive_componentdemo/images/level.png"
             hintFontColor: "#000000"
             value: 3
             showHint: true
-            imageOverlay: "images/level_overlay.png"
+            imageOverlay: "../capacitive_componentdemo/images/level_overlay.png"
             maxValue: 18
             increment: 9
             startPosition: "bottom"
@@ -89,7 +89,7 @@ Rectangle {
     Image{
         x: 72
         y: 122
-        source: "images/battery_base.png"
+        source: "../capacitive_componentdemo/images/battery_base.png"
 
         VerticalLevelIndicator {
             id: vertical2
@@ -100,13 +100,13 @@ Rectangle {
             hintFontBold: true
             minValue: 0
             hintFontPixelSize: 24
-            scale: 2.0
             symbol: "%"
-            imageBase: "images/battery_full.png"
+            valueScale: 2.0
+            imageBase: "../capacitive_componentdemo/images/battery_full.png"
             hintFontColor: "#000000"
             value: 0
             showHint: true
-            imageOverlay: "images/battery_empty.png"
+            imageOverlay: "../capacitive_componentdemo/images/battery_empty.png"
             maxValue: 50
             increment: 3
             startPosition: "bottom"

@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 Rectangle {
@@ -59,8 +59,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnCancel.png"
-        imageDown: "images/btnCancelOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+        imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
         onButtonClick: {
             if (typeof connection === "undefined")
                 console.debug("rinse=0");

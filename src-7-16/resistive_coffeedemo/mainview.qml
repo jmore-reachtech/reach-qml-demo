@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 import "js/dataModel.js" as Db
 
 
@@ -38,8 +38,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnSettings.png"
-        imageDown: "images/btnSettingsOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnSettings.png"
+        imageDown: "../capacitive_coffeedemo/images/btnSettingsOff.png"
 
         onButtonPress: {
             mainView.message("resistive_coffeedemo/settingsview.qml");
@@ -54,8 +54,8 @@ Rectangle {
         text: ""
         width: 76
         height: 64
-        imageUp: "images/btnRinse.png"
-        imageDown: "images/btnRinseOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnRinse.png"
+        imageDown: "../capacitive_coffeedemo/images/btnRinseOff.png"
 
         onButtonPress: {
             mainView.message("resistive_coffeedemo/rinseview.qml");
@@ -69,8 +69,8 @@ Rectangle {
         text: ""
         width: 76
         height: 64
-        imageUp: "images/btnBrew.png"
-        imageDown: "images/btnBrewOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnBrew.png"
+        imageDown: "../capacitive_coffeedemo/images/btnBrewOff.png"
 
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
@@ -85,8 +85,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnEdit.png"
-        imageDown: "images/btnEditOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnEdit.png"
+        imageDown: "../capacitive_coffeedemo/images/btnEditOff.png"
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
             mainView.message("resistive_coffeedemo/recipeview.qml");
@@ -100,8 +100,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnAdd.png"
-        imageDown: "images/btnAddOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnAdd.png"
+        imageDown: "../capacitive_coffeedemo/images/btnAddOff.png"
         onButtonPress: {
             mainView.message("resistive_coffeedemo/addrecipeview.qml");
         }
@@ -114,8 +114,8 @@ Rectangle {
         width: 76
         height: 64
         text: ""
-        imageUp: "images/btnCancel.png"
-        imageDown: "images/btnCancelOff.png"
+        imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
+        imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
         onButtonPress: {
             mainView.message("../src/mainmenu.qml");
         }

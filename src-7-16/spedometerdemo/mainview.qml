@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -14,7 +14,7 @@ Rectangle {
         anchors.fill: parent
     }
 
-    Spedometer {
+    Speedometer {
         id: spedo
         x: 238
         y: 135

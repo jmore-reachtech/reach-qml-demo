@@ -64,7 +64,7 @@ Rectangle {
                 id: wrapper
                 //anchors.horizontalCenter: delegateText.horizontalCenter
                 width: 200; height:119
-                source: "images/coffee_cup_small.png"
+                source: "../capacitive_coffeedemo/images/coffee_cup_small.png"
                 scale: 4. * y / view.height * 6. / items.count
                 z: y
                 opacity: scale / 1.3

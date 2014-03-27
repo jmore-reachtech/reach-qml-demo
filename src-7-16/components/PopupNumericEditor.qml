@@ -19,7 +19,17 @@ Item {
     property int keyHeight: 40
     property real min
     property real max
+    property bool checkMaxMin: true
     property color keyTextColor : "#ffffff"
+    property bool keyTextBold: false
+    property int keyTextFontSize: 14
+    property string mask: ""
+    property string templateMask: ""
+    property alias maskedInput: textItem.maskedInput
+    property string validator
+    property int totalNumbersAllowed: 0
+    property int requiredNumbers: 0
+    property string neg: ""
 
     signal keyPress(string key)
 
@@ -32,7 +42,6 @@ Item {
         //hide all child components
         //for(var i=0; i < rootObject.children.length; i++)
         //    rootObject.children[i].visible = false;
-
 
         popupEditor.parent = rootObject;
         popupEditor.width = rootObject.width;
@@ -52,14 +61,76 @@ Item {
         //    rootObject.children[i].visible = true;
     }
 
+    function removeKey(keyCode)
+    {
+        //find the child and remove the negative sign button
+        for(var k=0; k < keyPad.children.length; k++)
+        {
+            if (keyPad.children[k].keyCode && keyPad.children[k].keyCode === keyCode)
+                keyPad.children[k].visible = false;
+        }
+
+        checkMaxMin = false;
+    }
+
+    function removeChars(text)
+    {
+        var tmp = "";
+
+        for (var i = 0; i < text.length; i++)
+        {
+            if (parseInt(text.charAt(i)) >= 0 || (text.charAt(i) === "-" && neg.indexOf(i.toString()) < 0))
+                tmp += text.charAt(i);
+        }
+
+        return tmp;
+    }
+
+    function buildTestNumber(text)
+    {
+        var counter = text.length-1;
+        var temp = new Array(templateMask.length);
+
+        for (var j = templateMask.length -1; j >= 0; j--)
+        {
+            if (templateMask.charAt(j) === "_" && counter >= 0)
+            {
+                temp[j] = text.charAt(counter);
+                counter -= 1;
+            }
+            else
+            {
+                temp[j] = templateMask.charAt(j);
+            }
+
+        }
+
+        text = "";
+        for (var k=0; k < temp.length; k++)
+        {
+            if (temp[k] != "_")
+                text += temp[k];
+        }
+
+        return text;
+    }
+
     function handleKeyPress(key)
     {
         var error = false;
         txtMessage.text = "";
 
+        if (maskedInput.length > 0 || mask.length > 0)
+        {
+            handleMaskedInput(key);
+            return;
+        }
+
         if (key === KeyCodes.keyBackspace) {
             if (text.text.length)
+            {
                 text.text = text.text.substring(0, text.text.length-1);
+            }
         }
         else if (key === "-")
         {
@@ -69,10 +140,11 @@ Item {
                 error = true;
         }
         else if (key !== KeyCodes.keyEnter)
+        {
             text.text += key;
+        }
         else if (key === KeyCodes.keyEnter)
         {
-
             if (text.text === "-")
             {
                 txtMessage.text = "Please enter a valid number.";
@@ -94,6 +166,115 @@ Item {
             keyPress(key);
     }
 
+    function handleMaskedInput(key)
+    {
+        var error = false;
+
+        if (maskedInput.length > 0)
+        {
+            //we will handle the mask from here on out
+            mask = maskedInput.substring(0, maskedInput.indexOf(";"));
+            var dt = text.displayText;
+            maskedInput = "";
+
+            if (dt.match( /\d/))
+            {
+                text.text = dt;
+                //remove all non numbers from text except - signs entered by user
+                text.text = removeChars(text.text);
+            }
+        }
+        else
+        {
+            //remove all non numbers from text except - signs entered by user
+            text.text = removeChars(text.text);
+        }
+
+        if (key === KeyCodes.keyBackspace) {
+            if (text.text.length)
+            {
+                text.text = text.text.substring(0, text.text.length-1);
+            }
+        }
+        else if (key === "-")
+        {
+            if (text.text.indexOf("-") < 0)
+                text.text = key + text.text;
+            else
+                error = true;
+        }
+        else if (key !== KeyCodes.keyEnter)
+        {
+            if (text.text.length < totalNumbersAllowed)
+            {
+                //See if we need to test if it is a number
+                if (!checkMaxMin)
+                    text.text += key;
+                else
+                {
+                    var test = text.text + key;
+                    if (parseFloat(test))
+                        text.text += key;
+                    else
+                        error = true;
+                }
+            }
+            else
+            {
+                error = true;
+            }
+        }
+        else if (key === KeyCodes.keyEnter)
+        {
+            if (text.text === "-")
+            {
+                txtMessage.text = "Please enter a valid number.";
+                error = true;
+            }
+            else if (text.text.replace("-", "").length < requiredNumbers && text.text.length > 0)
+            {
+                txtMessage.text = labelItem.text + " must be in this format:\n" + mask;
+                error = true;
+            }
+            else if (checkMaxMin && parseFloat(buildTestNumber(text.text)) > max)
+            {
+                txtMessage.text = labelItem.text + " can not be greater than " + max.toString();
+                error = true;
+            }
+            else if (checkMaxMin && parseFloat(buildTestNumber(text.text)) < min)
+            {
+                txtMessage.text = labelItem.text + " can not be less than " + min.toString();
+                error = true;
+            }
+        }
+
+        //Build our mask for view purposes
+        var counter = text.text.length-1;
+        var temp = new Array(templateMask.length);
+
+        for (var j = templateMask.length -1; j >= 0; j--)
+        {
+            if (templateMask.charAt(j) === "_" && counter >= 0)
+            {
+                temp[j] = text.text.charAt(counter);
+                counter -= 1;
+            }
+            else
+            {
+                temp[j] = templateMask.charAt(j);
+            }
+
+        }
+
+        text.text = "";
+        for (var k=0; k < temp.length; k++)
+            text.text += temp[k];
+
+        if (!error)
+            keyPress(key);
+
+    }
+
     width: content.width
     height: content.height
 
@@ -104,12 +285,16 @@ Item {
    Image {
        id: bgImage
        source: "../images/keyboardbg.png"
+       width: parent.width
+       height: parent.height
    }
 
    Column {
+       width: parent.width
+       height: parent.height
        Item {
            id: content
-           width: 466
+           width: parent.width
            height: Math.max(labelItem.font.pixelSize, textItem.font.pixelSize) + 20
 
            Text {
@@ -125,7 +310,7 @@ Item {
            LineEdit {
                id: textItem
                anchors.left: labelItem.right
-               anchors.leftMargin: 6//content.height / 2
+               anchors.leftMargin: 6
                anchors.verticalCenter: parent.verticalCenter
                width: parent.width - labelItem.width - content.height / 2
                text: popupEditor.text.text
@@ -135,6 +320,7 @@ Item {
                border.color: "orange"
                cursorVisible: true;
            }
+
 
            Text{
                id: txtMessage
@@ -151,28 +337,31 @@ Item {
                id: keyPad
                anchors.left: textItem.left
                anchors.leftMargin: 0
-               anchors.top: labelItem.bottom
-               anchors.topMargin: 4
+               anchors.top: textItem.bottom
+               anchors.topMargin: 2
                normalKeyIcon: popupEditor.normalKeyIcon
                pressedlKeyIcon: popupEditor.pressedKeyIcon
                keySpacing: 4
                keyWidth: popupEditor.keyWidth
                keyHeight: popupEditor.keyHeight
                keyTextColor: popupEditor.keyTextColor
+               keyTextBold: popupEditor.keyTextBold
+               keyTextFontSize: popupEditor.keyTextFontSize
+
                keyDefs: [
-                   {keyCap: '1', keyCode: '1'},
-                   {keyCap: '2', keyCode: '2'},
-                   {keyCap: '3', keyCode: '3'},
-                   {keyCap: '4', keyCode: '4'},
-                   {keyCap: '5', keyCode: '5'},
-                   {keyCap: '6', keyCode: '6'},
-                   {keyCap: '7', keyCode: '7'},
-                   {keyCap: '8', keyCode: '8'},
-                   {keyCap: '9', keyCode: '9'},
-                   {keyCap: '0', keyCode: '0'},
-                   {keyCap: '-', keyCode: '-'},
-                   {keyCap: 'Back', keyCode: KeyCodes.keyBackspace},
-                   {keyCap: 'Done', keyCode: KeyCodes.keyEnter}
+                   {keyCap: '1', keyCode: '1', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '2', keyCode: '2', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '3', keyCode: '3', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '4', keyCode: '4', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '5', keyCode: '5', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '6', keyCode: '6', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '7', keyCode: '7', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '8', keyCode: '8', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '9', keyCode: '9', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '0', keyCode: '0', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: '-', keyCode: '-', normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: 'Back', keyCode: KeyCodes.keyBackspace, normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon},
+                   {keyCap: 'Done', keyCode: KeyCodes.keyEnter, normalKeyIcon: popupEditor.normalKeyIcon, pressedlKeyIcon: popupEditor.pressedlKeyIcon}
                ]
            }
 
@@ -201,5 +390,39 @@ Item {
             script: popupEditor.destroy()
         }
     }
+
+
+    Component.onCompleted: {
+        if (maskedInput.length > 0)
+        {
+            for (var i=0; i < maskedInput.length; i++)
+            {
+                if (maskedInput.charAt(i) === "#" || maskedInput.charAt(i) === "9")
+                {
+                    totalNumbersAllowed += 1;
+                    if (maskedInput.charAt(i) === "9")
+                        requiredNumbers += 1;
+
+                    templateMask += "_";
+                }
+                else
+                {
+                    if (maskedInput.charAt(i) == "-")
+                        neg += i.toString() + " ";
+                    templateMask += maskedInput.charAt(i);
+                }
+            }
+
+            if (neg.length > 0)
+                removeKey("-");
+            else if (maskedInput.charAt(0) == "9")
+                removeKey("-");
+
+            templateMask = templateMask.substring(0, templateMask.indexOf(";"));
+        }
+
+    }
+
+
 }
 

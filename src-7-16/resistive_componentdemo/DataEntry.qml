@@ -1,5 +1,5 @@
 import QtQuick 1.1
-import "components"
+import "../components"
 
 Rectangle {
     id: root
@@ -31,13 +31,11 @@ Rectangle {
         width: 302
         height: 34
         labelFontBold: false
-        keyboardBackGroundImage: "images/keyboardbg.png"
-        normalKeyIcon: "images/key1_off.png"
-        pressedKeyIcon: "images/key1_on.png"
-        normalSpaceKeyIcon: "images/keyspacer1_off.png"
-        pressedSpaceKeyIcon: "images/keyspacer1_on.png"
-        normalBackKeyIcon: "images/keyback1_off.png"
-        pressedBackKeyIcon: "images/keyback1_on.png"
+        keyboardBackGroundImage: "../capacitive_componentdemo/images/keyboardbg.png"
+        normalKeyIcon: "../capacitive_componentdemo/images/key1_off.png"
+        pressedKeyIcon: "../capacitive_componentdemo/images/key1_on.png"
+        keyWidth: 45
+        keyHeight: 55
         fieldSpacing: 7
         inputText: ""
         keyTextColor: "#000000"
@@ -59,8 +57,8 @@ Rectangle {
         x: 240
         y: 175
         width: 180
-        normalKeyIcon: "images/key1_off.png"
-        pressedKeyIcon: "images/key1_on.png"
+        normalKeyIcon: "../capacitive_componentdemo/images/key1_off.png"
+        pressedKeyIcon: "../capacitive_componentdemo/images/key1_on.png"
         max: 100
         fieldSpacing: 18
         min: 0
@@ -68,8 +66,8 @@ Rectangle {
         keyTextColor: "#000000"
         keyTextBold: true
         keyTextFontSize: 14
-        keyWidth: 40
-        keyHeight: 40
+        keyWidth: 45
+        keyHeight: 55
         inputColor: "#ffffff"
         labelColor: "#000000"
         inputFontPixelSize: 14
@@ -80,7 +78,7 @@ Rectangle {
         labelText: "Age"
     }
 
-    RadioButtonList {
+    VerticalRadioButtonList {
         id: radiobutton_list2
         x: 240
         y: 251
@@ -107,8 +105,8 @@ Rectangle {
                 item_text: "PDWZ200"
             }
         }
-        imageUnChecked: "images/radiobutton.png"
-        imageChecked: "images/radiobutton_click.png"
+        imageUnChecked: "../capacitive_componentdemo/images/radiobutton.png"
+        imageChecked: "../capacitive_componentdemo/images/radiobutton_click.png"
     }
 
     Text {
@@ -127,7 +125,7 @@ Rectangle {
         font.pixelSize: 14
     }
 
-    CheckBoxList {
+    VerticalCheckBoxList {
         id: checkbox_list1
         x: 406
         y: 251
@@ -161,8 +159,8 @@ Rectangle {
                 item_text: "Store 3"
             }
         }
-        imageUnChecked: "images/checkbox.png"
-        imageChecked: "images/checkbox_click.png"
+        imageUnChecked: "../capacitive_componentdemo/images/checkbox.png"
+        imageChecked: "../capacitive_componentdemo/images/checkbox_click.png"
     }
 
 }
