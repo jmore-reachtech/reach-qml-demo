@@ -121,16 +121,28 @@ Rectangle {
             mainView.message("../src/mainmenu.qml");
         }
     }
-
+"
+	  
     DataModel
     {
         id: items
     }
 
+    System{
+        id: system
+    }
+
     Component.onCompleted: {
         Db.dataList = items;
         //Open database connection
-        Db.openDB();
+        var r = Db.openDB();
+		
+        if (r === 0)
+        {
+            //we have a corrupted database
+            system.execute("rm -rf /.qws");
+            r = Db.openDB();
+        }
 
         //Add the machine records if need be
         if (parseInt(Db.getRecipeCount()) === 0)

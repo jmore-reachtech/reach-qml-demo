@@ -10,9 +10,17 @@ var _db
 
 //
 function openDB() {
-    _db = openDatabaseSync("Trifecta","1.0","Trifecta Recipe Database",1000000);
-    createRecipeTable();
-    createSettingsTable();
+    try
+    {
+        _db = openDatabaseSync("Trifecta","1.0","Trifecta Recipe Database",1000000);
+        createRecipeTable();
+        createSettingsTable();
+        return 1;
+    }
+    catch(e)
+    {
+        return 0;
+    }
 }
 
 function createRecipeTable() {
@@ -190,6 +198,8 @@ function loadRecipes()
                         turbulenceOff: rs.rows.item(i).turbulenceOff, turbulencePower: rs.rows.item(i).turbulencePower,
                         pressOutPower: rs.rows.item(i).pressOutPower, pressOutTime: rs.rows.item(i).pressOutTime, temp: rs.rows.item(i).temp });
                 }
+
+
             }
             else
             {
