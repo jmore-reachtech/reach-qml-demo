@@ -4,23 +4,24 @@ import "js/dataModel.js" as Db
 
 
 Rectangle {
-    width: 800
-    height: 480
+    width: 480
+    height: 272
     id: mainView
-
+    color: "#2D2D2D"
     signal message(string msg)
 
-    Image{
-        source: "../images/bg.png"
-        anchors.fill: parent
+    gradient: Gradient {
+        GradientStop {position: 0.0; color: "#666666"}
+        GradientStop {position: 1.0; color: "#EEEEEE"}
     }
+
 
     CoffeeCarousel {
         id: imagecarousel1
-        x: 92
-        y: 71
-        width: 616
-        height: 206
+        x: 0
+        y: 40
+        width: 480
+        height: 180
 
         onCurrentIndexChanged: {
             if (imagecarousel1.currentIndex >= 0)
@@ -33,89 +34,89 @@ Rectangle {
 
     ImageButton {
         id: btnSettings
-        x: 184
-        y: 292
+        x: 27
+        y: 191
         width: 76
         height: 64
         text: ""
-        imageUp: "../capacitive_coffeedemo/images/btnSettings.png"
-        imageDown: "../capacitive_coffeedemo/images/btnSettingsOff.png"
+        imageUp: "images/btnSettings.png"
+        imageDown: "images/btnSettingsOff.png"
 
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/settingsview.qml");
+            mainView.message("capacitive_coffeedemo/settingsview.qml");
         }
     }
 
     ImageButton {
         id: btnRinse
         objectName: "btnRinse"
-        x: 255
-        y: 292
+        x: 98
+        y: 191
         text: ""
         width: 76
         height: 64
-        imageUp: "../capacitive_coffeedemo/images/btnRinse.png"
-        imageDown: "../capacitive_coffeedemo/images/btnRinseOff.png"
+        imageUp: "images/btnRinse.png"
+        imageDown: "images/btnRinseOff.png"
 
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/rinseview.qml");
+            mainView.message("capacitive_coffeedemo/rinseview.qml");
         }
     }
 
     ImageButton {
         id: btnBrew
-        x: 325
-        y: 292
+        x: 168
+        y: 191
         text: ""
         width: 76
         height: 64
-        imageUp: "../capacitive_coffeedemo/images/btnBrew.png"
-        imageDown: "../capacitive_coffeedemo/images/btnBrewOff.png"
+        imageUp: "images/btnBrew.png"
+        imageDown: "images/btnBrewOff.png"
 
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("resistive_coffeedemo/brewview.qml");
+            mainView.message("capacitive_coffeedemo/brewview.qml");
         }
     }
 
     ImageButton {
         id: btnEdit
-        x: 395
-        y: 292
+        x: 238
+        y: 191
         width: 76
         height: 64
         text: ""
-        imageUp: "../capacitive_coffeedemo/images/btnEdit.png"
-        imageDown: "../capacitive_coffeedemo/images/btnEditOff.png"
+        imageUp: "images/btnEdit.png"
+        imageDown: "images/btnEditOff.png"
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("resistive_coffeedemo/recipeview.qml");
+            mainView.message("capacitive_coffeedemo/recipeview.qml");
         }
     }
 
     ImageButton {
         id: btnAdd
-        x: 465
-        y: 292
+        x: 308
+        y: 191
         width: 76
         height: 64
         text: ""
-        imageUp: "../capacitive_coffeedemo/images/btnAdd.png"
-        imageDown: "../capacitive_coffeedemo/images/btnAddOff.png"
+        imageUp: "images/btnAdd.png"
+        imageDown: "images/btnAddOff.png"
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/addrecipeview.qml");
+            mainView.message("capacitive_coffeedemo/addrecipeview.qml");
         }
     }
 
     ImageButton {
         id: btnQuit
-        x: 535
-        y: 292
+        x: 378
+        y: 191
         width: 76
         height: 64
         text: ""
-        imageUp: "../capacitive_coffeedemo/images/btnCancel.png"
-        imageDown: "../capacitive_coffeedemo/images/btnCancelOff.png"
+        imageUp: "images/btnCancel.png"
+        imageDown: "images/btnCancelOff.png"
         onButtonPress: {
             mainView.message("../src/mainmenu.qml");
         }
@@ -126,10 +127,24 @@ Rectangle {
         id: items
     }
 
+    System{
+        id: system
+    }
+
     Component.onCompleted: {
         Db.dataList = items;
         //Open database connection
-        Db.openDB();
+	var r = Db.openDB();
+		
+        if (r === 0)
+        {
+            //we have a corrupted database
+            system.execute("rm -rf /.qws");
+            system.execute("sync && sync");
+        }
+	
+        Db.createSettingsTable();
+    	Db.createRecipeTable();  
 
         //Add the machine records if need be
         if (parseInt(Db.getRecipeCount()) === 0)

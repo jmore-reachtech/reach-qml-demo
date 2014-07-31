@@ -43,7 +43,7 @@ Rectangle {
         imageDown: "images/btnSettingsOff.png"
 
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/settingsview.qml");
+            mainView.message("capacitive_coffeedemo/settingsview.qml");
         }
     }
 
@@ -59,7 +59,7 @@ Rectangle {
         imageDown: "images/btnRinseOff.png"
 
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/rinseview.qml");
+            mainView.message("capacitive_coffeedemo/rinseview.qml");
         }
     }
 
@@ -75,7 +75,7 @@ Rectangle {
 
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("resistive_coffeedemo/brewview.qml");
+            mainView.message("capacitive_coffeedemo/brewview.qml");
         }
     }
 
@@ -90,7 +90,7 @@ Rectangle {
         imageDown: "images/btnEditOff.png"
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("resistive_coffeedemo/recipeview.qml");
+            mainView.message("capacitive_coffeedemo/recipeview.qml");
         }
     }
 
@@ -104,7 +104,7 @@ Rectangle {
         imageUp: "images/btnAdd.png"
         imageDown: "images/btnAddOff.png"
         onButtonPress: {
-            mainView.message("resistive_coffeedemo/addrecipeview.qml");
+            mainView.message("capacitive_coffeedemo/addrecipeview.qml");
         }
     }
 
@@ -127,10 +127,24 @@ Rectangle {
         id: items
     }
 
+    System{
+        id: system
+    }
+
     Component.onCompleted: {
         Db.dataList = items;
         //Open database connection
-        Db.openDB();
+	var r = Db.openDB();
+		
+        if (r === 0)
+        {
+            //we have a corrupted database
+            system.execute("rm -rf /.qws");
+            system.execute("sync && sync");
+        }
+	
+        Db.createSettingsTable();
+    	Db.createRecipeTable();  
 
         //Add the machine records if need be
         if (parseInt(Db.getRecipeCount()) === 0)

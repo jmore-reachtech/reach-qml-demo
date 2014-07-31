@@ -5,18 +5,29 @@ var currentIndex = 0;
 var recipe;
 
 
-// declaring a global variable for storing the database instance
-var _db
+// database connection closes after variable loses scope
+function getDb() {
+	return openDatabaseSync("Trifecta","1.0","Trifecta Recipe Database",1000000);
+}
 
 //
 function openDB() {
-    _db = openDatabaseSync("Trifecta","1.0","Trifecta Recipe Database",1000000);
-    createRecipeTable();
-    createSettingsTable();
+    console.log("Testing database connection.");
+    try
+    {
+	var db = openDatabaseSync("Trifecta","1.0","Trifecta Recipe Database",1000000);
+    }
+    catch(e)
+    {
+	console.log("Unable to test the database connection.");
+        return 0;
+    }
+    return 1;
 }
 
 function createRecipeTable() {
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
        function(tx) {
            // Create the settings table if it doesn't already exist
            // If the table exists, this is skipped
@@ -26,7 +37,8 @@ function createRecipeTable() {
 
 
 function createSettingsTable(){
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
        function(tx) {
            // Create the settings table if it doesn't already exist
            // If the table exists, this is skipped
@@ -40,7 +52,8 @@ function setSetting(setting, value) {
    // setting: string representing the setting name (eg: “username”)
    // value: string representing the value of the setting (eg: “myUsername”)
    var res = "";
-   _db.transaction(
+   var db = getDb();
+   db.transaction(
        function(tx) {
            var rs = tx.executeSql('INSERT OR REPLACE INTO settings VALUES (?,?);', [setting,value]);
            //console.log(rs.rowsAffected)
@@ -60,7 +73,8 @@ function setSetting(setting, value) {
 // This function is used to retrieve a setting from the database
 function getSetting(setting) {
    var res="";
-   _db.transaction(
+   var db = getDb();
+   db.transaction(
        function(tx) {
            var rs = tx.executeSql('SELECT value FROM settings WHERE setting=?;', [setting]);
            if (rs.rows.length > 0)
@@ -84,8 +98,8 @@ function updateRecipe(recipe){
             "turbulenceOn=?, turbulenceOff=?, turbulencePower=?, pressoutPower=?, pressOutTime=?, temp=? Where recipeID=?";
 
      var res = 1;
-
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
         function(tx) {
             try
             {
@@ -108,11 +122,12 @@ function insertRecipe(machineRecipe, recipeName, volume,  preWet, preInfusion, f
 
     var res = "";
     var rs;
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
        function(tx) {
            try
            {
-               rs = tx.executeSql(query, [machineRecipe, recipeName, volume,  preWet, preInfusion, fillPause, extractionTime, turbulenceOn, turbulenceOff, turbulencePower, pressOutPower, pressOutTime, temp]);
+            rs = tx.executeSql(query, [machineRecipe, recipeName, volume,  preWet, preInfusion, fillPause, extractionTime, turbulenceOn, turbulenceOff, turbulencePower, pressOutPower, pressOutTime, temp]);
                if (rs.rowsAffected > 0)
                {
                    rs = tx.executeSql("SELECT last_insert_rowid() as id FROM recipe");
@@ -133,7 +148,8 @@ function getRecipeCount()
     var query = "select count(*) as count from recipe"
     var rs;
     var res = "";
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
        function(tx) {
            rs = tx.executeSql(query);
            if (rs.rows.length > 0)
@@ -153,7 +169,8 @@ function deleteRecipe(recipeId)
 {
     var res = 0;
     var rs;
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
        function(tx) {
            rs = tx.executeSql("DELETE from recipe where recipeId=" + recipeId);
                     if (rs.rowsAffected > 0)
@@ -166,7 +183,8 @@ function deleteRecipe(recipeId)
 
 
 function clearRecipeTable() {
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
         function(tx) {
             tx.executeSql("DELETE FROM recipe");
         });
@@ -177,7 +195,8 @@ function loadRecipes()
     var query = "select * from recipe"
     var rs;
     var res = "";
-    _db.transaction(
+    var db = getDb();
+    db.transaction(
         function(tx) {
             rs = tx.executeSql(query);
             if (rs.rows.length > 0)
