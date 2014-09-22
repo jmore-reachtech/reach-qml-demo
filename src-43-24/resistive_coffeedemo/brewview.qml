@@ -49,7 +49,7 @@ Rectangle {
             if (progress.value == progress.maximum)
             {
                 timer.stop();
-                root.message("resistive_coffeedemo/mainview.qml")
+                root.message("capacitive_coffeedemo/mainview.qml")
             }
         }
     }
@@ -68,7 +68,7 @@ Rectangle {
                 console.debug("brew=0");
             else
                 connection.sendMessage("brew=0");
-            root.message("resistive_coffeedemo/mainview.qml");
+            root.message("mainview.qml");
         }
     }
 
@@ -86,12 +86,9 @@ Rectangle {
         if (typeof connection === "undefined")
         {
             console.debug("&recipeid=" + recipe.recipeId + "&recipeName=" + encodeURIComponent(recipe.recipeName) +
-                "&volume=" + encodeURIComponent(recipe.volume) + "&preWet=" + encodeURIComponent(recipe.preWet) +
-                "&preInfusion=" + encodeURIComponent(recipe.preInfusion) + "&fillPause=" + encodeURIComponent(recipe.fillPause) +
+                "&volume=" + encodeURIComponent(recipe.volume) + "&fillPause=" + encodeURIComponent(recipe.fillPause) +
                 "&extractionTime=" + encodeURIComponent(recipe.extractionTime) + "&turbulenceOn=" + encodeURIComponent(recipe.turbulenceOn) +
-                "&turbulenceOff=" + encodeURIComponent(recipe.turbulenceOff) + "&turbulencePower=" + encodeURIComponent(recipe.turbulencePower) +
-                "&pressOutPower" + encodeURIComponent(recipe.pressOutPower) + "&pressOutTime=" + encodeURIComponent(recipe.pressOutTime) +
-                "&temp=" +  encodeURIComponent(recipe.temp));
+                "&turbulenceOff=" + encodeURIComponent(recipe.turbulenceOff) + "&temp=" +  encodeURIComponent(recipe.temp));
         }
         else
         {
@@ -99,19 +96,13 @@ Rectangle {
                 (
                     "brew="+recipe.recipeId + "," +
                     recipe.volume + "," +
-                    recipe.preWet + "," +
-                    recipe.preInfusion + "," +
                     recipe.fillPause + "," +
                     recipe.extractionTime + "," +
                     recipe.turbulenceOn + "," +
                     recipe.turbulenceOff + "," +
-                    recipe.turbulencePower + "," +
-                    recipe.pressOutPower + "," +
-                    recipe.pressOutTime + "," +
                     recipe.temp
                  )
 
         }
     }
 }
-

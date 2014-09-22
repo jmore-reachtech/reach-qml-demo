@@ -44,6 +44,15 @@ Rectangle {
         ListElement {
             image: "images/graph-icon.png"; iconheight:64; iconwidth: 76; form: "graphdemo/mainview.qml"; icontext: "Graph Demo"
         }
+        ListElement {
+            image: "images/gpio-icon.png"; iconheight:64; iconwidth: 76; form: "gpiodemo/mainview.qml"; icontext: "GPIO Plugin\n    Demo"
+        }
+        ListElement {
+            image: "images/system-icon.png"; iconheight:64; iconwidth: 76; form: "systemdemo/mainview.qml"; icontext: "System Plugin\n      Demo"
+        }
+        ListElement {
+            image: "images/upgrade-icon.png"; iconheight:72; iconwidth: 77; form: "upgradedemo/mainview.qml"; icontext: "Upgrade"
+        }
     }
 
     GridView{
@@ -79,7 +88,7 @@ Rectangle {
             textColor: "#000000"
             imageDown: "images/down-arrow_down.png"
             font.bold: false
-            font.family: "Arial"
+            font.family: "DejaVu Sans"
 
             onButtonClick: {
                 var index = 0;
@@ -150,8 +159,9 @@ Rectangle {
                     }
                     text: icontext
                     font.pixelSize: 16
+                    font.family: "DejaVu Sans"
                     color:"white"
-                    smooth: true
+					font.bold: false;
                 }
 
                 MouseArea{

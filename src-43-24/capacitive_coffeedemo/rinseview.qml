@@ -49,7 +49,7 @@ Rectangle {
             if (progress.value == progress.maximum)
             {
                 timer.stop();
-                root.message("capacitive_coffeedemo/mainview.qml")
+                root.message("mainview.qml")
             }
         }
     }
@@ -68,11 +68,12 @@ Rectangle {
                 console.debug("rinse=0");
             else
                 connection.sendMessage("rinse=0");
-            root.message("capacitive_coffeedemo/mainview.qml");
+            root.message("mainview.qml");
         }
     }
 
     Component.onCompleted: {
+        Db.firstRun = false;
         if (typeof connection === "undefined")
             console.debug("rinse=1");
         else

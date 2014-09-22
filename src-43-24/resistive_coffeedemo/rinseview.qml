@@ -49,7 +49,7 @@ Rectangle {
             if (progress.value == progress.maximum)
             {
                 timer.stop();
-                root.message("resistive_coffeedemo/mainview.qml")
+                root.message("mainview.qml")
             }
         }
     }
@@ -68,7 +68,7 @@ Rectangle {
                 console.debug("rinse=0");
             else
                 connection.sendMessage("rinse=0");
-            root.message("resistive_coffeedemo/mainview.qml");
+            root.message("mainview.qml");
         }
     }
 

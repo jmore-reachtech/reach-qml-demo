@@ -1,8 +1,6 @@
 import QtQuick 1.1
-
 import "../components"
 import "js/dataModel.js" as Db
-
 
 Rectangle {
     width: 480
@@ -52,6 +50,7 @@ Rectangle {
         y: 28
         color: "Red"
         text: qsTr("*")
+        font.family: "DejaVu Serif"
         font.pixelSize: 14
         z: 30
     }
@@ -186,6 +185,10 @@ Rectangle {
         displayText: " Secs"
     }
 
+    SqLite{
+        id: db
+    }
+
     ImageButton {
         id: btnSave
         x: 166
@@ -199,21 +202,38 @@ Rectangle {
             txtMsg.text = "*";
             if (tbName.inputText.trim().length > 0)
             {
+                var error = "";
+                db.openDB();
                 //Insert recipe to the database and get the ID
-                var res = Db.insertRecipe(0, tbName.inputText, volume.value, 0, 0, fillPause.value, extractionTime.value,
-                                turbulenceOn.value, turbulenceOff.value, 0,
-                                0, 60, temp.value);
+                var res = db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp)" +
+                                     " values(?, ?, ?, ?, ?, ?, ?, ?)", ["0", tbName.inputText, volume.value.toString(), fillPause.value.toString(), extractionTime.value.toString(),
+                                     turbulenceOn.value.toString(), turbulenceOff.value.toString(), temp.value.toString()]);
+
+                if (res === 0)
+                    error = db.lastError();
+
+                //Get last recipeID in the table
+                var row = db.getRows("Select max(recipeID) from recipe");
+                var data = row[0];
+                var recipeId = data[0];
+
+                db.closeDB();
+
                 if (res > 0)
-                {           
-                    Db.currentIndex = root.count - 1;
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                {
+                    //Add an item to Db.datalist
+                    Db.dataList.append({recipeId: recipeId, recipeName: tbName.inputText, volume: volume.value, fillPause: fillPause.value,
+                                       extractionTime: extractionTime.value, turbulenceOn: turbulenceOn.value, turbulenceOff: turbulenceOff.value,
+                                       temp: temp.value, machineRecipe: "0"});
+                    Db.currentIndex = Db.dataList.count-1;
+                    root.message("add");
                 }
                 else
                 {
                     //Show error here
-                    tbName.visible = false;           
+                    tbName.visible = false;
                     txtMsg.visible = false;
-                    errorMessage = res;
+                    errorMessage = error;
                     errorWindow.visible = true;
                     opaqueWindow.visible = true;
                 }
@@ -236,7 +256,7 @@ Rectangle {
         imageUp: "images/btnCancel.png"
         imageDown: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("capacitive_coffeedemo/mainview.qml")
+            root.message("mainview.qml")
         }
     }
 
@@ -317,10 +337,11 @@ Rectangle {
         extractionTime.value = 45;
         turbulenceOn.value = 5;
         turbulenceOff.value = 10;
-        root.count = Db.getRecipeCount();
+        db.openDB();
+        var row = db.getRows("select count(recipeId) from recipe");
+        var data = row[0];
+        root.count = data[0];
+        db.closeDB();
     }
 
 }
-
-
-

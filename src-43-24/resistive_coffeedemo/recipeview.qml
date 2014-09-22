@@ -1,5 +1,4 @@
 import QtQuick 1.1
-
 import "../components"
 import "js/dataModel.js" as Db
 
@@ -187,6 +186,10 @@ Rectangle {
         displayText: " Secs"
     }
 
+    SqLite{
+        id: db
+    }
+
     ImageButton {
         id: btnSave
         x: 128
@@ -201,23 +204,31 @@ Rectangle {
 
             if (tbName.inputText.trim().length > 0)
             {
-                Db.recipe.recipeId = root.recipeId;
-                Db.recipe.recipeName = tbName.inputText;
-                Db.recipe.volume = volume.value;
-                Db.recipe.temp = temp.value;
-                Db.recipe.fillPause = fillPause.value;
-                Db.recipe.extractionTime = extractionTime.value;
-                Db.recipe.turbulenceOn = turbulenceOn.value;
-                Db.recipe.turbulenceOff = turbulenceOff.value;
-                console.debug(Db.recipe.recipeId)
-                var res = Db.updateRecipe(Db.recipe);
+                db.openDB();
+                var query = "Update recipe set recipeName=?, volume=?, fillPause=?, extractionTime=?," +
+                        "turbulenceOn=?, turbulenceOff=?, temp=? Where recipeID=?";
+                var res = db.execSql(query, [tbName.inputText, volume.value.toString(), fillPause.value.toString(),
+                                             extractionTime.value.toString(), turbulenceOn.value.toString(), turbulenceOff.value.toString(),
+                                     temp.value.toString(), root.recipeId]);
                 if (res > 0)
                 {
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                    db.closeDB();
+
+                    Db.recipe = Db.dataList.get(Db.currentIndex);
+                    Db.recipe.recipeName = tbName.inputText;
+                    Db.recipe.volume = volume.value;
+                    Db.recipe.temp = temp.value;
+                    Db.recipe.fillPause = fillPause.value;
+                    Db.recipe.extractionTime = extractionTime.value;
+                    Db.recipe.turbulenceOn = turbulenceOn.value;
+                    Db.recipe.turbulenceOff = turbulenceOff.value;
+
+                    root.message("mainview.qml");
                 }
                 else
                 {
-                    errorMessage = res;
+                    errorMessage = db.lastError();
+                    db.closeDB();
                     opaqueWindow.visible = true;
                     errorWindow.visible = true;
                 }
@@ -257,7 +268,7 @@ Rectangle {
         imageUp: "images/btnCancel.png"
         imageDown: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("capacitive_coffeedemo/mainview.qml")
+            root.message("mainview.qml")
         }
     }
 
@@ -321,11 +332,14 @@ Rectangle {
             imageDown: "images/btnYesOff.png"
             onButtonClick: {
                 //First delete from the database
-                var res = Db.deleteRecipe(root.recipeId);
+                db.openDB();
+                var res = db.execSql("delete from recipe where recipeId = " + root.recipeId.toString());
+                db.closeDB();
                 if (res > 0)
-                {      
+                {
+                    Db.dataList.remove(Db.currentIndex);
                     Db.currentIndex = 0;
-                    root.message("capacitive_coffeedemo/mainview.qml");
+                    root.message("mainview.qml");
                 }
             }
         }
@@ -400,6 +414,7 @@ Rectangle {
 
     }
 
+
     Component.onCompleted: {
         //Initialize components
         Db.recipe = Db.dataList.get(Db.currentIndex);
@@ -413,7 +428,7 @@ Rectangle {
         turbulenceOff.value = Db.recipe.turbulenceOff;
 
         //Position the delete and cancel buttons
-        if (Db.recipe.machineRecipe === 1)
+        if (Db.recipe.machineRecipe === "1")
         {
             //hide delete button
             btnDelete.visible = false;
@@ -423,6 +438,3 @@ Rectangle {
 
     }
 }
-
-
-

@@ -43,7 +43,9 @@ Rectangle {
         imageUp: "images/btnCancel.png"
         imageDown: "images/btnCancelOff.png"
         onButtonClick: {
-            root.message("capacitive_coffeedemo/mainview.qml")
+            root.message("mainview.qml")
         }
     }
+
+    Component.onCompleted: Db.firstRun = false;
 }

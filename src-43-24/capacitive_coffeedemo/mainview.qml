@@ -27,7 +27,6 @@ Rectangle {
             if (imagecarousel1.currentIndex >= 0)
             {
                 Db.currentIndex = imagecarousel1.currentIndex;
-                Db.setSetting("currentIndex", Db.currentIndex);
             }
         }
     }
@@ -43,7 +42,7 @@ Rectangle {
         imageDown: "images/btnSettingsOff.png"
 
         onButtonPress: {
-            mainView.message("capacitive_coffeedemo/settingsview.qml");
+            load.source = "settingsview.qml";
         }
     }
 
@@ -59,7 +58,7 @@ Rectangle {
         imageDown: "images/btnRinseOff.png"
 
         onButtonPress: {
-            mainView.message("capacitive_coffeedemo/rinseview.qml");
+            load.source = "rinseview.qml";
         }
     }
 
@@ -75,7 +74,7 @@ Rectangle {
 
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("capacitive_coffeedemo/brewview.qml");
+            load.source = "brewview.qml";
         }
     }
 
@@ -90,7 +89,7 @@ Rectangle {
         imageDown: "images/btnEditOff.png"
         onButtonPress: {
             Db.currentIndex = imagecarousel1.currentIndex;
-            mainView.message("capacitive_coffeedemo/recipeview.qml");
+            load.source = "recipeview.qml";
         }
     }
 
@@ -103,8 +102,9 @@ Rectangle {
         text: ""
         imageUp: "images/btnAdd.png"
         imageDown: "images/btnAddOff.png"
-        onButtonPress: {
-            mainView.message("capacitive_coffeedemo/addrecipeview.qml");
+        onButtonPress:
+        {
+            load.source = "addrecipeview.qml";
         }
     }
 
@@ -121,53 +121,86 @@ Rectangle {
             mainView.message("../src/mainmenu.qml");
         }
     }
-
+	  
     DataModel
     {
         id: items
     }
 
-    System{
-        id: system
+    SqLite{
+        id: db
+    }
+
+    function createRecipeTable()
+    {
+        return db.execSql("CREATE TABLE IF NOT EXISTS recipe (recipeId INTEGER PRIMARY KEY AUTOINCREMENT, machineRecipe BOOLEAN, recipeName TEXT UNIQUE, volume REAL, fillPause REAL, extractionTime REAL, turbulenceOn REAL, turbulenceOff REAL, temp REAL)");
+
+    }
+
+    function getRecipeCount()
+    {
+        var row = db.getRows("select count(recipeId) from recipe");
+        var data = row[0];
+        return parseInt(data[0]);
+    }
+
+    function insertRecipes()
+    {
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"House Special\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Decaf\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Decaf\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Columbia\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Costa Rica\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Ethiopia\", 8, 5, 45, 10, 4, 200);");
+        db.execSql("insert into recipe (machineRecipe, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp) values(1, \"Kona\", 8, 5, 45, 10, 4, 200);");
+    }
+
+    function loadRecipes()
+    {
+        var rows = db.getRows("select recipeId, recipeName, volume, fillPause, extractionTime, turbulenceOn, turbulenceOff, temp, machineRecipe from recipe");
+        for (var i=0; i < rows.length; i++)
+        {
+            var data = rows[i];
+            Db.dataList.append({recipeId: data[0], recipeName: data[1], volume: data[2], fillPause: data[3], extractionTime: data[4], turbulenceOn: data[5], turbulenceOff: data[6], temp: data[7], machineRecipe: data[8] });
+        }
+    }
+
+    Loader{
+        id: load
+    }
+
+    Connections {
+        target: load.item
+        onMessage: {
+            if (msg == "add")
+                 imagecarousel1.setCurrentIndex(Db.currentIndex);
+            load.source = "";
+        }
     }
 
     Component.onCompleted: {
         Db.dataList = items;
+        Db.dataList.clear();
         //Open database connection
-	var r = Db.openDB();
-		
-        if (r === 0)
-        {
-            //we have a corrupted database
-            system.execute("rm -rf /.qws");
-            system.execute("sync && sync");
-        }
-	
-        Db.createSettingsTable();
-    	Db.createRecipeTable();  
+        var r = db.openDB();
 
-        //Add the machine records if need be
-        if (parseInt(Db.getRecipeCount()) === 0)
+        //create the recipe table for application use
+        if (r)
         {
-            Db.insertRecipe(1, "House Special", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
-            Db.insertRecipe(1, "Decaf", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
-            Db.insertRecipe(1, "Columbia", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
-            Db.insertRecipe(1, "Costa Rica", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
-            Db.insertRecipe(1, "Ethiopia", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
-            Db.insertRecipe(1, "Kona", 8, 0.0, 10, 5, 45, 5, 10, 4, 7, 60, 200);
+            createRecipeTable();
+            if (getRecipeCount() === 0)
+            {
+                insertRecipes();
+            }
+
+            //load recipes
             Db.dataList.clear();
-            Db.loadRecipes();
+            loadRecipes();
 
-            Db.setSetting("currentIndex", 0);
-        }
-        else
-        {
-            //Load the table
-            Db.dataList.clear();
-            Db.loadRecipes();
         }
 
-        var currentIndex = parseInt(Db.getSetting("currentIndex"));
+        var currentIndex = parseInt(db.getSetting("currentIndex"));
+        db.closeDB();
 
         if (currentIndex && currentIndex >= 0)
         {
@@ -178,8 +211,10 @@ Rectangle {
             Db.currentIndex = 0;
         }
 
+
         imagecarousel1.items = Db.dataList;
         imagecarousel1.setCurrentIndex(Db.currentIndex);
     }
+
 
 }
