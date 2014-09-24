@@ -45,10 +45,10 @@ Rectangle {
 
     NumericSelector {
         id: volume
-        x: 72
+        x: 65
         y: 63
         width: 107
-        height: 30
+        height: 34
         value: 50
         rightImageDown: "../images/right_arrow_spin_off.png"
         autoRepeatInterval: 10
@@ -69,7 +69,7 @@ Rectangle {
 
     Text {
         id: text1
-        x: 72
+        x: 65
         y: 43
         width: 90
         height: 14
@@ -81,7 +81,7 @@ Rectangle {
 
     Text {
         id: text2
-        x: 72
+        x: 65
         y: 103
         width: 126
         height: 14
@@ -93,10 +93,10 @@ Rectangle {
 
     NumericSelector {
         id: frequency
-        x: 72
+        x: 65
         y: 124
         width: 126
-        height: 30
+        height: 34
         value: 1000
         rightImageDown: "../images/right_arrow_spin_off.png"
         autoRepeatInterval: 10
@@ -117,7 +117,7 @@ Rectangle {
 
     Text {
         id: text3
-        x: 72
+        x: 65
         y: 166
         width: 126
         height: 14
@@ -129,10 +129,10 @@ Rectangle {
 
     NumericSelector {
         id: duration
-        x: 72
+        x: 65
         y: 187
         width: 126
-        height: 30
+        height: 34
         rightImageDown: "../images/right_arrow_spin_off.png"
         autoRepeatInterval: 10
         textFontFamily: "DejaVu Sans"
@@ -181,7 +181,7 @@ Rectangle {
         x: 296
         y: 124
         width: 107
-        height: 30
+        height: 34
         value: 100
         rightImageDown: "../images/right_arrow_spin_off.png"
         autoRepeatInterval: 10
@@ -217,9 +217,9 @@ Rectangle {
     ImageButton {
         id: btnSubmit
         x: 210
-        y: 216
+        y: 204
         width: 60
-        height: 28
+        height: 35
         text: "Submit"
         imageUp: "../images/internal_button_up.bmp"
         textColor: "#000000"
@@ -266,7 +266,7 @@ Rectangle {
             x: 296
             y: 65
             width: 107
-            height: 32
+            height: 34
             text: "3 second test"
             font.pixelSize: 14
             imageDown: "../images/internal_button_dn.bmp"

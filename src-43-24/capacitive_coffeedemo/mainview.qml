@@ -41,7 +41,7 @@ Rectangle {
         imageUp: "images/btnSettings.png"
         imageDown: "images/btnSettingsOff.png"
 
-        onButtonPress: {
+        onButtonClick: {
             load.source = "settingsview.qml";
         }
     }
@@ -57,7 +57,7 @@ Rectangle {
         imageUp: "images/btnRinse.png"
         imageDown: "images/btnRinseOff.png"
 
-        onButtonPress: {
+        onButtonClick: {
             load.source = "rinseview.qml";
         }
     }
@@ -72,7 +72,7 @@ Rectangle {
         imageUp: "images/btnBrew.png"
         imageDown: "images/btnBrewOff.png"
 
-        onButtonPress: {
+        onButtonClick: {
             Db.currentIndex = imagecarousel1.currentIndex;
             load.source = "brewview.qml";
         }
@@ -87,7 +87,7 @@ Rectangle {
         text: ""
         imageUp: "images/btnEdit.png"
         imageDown: "images/btnEditOff.png"
-        onButtonPress: {
+        onButtonClick: {
             Db.currentIndex = imagecarousel1.currentIndex;
             load.source = "recipeview.qml";
         }
@@ -102,7 +102,7 @@ Rectangle {
         text: ""
         imageUp: "images/btnAdd.png"
         imageDown: "images/btnAddOff.png"
-        onButtonPress:
+        onButtonClick:
         {
             load.source = "addrecipeview.qml";
         }
@@ -117,7 +117,7 @@ Rectangle {
         text: ""
         imageUp: "images/btnCancel.png"
         imageDown: "images/btnCancelOff.png"
-        onButtonPress: {
+        onButtonClick: {
             mainView.message("../src/mainmenu.qml");
         }
     }
