@@ -243,7 +243,6 @@ Rectangle {
             backLight.setBrightness(brightness.value);
 
             //Persist the Backlight values
-            settings.setValue("backlight_enable", enable.on);
             settings.setValue("backlight_brightness", brightness.value);
             textMsg.visible = true;
         }
