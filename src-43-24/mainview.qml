@@ -41,7 +41,7 @@ Item {
         settings.setValue("beeper_frequency", freq);
 
         //Set backlight values
-        var brightness = settings.getValue("backlight_brightness",60);
+        var brightness = settings.getValue("backlight_brightness", 100);
 
         backLight.setBrightness(brightness);
         settings.setValue("backlight_enable", true);
