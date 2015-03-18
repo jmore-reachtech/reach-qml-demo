@@ -1,11 +1,31 @@
 import QtQuick 1.1
 import "components"
 
-Item {
+Rectangle {
     id: mainView
+	color: "#2D2D2D"
     width: 480
     height: 272
+    property int mainMenuY: 0
+	property int page: 1
 
+	Text{
+        id: txtMessage
+        anchors.centerIn:parent
+        font.pixelSize: 22
+        color: "Red"
+        text: "Loading QML Application...Please Wait."
+        visible: true
+    }
+	
+	Connections {
+        target: connection
+        onReadyToSend: {
+            txtMessage.visible = false;
+            loader.source = "mainmenu.qml";
+        }
+    }
+	
     Loader{
         id: loader
     }
@@ -26,6 +46,7 @@ Item {
         }
     }
 
+	
     Component.onCompleted: {
         //Set beeper values
         var volume = settings.getValue("beeper_volume",50);
@@ -47,7 +68,6 @@ Item {
         settings.setValue("backlight_enable", true);
         settings.setValue("backlight_brightness", brightness);
 
-        loader.source = "mainmenu.qml";
     }
 }
 

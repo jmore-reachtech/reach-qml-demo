@@ -74,6 +74,8 @@ Rectangle {
                 page = 1;
             else if (menu.atYEnd)
                 page = rows;
+            mainView.mainMenuY = menu.contentY;
+			mainView.page = page;
         }
 
         ImageButton {
@@ -98,6 +100,8 @@ Rectangle {
 
                 index = (menu.page - 1) * 4;
                 menu.positionViewAtIndex(index, GridView.Beginning);
+                mainView.mainMenuY = menu.contentY;
+				mainView.page = menu.page;
             }
         }
 
@@ -122,6 +126,8 @@ Rectangle {
                     menu.page = 1;
                 index = (menu.page - 1) * 4;
                 menu.positionViewAtIndex(index, GridView.Beginning);
+                mainView.mainMenuY = menu.contentY;
+				mainView.page = menu.page;
             }
         }
     }
@@ -228,5 +234,8 @@ Rectangle {
         font.pixelSize: 16
     }
 
-
+    Component.onCompleted: {
+        menu.contentY = mainView.mainMenuY;
+		menu.page = mainView.page;
+    }
 }
