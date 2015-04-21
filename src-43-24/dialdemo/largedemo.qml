@@ -25,6 +25,8 @@ Rectangle {
         anchors.centerIn: parent
         imageBase: "images/dialbase_large.svg"
         imageNeedle: "images/dialneedle_large.png"
+        mouseAreaHeight: 142
+        mouseAreaWidth: 142
         model: listModel3
 
         ListModel{

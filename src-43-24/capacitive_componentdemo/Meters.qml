@@ -95,39 +95,44 @@ Rectangle {
         }
     }
 
-    HorizontalSlider {
-        id: slider___horizontal1
+    MouseArea{
         x: 288
         y: 31
         width: 180
         height: 22
-        xMax: 158
-        hintBorderColor: "#000000"
-        showHint: false
-        maximum: 180
-        hintBorderWidth: 2
-        hintFontFamily: "Arial"
-        hintBackgroundColor: "#ffffff"
-        hintFontColor: "#000000"
-        hintFontPixelSize: 16
-        imageTrack: "images/smallsliderbg.png"
-        minimum: 0
-        imageOverlay: "images/smallsliderfg.png"
-        xMin: 0
-        value: 0
-        handleY: 0
-        hintRadius: 9
-        hintWidth: 40
-        imageHandle: "images/smallsliderhandle.png"
-        allowDrag: true
-        hintHeight: 40
+        preventStealing: true
 
-        onValueChanged: {
-            spedometer1.value = value;
-            spedometer2.value = 38.23 * spedometer1.value / 100.0;
+        HorizontalSlider {
+            id: slider___horizontal1
+            width: 180
+            height: 22
+            xMax: 158
+            hintBorderColor: "#000000"
+            showHint: false
+            maximum: 180
+            hintBorderWidth: 2
+            hintFontFamily: "Arial"
+            hintBackgroundColor: "#ffffff"
+            hintFontColor: "#000000"
+            hintFontPixelSize: 16
+            imageTrack: "images/smallsliderbg.png"
+            minimum: 0
+            imageOverlay: "images/smallsliderfg.png"
+            xMin: 0
+            value: 0
+            handleY: 0
+            hintRadius: 9
+            hintWidth: 40
+            imageHandle: "images/smallsliderhandle.png"
+            allowDrag: true
+            hintHeight: 40
+
+            onValueChanged: {
+                spedometer1.value = value;
+                spedometer2.value = 38.23 * spedometer1.value / 100.0;
+            }
         }
     }
-
 
 }
 

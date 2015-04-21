@@ -172,6 +172,7 @@ Rectangle
         height: 77
         width: 77
         anchors.centerIn: parent
+        preventStealing: true
 
         onPositionChanged: {
              dialer.rotation = getEventAngle(mouse);

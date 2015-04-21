@@ -84,8 +84,8 @@ Rectangle {
         hintFontPixelSize: 16
         remove: false
         initialIndex: 0
-        mouseAreaWidth: 120
-        mouseAreaHeight: 120
+        mouseAreaWidth: 150
+        mouseAreaHeight: 150
         textColor: "#ffffff"
         imageNeedleWidth: 150
         font.family: "Arial"

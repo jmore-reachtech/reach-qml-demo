@@ -34,19 +34,19 @@ Rectangle {
     Text {
         id: txtTitle
         x: 152
-        y: 9
+        y: 4
         text: qsTr("System Plugin Demo")
         anchors.horizontalCenterOffset: 0
         horizontalAlignment: Text.AlignLeft
         font.bold: false
-        font.pixelSize: 21
+        font.pixelSize: 18
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
     NumericSelector {
         id: volume
-        x: 65
-        y: 63
+        x: 35
+        y: 54
         width: 107
         height: 34
         value: 50
@@ -69,8 +69,8 @@ Rectangle {
 
     Text {
         id: text1
-        x: 65
-        y: 43
+        x: 35
+        y: 34
         width: 90
         height: 14
         color: "#ffffff"
@@ -81,8 +81,8 @@ Rectangle {
 
     Text {
         id: text2
-        x: 65
-        y: 103
+        x: 35
+        y: 94
         width: 126
         height: 14
         color: "#ffffff"
@@ -93,8 +93,8 @@ Rectangle {
 
     NumericSelector {
         id: frequency
-        x: 65
-        y: 124
+        x: 35
+        y: 115
         width: 126
         height: 34
         value: 1000
@@ -117,8 +117,8 @@ Rectangle {
 
     Text {
         id: text3
-        x: 65
-        y: 166
+        x: 35
+        y: 157
         width: 126
         height: 14
         color: "#ffffff"
@@ -129,8 +129,8 @@ Rectangle {
 
     NumericSelector {
         id: duration
-        x: 65
-        y: 187
+        x: 35
+        y: 178
         width: 126
         height: 34
         rightImageDown: "../images/right_arrow_spin_off.png"
@@ -154,8 +154,8 @@ Rectangle {
 
     Text {
         id: text4
-        x: 296
-        y: 43
+        x: 315
+        y: 34
         width: 119
         height: 14
         color: "#ffffff"
@@ -166,8 +166,8 @@ Rectangle {
 
     Text {
         id: text5
-        x: 296
-        y: 103
+        x: 315
+        y: 94
         width: 119
         height: 14
         color: "#ffffff"
@@ -178,8 +178,8 @@ Rectangle {
 
     NumericSelector {
         id: brightness
-        x: 296
-        y: 124
+        x: 315
+        y: 115
         width: 107
         height: 34
         value: 100
@@ -216,9 +216,9 @@ Rectangle {
 
     ImageButton {
         id: btnSubmit
-        x: 210
-        y: 204
-        width: 60
+        x: 189
+        y: 197
+        width: 102
         height: 35
         text: "Submit"
         imageUp: "../images/internal_button_up.bmp"
@@ -244,9 +244,35 @@ Rectangle {
 
             //Persist the Backlight values
             settings.setValue("backlight_brightness", brightness.value);
+            settings.sync();
             textMsg.visible = true;
         }
     }
+
+
+    ImageButton {
+        id: btnTestBeeper
+        x: 189
+        y: 147
+        width: 102
+        height: 35
+        text: "Test Beeper"
+        imageUp: "../images/internal_button_up.bmp"
+        textColor: "#000000"
+        font.pixelSize: 14
+        imageDown: "../images/internal_button_dn.bmp"
+        font.family: "DejaVu Sans"
+        font.bold: false
+
+        onButtonClick: {
+            //Set the beeper values
+            beeper.setVolume(volume.value);
+            beeper.setFrequency(frequency.value);
+            beeper.setDuration(duration.value);
+            beeper.beep();
+        }
+    }
+
 
     ImageButton {
             id: quitButton
@@ -262,8 +288,8 @@ Rectangle {
 
     ImageButton {
             id: disableBacklightButton
-            x: 296
-            y: 65
+            x: 315
+            y: 56
             width: 107
             height: 34
             text: "3 second test"
@@ -275,11 +301,28 @@ Rectangle {
                 backLight.disable();
                 while ( (new Date().getTime() - start) < 3000)
                 {
-
                 }
-
                 backLight.enable();
             }
+    }
+
+    ImageButton {
+        id: btnBackLight
+        x: 315
+        y: 162
+        width: 119
+        height: 35
+        text: "Test Brightness"
+        font.family: "DejaVu Sans"
+        font.bold: false
+        imageUp: "../images/internal_button_up.bmp"
+        textColor: "#000000"
+        font.pixelSize: 14
+        imageDown: "../images/internal_button_dn.bmp"
+
+        onButtonClick: {
+            backLight.setBrightness(brightness.value);
+        }
     }
 
     Component.onCompleted: {

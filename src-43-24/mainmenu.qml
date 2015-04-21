@@ -33,7 +33,7 @@ Rectangle {
             image: "images/samegame-icon.png"; iconheight:74; iconwidth: 110; form: "samegame/mainview.qml"; icontext: "Same Game"
         }
         ListElement {
-            image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "spedometerdemo/mainview.qml"; icontext: "Spedometer Demo"
+            image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "spedometerdemo/mainview.qml"; icontext: "Speedometer Demo"
         }
         ListElement {
             image: "images/reach-icon.png"; iconheight:76; iconwidth: 76; form: "capacitive_componentdemo/mainview.qml"; icontext: "     Capacitive\nComponent Demo"
@@ -74,8 +74,6 @@ Rectangle {
                 page = 1;
             else if (menu.atYEnd)
                 page = rows;
-            mainView.mainMenuY = menu.contentY;
-			mainView.page = page;
         }
 
         ImageButton {
@@ -100,8 +98,6 @@ Rectangle {
 
                 index = (menu.page - 1) * 4;
                 menu.positionViewAtIndex(index, GridView.Beginning);
-                mainView.mainMenuY = menu.contentY;
-				mainView.page = menu.page;
             }
         }
 
@@ -126,8 +122,6 @@ Rectangle {
                     menu.page = 1;
                 index = (menu.page - 1) * 4;
                 menu.positionViewAtIndex(index, GridView.Beginning);
-                mainView.mainMenuY = menu.contentY;
-				mainView.page = menu.page;
             }
         }
     }
@@ -234,8 +228,5 @@ Rectangle {
         font.pixelSize: 16
     }
 
-    Component.onCompleted: {
-        menu.contentY = mainView.mainMenuY;
-		menu.page = mainView.page;
-    }
+
 }
