@@ -34,12 +34,12 @@ Rectangle {
     Text {
         id: txtTitle
         x: 152
-        y: 4
+        y: 6
         text: qsTr("System Plugin Demo")
         anchors.horizontalCenterOffset: 0
         horizontalAlignment: Text.AlignLeft
         font.bold: false
-        font.pixelSize: 18
+        font.pixelSize: 20
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -47,11 +47,11 @@ Rectangle {
         id: volume
         x: 35
         y: 54
-        width: 107
-        height: 34
+        width: 118
+        height: 38
         value: 50
         rightImageDown: "../images/right_arrow_spin_off.png"
-        autoRepeatInterval: 10
+        autoRepeatInterval: 100
         textFontFamily: "DejaVu Sans"
         increment: 1
         displayText: ""
@@ -82,7 +82,7 @@ Rectangle {
     Text {
         id: text2
         x: 35
-        y: 94
+        y: 101
         width: 126
         height: 14
         color: "#ffffff"
@@ -94,12 +94,12 @@ Rectangle {
     NumericSelector {
         id: frequency
         x: 35
-        y: 115
+        y: 122
         width: 126
-        height: 34
+        height: 38
         value: 1000
         rightImageDown: "../images/right_arrow_spin_off.png"
-        autoRepeatInterval: 10
+        autoRepeatInterval: 100
         textFontFamily: "DejaVu Sans"
         increment: 100
         displayText: " hz"
@@ -118,7 +118,7 @@ Rectangle {
     Text {
         id: text3
         x: 35
-        y: 157
+        y: 171
         width: 126
         height: 14
         color: "#ffffff"
@@ -130,11 +130,11 @@ Rectangle {
     NumericSelector {
         id: duration
         x: 35
-        y: 178
+        y: 193
         width: 126
-        height: 34
+        height: 38
         rightImageDown: "../images/right_arrow_spin_off.png"
-        autoRepeatInterval: 10
+        autoRepeatInterval: 100
         textFontFamily: "DejaVu Sans"
         increment: 1
         displayText: " ms"
@@ -155,7 +155,7 @@ Rectangle {
     Text {
         id: text4
         x: 315
-        y: 34
+        y: 36
         width: 119
         height: 14
         color: "#ffffff"
@@ -167,7 +167,7 @@ Rectangle {
     Text {
         id: text5
         x: 315
-        y: 94
+        y: 101
         width: 119
         height: 14
         color: "#ffffff"
@@ -179,12 +179,12 @@ Rectangle {
     NumericSelector {
         id: brightness
         x: 315
-        y: 115
-        width: 107
-        height: 34
+        y: 122
+        width: 119
+        height: 38
         value: 100
         rightImageDown: "../images/right_arrow_spin_off.png"
-        autoRepeatInterval: 10
+        autoRepeatInterval: 100
         textFontFamily: "DejaVu Sans"
         increment: 1
         displayText: ""
@@ -289,7 +289,7 @@ Rectangle {
     ImageButton {
             id: disableBacklightButton
             x: 315
-            y: 56
+            y: 58
             width: 107
             height: 34
             text: "3 second test"
@@ -309,7 +309,7 @@ Rectangle {
     ImageButton {
         id: btnBackLight
         x: 315
-        y: 162
+        y: 172
         width: 119
         height: 35
         text: "Test Brightness"
