@@ -1,4 +1,4 @@
-import QtQuick 1.0
+import QtQuick 1.1
 
 Item {
     id: slider;
@@ -78,7 +78,7 @@ Item {
             id: horizontalMouse
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.XAxis; drag.minimumX: slider.xMin; drag.maximumX: slider.xMax
-
+            preventStealing: true
             onPressed: mousePressed = true;
             onReleased: mousePressed = false;
 

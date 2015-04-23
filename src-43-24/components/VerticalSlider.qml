@@ -101,7 +101,8 @@ Item {
             id: verticalMouse
             anchors.fill: parent; drag.target: parent
             drag.axis: Drag.YAxis; drag.minimumY: slider.yMin; drag.maximumY: slider.yMax
-
+            preventStealing: true
+			
             onPressed: mousePressed = true;
             onReleased: mousePressed = false;
 

@@ -65,7 +65,7 @@ Rectangle {
         flickDeceleration: 500
         boundsBehavior: Flickable.StopAtBounds
 
-        onFlickEnded: {
+        onMovementEnded: {
             var index = view.contentX/480;
             root.page = index;
             updatePageIndicator();

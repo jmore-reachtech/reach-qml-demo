@@ -33,6 +33,7 @@ Rectangle {
 
         MouseArea{
             anchors.fill: parent
+			preventStealing: true
         }
 
         HorizontalSlider {
@@ -69,6 +70,7 @@ Rectangle {
 
         MouseArea{
             anchors.fill: parent
+			preventStealing: true
         }
 
         HorizontalSlider {

@@ -68,6 +68,8 @@ Rectangle {
         cellWidth: 240; cellHeight: 136
         clip: true
         focus: true
+		snapMode: ListView.SnapOneItem
+        boundsBehavior: Flickable.StopAtBounds
 
         onFlickEnded: {
             if (menu.atYBeginning)

@@ -96,16 +96,17 @@ Rectangle {
     }
 
     MouseArea{
-        x: 288
-        y: 31
-        width: 180
-        height: 22
+        x: 282
+        y: 10
+        width: 200
+        height: 50
         preventStealing: true
 
         HorizontalSlider {
             id: slider___horizontal1
             width: 180
             height: 22
+			anchors.centerIn: parent
             xMax: 158
             hintBorderColor: "#000000"
             showHint: false
