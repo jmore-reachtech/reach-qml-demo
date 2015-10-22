@@ -53,6 +53,9 @@ Rectangle {
         ListElement {
             image: "images/upgrade-icon.png"; iconheight:72; iconwidth: 77; form: "upgradedemo/mainview.qml"; icontext: "Upgrade"
         }
+        ListElement {
+            image: "images/spedometer-icon.png"; iconheight:78; iconwidth: 78; form: "persist_spedometerdemo/mainview.qml"; icontext: "Persistent Speedometer Demo"
+        }
     }
 
     GridView{
